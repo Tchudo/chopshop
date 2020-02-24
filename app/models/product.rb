@@ -5,7 +5,7 @@ class Product < ApplicationRecord
   has_many :stocks
   has_many :shops, through: :stocks
 
-  validates name, presence: true
-  validates product_sku, uniqueness: true,
+  validates :name, presence: true
+  # validates :product_sku, uniqueness: true
 
 end
