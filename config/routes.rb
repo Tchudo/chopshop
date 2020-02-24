@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  root to: 'searches#new'
+  get "/searches", to: 'searches#new'
 
   resources :stocks, only:[:index, :show], shallow: true do
     resources :favorites, only:[:index, :create], shallow:true
