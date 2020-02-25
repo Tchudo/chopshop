@@ -1,23 +1,23 @@
-<nav class="navbar navbar-expand-sm bg-transparent justify-content-between">
+<nav class="navbar navbar-expand-sm bg-transparent justify-content-between" id="nav">
 
+  <!-- Logo à gauche -->
   <%= image_tag "lily_35.png" %>
 
-  <div class="p-1 bg-white rounded rounded-pill">
+  <!-- Search form -->
+  <div class="p-1 bg-white rounded rounded-pill w-75">
     <div class="input-group">
-      <div class="input-group-prepend">
-        <button class="btn shadow-none"><i class="fa fa-search"></i></button>
-      </div>
-      <input type="search" placeholder="Quel produit rechercher ?" class="form-control border-0 shadow-none ">
+      <input type="search" placeholder="" class="form-control border-0 shadow-none bg-transparent">
       <div class="input-group-append">
-        <button id="button-??" type="submit" class="btn btn-link text-primary py-0"><%= image_tag "lily_35.png", class:"p-0"%></button>
+        <button class="btn shadow-none"><i class="fa fa-search" style="color: #F4AA5B;"></i></button>
       </div>
     </div>
   </div>
 
+  <!-- Burger -->
   <div class="dropdown dropleft">
-    <button class="btn btn-primary" type="button" data-toggle="dropdown"><i class="fas fa-bars fa-1x"></i>
+    <button class="btn bg-transparent border-transparent shadow-none px-1" type="button" data-toggle="dropdown"><i class="fas fa-bars fa-1x" style="color: #A8D384;"></i>
     </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    <div class="dropdown-menu rounded border-0" aria-labelledby="dropdownMenu2">
       <button class="dropdown-item" type="button">Favoris</button>
       <button class="dropdown-item" type="button">Another action</button>
       <button class="dropdown-item" type="button">Something else here</button>
