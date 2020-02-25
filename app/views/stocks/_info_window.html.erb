@@ -1,2 +1,17 @@
-<h2><%= shop.name %></h2>
-<p><%= shop.address %></p>
+<div class="container">
+  <div class="row d-flex">
+    <div class="col-sm-4">
+      <p>image</p>
+    </div>
+    <div class="col-sm-8">
+      <div class="">
+        <h5><%= shop.name %></h5>
+        <p><%= shop.address %></p>
+      </div>
+      <div class="d-flex justify-content-between">
+        <p><%= stock.product.name %></p>
+        <p><%="#{stock.price}€" %></p>
+      </div>
+    </div>
+  </div>
+</div>
