@@ -14,11 +14,16 @@ class StocksController < ApplicationController
         lat: shop.latitude,
         lng: shop.longitude,
         infoWindow: render_to_string(partial: "info_window", locals: { shop: shop })
-
       }
     end
   end
 
   def show
+    @stock = Stock.find(params[:id])
+
+    @markers = [{
+        lat: @stock.shop.latitude,
+        lng: @stock.shop.longitude
+      }]
   end
 end

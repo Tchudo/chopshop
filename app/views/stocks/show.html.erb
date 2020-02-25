@@ -1,12 +1,12 @@
-<h1>Stocks#show</h1>
-<p>Find me in app/views/stocks/show.html.erb</p>
-
-
 <!-- navbar -->
 <%= render 'shared/navbar' %>
 
+
+
+
 <!-- map -->
+<div id="map-iti" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
 
 
 <!-- card-product -->
-<%= render 'product_show' %>
+<%#= render 'product_show' %>
