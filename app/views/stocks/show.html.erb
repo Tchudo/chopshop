@@ -1,2 +1,22 @@
-<h1>Stocks#show</h1>
-<p>Find me in app/views/stocks/show.html.erb</p>
+<div class="container">
+  <h2><%= @stock.shop.name %></h2>
+  <% if @stock.reviews.map(&:rating).count > 0 %>
+    <% (@stock.reviews.map(&:rating).sum / @stock.reviews.map(&:rating).count).times do  %>
+      <i class="fas fa-star"></i>
+    <%end  %>
+    <%= @stock.reviews.map(&:rating).count %>
+  <% end %>
+
+  <% if (1..@stock.shop.time_tables[0].day_of_week).include?(Time.now.wday) && (@stock.shop.time_tables[0].opened_at..@stock.shop.time_tables[0].closed_at).include?(Time.now.hour)  %>
+    <p>Open! - Will close at : <%= @stock.shop.time_tables[0].closed_at  %></p>
+  <% else %>
+    <p>Closed! - Will next morning at : <%= @stock.shop.time_tables[0].opened_at %> </p>
+  <%end %>
+
+
+  <p><%= @stock.product.name %></p>
+  <p><%= @stock.price %>$</p>
+
+
+
+</div>
