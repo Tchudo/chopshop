@@ -1,7 +1,10 @@
 <nav class="navbar navbar-expand-sm bg-transparent justify-content-between" id="nav">
 
   <!-- Logo à gauche -->
-  <%= image_tag "lily_35.png" %>
+  <%= link_to "/" do %>
+      <%= image_tag "lily_35.png" %>
+  <% end %>
+
 
   <!-- Search form -->
   <div class="p-1 bg-white rounded rounded-pill w-75">
@@ -16,13 +19,24 @@
   <!-- Burger -->
   <div class="dropdown dropleft">
     <button class="btn bg-transparent border-transparent shadow-none px-1" type="button" data-toggle="dropdown"><i class="fas fa-bars fa-1x" style="color: #A8D384;"></i>
-    </button>
-    <div class="dropdown-menu rounded border-0" aria-labelledby="dropdownMenu2">
-      <button class="dropdown-item" type="button">Favoris</button>
-      <button class="dropdown-item" type="button">Another action</button>
-      <button class="dropdown-item" type="button">Something else here</button>
-    </div>
+        </button>
+      <% if user_signed_in? %>
+
+        <div class="dropdown-menu rounded border-0" aria-labelledby="dropdownMenu2">
+          <%= link_to '/' do %>
+          <button class="dropdown-item" type="button">Favoris</button>
+          <% end %>
+          <%= link_to destroy_user_session_path, method: :delete do %>
+          <button class="dropdown-item" type="button">Log out</button>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="dropdown-menu rounded border-0" aria-labelledby="dropdownMenu2">
+          <%= link_to new_user_session_path do %>
+          <button class="dropdown-item" type="button">Login</button>
+          <% end %>
+        </div>
+      <% end %>
   </div>
 
 </nav>
-
