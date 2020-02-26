@@ -18,6 +18,7 @@ gem 'webpacker'
 gem 'cloudinary', '~> 1.12.0'
 
 gem 'geocoder'
+gem 'searchkick', '~> 4.3.0'
 
 
 group :development do

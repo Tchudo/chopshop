@@ -160,6 +160,7 @@ puts "Product tag created ok"
 
 puts "Load image"
 
+
 file1 = URI.open('https://fotomelia.com/wp-content/uploads/2018/01/fotomelia-images-gratuites-38-1560x1041.jpg')
 
 p1.photo.attach(io: file1, filename: 'pizza.png', content_type: 'image/png')
@@ -184,6 +185,7 @@ file5 = URI.open('https://fotomelia.com/wp-content/uploads/edd/2015/12/banque-d-
 
 p5.photo.attach(io: file5, filename: 'poulet.png', content_type: 'image/png')
 puts "Image5 loaded OK"
+
 
 puts "SEED DONE :D"
 

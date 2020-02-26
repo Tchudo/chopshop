@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  searchkick
+
   has_many :product_tags, dependent: :destroy
   has_many :tags, through: :product_tags
   has_many :favorites
@@ -9,5 +11,6 @@ class Product < ApplicationRecord
 
   validates :name, presence: true
   # validates :product_sku, uniqueness: true
+
 
 end
