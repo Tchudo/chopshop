@@ -15,6 +15,7 @@ class StocksController < ApplicationController
         lat: shop.latitude,
         lng: shop.longitude,
         infoWindow: render_to_string(partial: "info_window", locals: { shop: shop , stock: @stocks.find(shop.id)}),
+        image_url: helpers.asset_url('lily.png'),
       }
     end
   end
