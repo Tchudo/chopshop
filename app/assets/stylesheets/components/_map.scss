@@ -10,3 +10,14 @@
 .mapboxgl-popup-content {
   text-align: justify;
 }
+
+.marker {
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+// .mapboxgl-marker {
+//   position: absolute;
+//   top: -20px;
+//   left: 15px;
+// }
