@@ -1,6 +1,6 @@
 class SearchesController < ApplicationController
 
   def new
-    @stocks = Stock.all
+    @products = Product.reindex
   end
 end
