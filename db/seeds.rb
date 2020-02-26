@@ -291,12 +291,38 @@ puts "Time tables creation start !"
 
 
 
-time_table = {
+time_table = [{       #day_of_weed : 0 : Dimanche, 1 : Lundi ..... Samedi : 6 #
     opened_at: 8 ,
     closed_at: 19 ,
-    day_of_week: 6 ,
+    day_of_week: 1,  #day_of_week : 1 => lundi
     shop_id: s1.id
-}
+},{
+    opened_at: 8 ,
+    closed_at: 19,
+    day_of_week: 2,  #day_of_week : 2 => mardi
+    shop_id: s1.id
+},{
+    opened_at: 8 ,
+    closed_at: 19 ,
+    day_of_week: 3 ,  #day_of_week : 3 => mercredi
+    shop_id: s1.id
+},{
+    opened_at: 8 ,
+    closed_at: 19 ,
+    day_of_week: 4 ,  #day_of_week : 4 => jeudi
+    shop_id: s1.id
+},{
+    opened_at: 8 ,
+    closed_at: 19 ,
+    day_of_week: 5 ,  #day_of_week : 5 => vendredi
+    shop_id: s1.id
+},{
+    opened_at: 8 ,
+    closed_at: 19 ,
+    day_of_week: 6 ,  #day_of_week : 6 => samedi
+    shop_id: s1.id
+}]
+
 
 TimeTable.create!(time_table)
 
