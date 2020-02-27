@@ -1,3 +1,5 @@
+require "open-uri"
+
 puts "Destruction : start"
 puts "3"
 puts "2"
@@ -249,6 +251,7 @@ ProductTag.create!(product_tags)
 
 puts "Product tag created ok"
 
+
 puts "Reviews creation start !"
 
 ############################REVIEWS-CREATION##############
@@ -352,6 +355,37 @@ TimeTable.create!(time_table)
 
 
 #---------------------------TIME-TABLE-END--------------
+
+
+puts "Load image"
+
+
+file1 = URI.open('https://fotomelia.com/wp-content/uploads/2018/01/fotomelia-images-gratuites-38-1560x1041.jpg')
+
+p1.photo.attach(io: file1, filename: 'pizza.png', content_type: 'image/png')
+puts "Image1 loaded OK"
+
+file2 = URI.open('https://cdn.pixabay.com/photo/2015/08/16/12/02/sandwich-890822_960_720.jpg')
+
+p2.photo.attach(io: file2, filename: 'sandwich.png', content_type: 'image/png')
+puts "Image2 loaded OK"
+
+file3 = URI.open('https://fotomelia.com/wp-content/uploads/2017/03/base-d-images-gratuites-20-1560x1040.jpg')
+
+p3.photo.attach(io: file3, filename: 'kebab.png', content_type: 'image/png')
+puts "Image3 loaded OK"
+
+file4 = URI.open('https://s1.thcdn.com/productimg/960/960/10979946-1904620647515953.jpg')
+
+p4.photo.attach(io: file4, filename: 'barreprot.png', content_type: 'image/png')
+puts "Image4 loaded OK"
+
+file5 = URI.open('https://fotomelia.com/wp-content/uploads/edd/2015/12/banque-d-images-et-photos-gratuites-libres-de-droits-t%C3%A9l%C3%A9chargement-gratuits20-1560x1170.jpg')
+
+p5.photo.attach(io: file5, filename: 'poulet.png', content_type: 'image/png')
+puts "Image5 loaded OK"
+
+
 
 puts "SEED DONE :D"
 

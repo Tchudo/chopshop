@@ -1,12 +1,32 @@
 class StocksController < ApplicationController
   def index
-    @stocks = Stock.all
+
+    #@products = Product.search(params[:query]) "Elastic"
+    @products = Product.all #'sans Elastic'
+    @products.each do |product|
+      @stocks = Stock.where(product_id: product.id)
+      @markers = @stocks.map do |stock|
+        {
+        lat: stock.shop.latitude,
+        lng: stock.shop.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { shop: stock.shop , stock: stock}),
+        image_url: helpers.asset_url('lily.png')
+      }
+      end
+    end
+
+
   end
 
   def show
+    
+    @markers = [{
+      lat: @stock.shop.latitude,
+      lng: @stock.shop.longitude
+    }]
+    
     @stock = Stock.find(params[:id])
     @rating = @stock.reviews.map(&:rating)
-
     @shop = @stock.shop
     @day_of_week = @shop.time_tables.map(&:day_of_week)
 
@@ -30,6 +50,7 @@ class StocksController < ApplicationController
 
 
 private
+ 
 
   ###DATE#####
 

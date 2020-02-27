@@ -1,6 +1,7 @@
 class SearchesController < ApplicationController
 
   def new
-    @stocks = Stock.all
+    @products = Product.all #"Sans Elastic"
+    #@products = Product.reindex "Elastic"
   end
 end
