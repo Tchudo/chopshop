@@ -1,8 +1,16 @@
 <!-- navbar -->
 <%= render 'shared/navbar' %>
 <%= link_to stocks_path do%>
-<div class="btn rounded rounded-pill btn-circle bg-warning p-2"><i class="fas fa-chevron-right" style="color:white"></i></div>
+<div class="btn rounded rounded-pill btn-circle bg-warning p-2"><i class="fas fa-chevron-right" style="color: white"></i></div>
 <% end %>
+
+
+  <div class="bg-white info-instruction m-0 w-25 rounded">
+    <div class="d-flex align-item-center p-1">
+     <i class="fas fa-walking" style="font-size: 11px"></i>
+     <p id="instructions-iti" class="m-0 pl-1 text-center" style="font-size: 11px" ></p>
+   </div>
+  </div>
 
 <div class="container">
   <h2><%= @stock.shop.name %></h2>
@@ -26,8 +34,13 @@
 </div>
 
 
+
 <!-- map -->
-<div id="map-iti" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+<div class="" id="map-iti" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+
+</div>
+
+
 
 
 <!-- card-product -->
