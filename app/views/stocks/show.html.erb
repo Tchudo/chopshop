@@ -10,9 +10,9 @@
     <%= @rating.count %>
 
     <% if !@open %>
-      <h2>Fermé : <%= @day %></h2>
+      <h2>Fermé : <%=  %></h2>
     <%else %>
-      <h2> <%= @open %> Ouvre dans <%= @hours  %></h2>
+      <h2> <%= @open %> <%= @fermeture%></h2>
     <%end %>
 
   <p><%= @stock.product.name %></p>
