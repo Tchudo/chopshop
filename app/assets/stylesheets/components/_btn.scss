@@ -1,0 +1,13 @@
+.btn-circle {
+  width: 10%;
+  position: absolute;
+  z-index: 10;
+  top: 8%;
+  left: 2%;
+  &:hover {
+    cursor: pointer;
+  }
+  i {
+    transform: rotate(180deg);
+  }
+}

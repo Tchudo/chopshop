@@ -1,12 +1,14 @@
-<h1>Stocks#show</h1>
-<p>Find me in app/views/stocks/show.html.erb</p>
-
-
 <!-- navbar -->
 <%= render 'shared/navbar' %>
+<%= link_to stocks_path do%>
+<div class="btn rounded rounded-pill btn-circle bg-warning p-2"><i class="fas fa-chevron-right" style="color:white"></i></div>
+<% end %>
+
+
 
 <!-- map -->
+<div id="map-iti" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
 
 
 <!-- card-product -->
-<%= render 'product_show' %>
+<%#= render 'product_show' %>

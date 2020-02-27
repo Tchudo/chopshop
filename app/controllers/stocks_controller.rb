@@ -17,5 +17,11 @@ class StocksController < ApplicationController
 
   def show
     @stock = Stock.find(params[:id])
+
+    @markers = [{
+        lat: @stock.shop.latitude,
+        lng: @stock.shop.longitude
+      }]
+
   end
 end
