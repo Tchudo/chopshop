@@ -1,2 +1,18 @@
-<h2><%= shop.name %></h2>
-<p><%= shop.address %></p>
+<div class="container">
+  <div class="text-center">
+    <div class="img-size">
+      <i><%= cl_image_tag stock.product.photo.key%></i>
+    </div>
+    <div>
+      <h6 class="mb-0 mt-1"><%= stock.product.name %></h6>
+      <p><%= shop.name %></p>
+      <p><%= stock.product.description %></p>
+    </div>
+    <div class="d-flex justify-content-between px-4" style="width:200px;">
+      <h6><%="#{stock.price}€" %></h6>
+      <%= link_to stock_path(stock.id) do %>
+        <button class="fas fa-plus"></button>
+      <% end %>
+    </div>
+  </div>
+</div>
