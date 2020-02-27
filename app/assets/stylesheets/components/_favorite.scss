@@ -1,0 +1,42 @@
+.favorite-bg {
+  background: linear-gradient(187deg, rgba(176,231,157,1) 0%, rgba(246,255,238,1) 100%);
+  min-height: 100vh;
+}
+
+.card-favorite {
+  width: 100vh;
+  margin: 0 15px;
+  background: white;
+  border-radius: 100px;
+
+}
+.img-resize img {
+  // padding: 10px 0px 10px 0px;
+  height: 100%;
+  width: 100%;
+  border-radius: 2px 0% 0% 2px;
+}
+
+.favorite-disp {
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+}
+
+.btn-suppr {
+
+}
+
+.button_to{
+  // display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-top: 5px;
+  padding-right: 5px;
+  color: black;
+}
+
+#btn-search {
+  color: #F4AA5B;
+}
