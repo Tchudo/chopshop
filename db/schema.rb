@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 2020_02_25_132459) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,12 +106,12 @@ ActiveRecord::Schema.define(version: 2020_02_25_132459) do
   end
 
   create_table "time_tables", force: :cascade do |t|
-    t.time "opened_at"
-    t.time "closed_at"
     t.integer "day_of_week"
     t.bigint "shop_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "opened_at"
+    t.integer "closed_at"
     t.index ["shop_id"], name: "index_time_tables_on_shop_id"
   end
 

@@ -1,12 +1,34 @@
-<h1>Stocks#show</h1>
-<p>Find me in app/views/stocks/show.html.erb</p>
-
-
 <!-- navbar -->
 <%= render 'shared/navbar' %>
+<%= link_to stocks_path do%>
+<div class="btn rounded rounded-pill btn-circle bg-warning p-2"><i class="fas fa-chevron-right" style="color:white"></i></div>
+<% end %>
+
+<div class="container">
+  <h2><%= @stock.shop.name %></h2>
+    <% if @rating_score != 0 %>
+      <p><%= @rating_score %></p>
+    <%end %>
+    <% @star.times do  %>
+      <i class="fas fa-star"></i>
+    <%end  %>
+    <% @halfstar.times do %>
+      <i class="fas fa-star-half-alt"></i>
+    <%end  %>
+    <% if @rating != 0 %>
+      <%= @rating.count %>
+    <% end %>
+
+      <h2> <%= @open %> <%= @fermeture%></h2>
+
+  <p><%= @stock.product.name %></p>
+  <p><%= @stock.price %>$</p>
+</div>
+
 
 <!-- map -->
+<div id="map-iti" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
 
 
 <!-- card-product -->
-<%= render 'product_show' %>
+<%#= render 'product_show' %>
