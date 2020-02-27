@@ -1,8 +1,35 @@
-<h1>Favorites#index</h1>
-<p>Find me in app/views/favorites/index.html.erb</p>
+<div class="favorite-bg">
+  <div class="d-flex justify-content-between p-2">
+    <i><%= image_tag "lily_35.png" %></i>
+    <h1 class="text-center text-white">Favorites!</h1>
+    <h1> </h1>
+  </div>
 
+  <div class="container">
 
-
-
-
-<%= cl_image_tag @product.photo.key, height: 300, width: 400, crop: :fill %>
+    <% @favorites.each do |favorite| %>
+    <div class="row d-flex bg-white rounded shadow border m-2">
+      <div class="col-sm-2 py-2 w-25 px-0">
+       <i class="img-resize"><%= cl_image_tag favorite.product.photo.key %></i>
+      </div>
+      <div class="col-sm-9 py-1 w-50">
+        <div class="d-flex w-100">
+          <div class="d-block">
+            <strong><p class="m-0"><%= favorite.product.name %></p></strong>
+            <i><%= favorite.product.brand %></i>
+            <p><%= favorite.product.description %></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-1 w-25 d-flex align-items-center">
+        <%= button_to favorite_path(favorite),method: :delete, data: { confirm: "Are you sure ?"} do %>
+          <i class="far fa-times-circle" id="btn-suppr"></i>
+        <% end %>
+        <%= link_to stocks_path do %>
+        <i class="fa fa-search" id="btn-search"></i>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

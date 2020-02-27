@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   resources :stocks, only:[:index, :show], shallow: true do
     resources :reviews, only:[:new, :create]
   end
-  resources :favorites, only:[:index, :create]
+  resources :favorites, only:[:index, :create, :destroy]
 end
