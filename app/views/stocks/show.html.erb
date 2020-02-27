@@ -1,19 +1,20 @@
 <div class="container">
   <h2><%= @stock.shop.name %></h2>
-
+    <% if @rating_score != 0 %>
+      <p><%= @rating_score %></p>
+    <%end %>
     <% @star.times do  %>
       <i class="fas fa-star"></i>
     <%end  %>
     <% @halfstar.times do %>
       <i class="fas fa-star-half-alt"></i>
     <%end  %>
-    <%= @rating.count %>
+    <% if @rating != 0 %>
+      <%= @rating.count %>
+    <% end %>
 
-    <% if !@open %>
-      <h2>Fermé : <%=  %></h2>
-    <%else %>
       <h2> <%= @open %> <%= @fermeture%></h2>
-    <%end %>
+
 
   <p><%= @stock.product.name %></p>
   <p><%= @stock.price %>$</p>

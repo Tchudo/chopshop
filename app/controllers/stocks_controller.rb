@@ -6,79 +6,91 @@ class StocksController < ApplicationController
   def show
     @stock = Stock.find(params[:id])
     @rating = @stock.reviews.map(&:rating)
-    @stars = 0
+
     @shop = @stock.shop
-    @shop_time_table = @stock.shop.time_tables
-    @day_of_week = @shop_time_table.map(&:day_of_week)
-    @day_of_week_range = (@day_of_week.first..@day_of_week.last)
+    @day_of_week = @shop.time_tables.map(&:day_of_week)
 
-    if (date? && (Time.now < Time.new(Time.now.year, Time.now.month, Time.now.day, good_opening_hour, 00, 00))) #Matin avant ouverture
-
-
-      time_second = Time.new(Time.now.year, Time.now.month, Time.now.day, good_opening_hour, 00, 00) - Time.now
-      time_hour = time_second / 3600
-      hours = time_hour.floor
-      minutes = ((time_hour - hours) * 60).to_i
-      @open = "Fermé"
-      @fermeture = " . Ouvre à #{good_opening_hour}:00 (dans #{hours}h:#{minutes}m) "
-
-
-    elsif date? && (Time.now > Time.new(Time.now.year, Time.now.month, Time.now.day, good_closing_hour, 00, 00)) #Soir aprés fermeture
-       #!!!!
-      if Time.now.wday == @day_of_week.last
-                                                                     #Si c'est le dernier jour d'ouverture
-        @open = "Fermé"
-        @fermeture = " . Ouvre #{wich_day(@day_of_week.first)} à #{good_opening_hour}h:00m" #Le else possible
-      else                                                                                                       #Si le magasin est ouvert le lendemain
-        time_second = Time.new(Time.now.year, Time.now.month, Time.now.day, 23, 59, 59) - Time.now
-        time_hour = time_second / 3600
-        hours = time_hour.floor + good_opening_hour
-        minutes = ((time_hour - hours) * 60).to_i
-        @open = "Fermé"
-        @fermeture = " . Ouvre demain à #{good_opening_hour}"
-      end
-
-      # Dans la plage horaire d'ouverture
-    elsif   date? && ( (Time.new(Time.now.year, Time.now.month, Time.now.day, good_opening_hour, 00, 00) < Time.now)  && (Time.now < Time.new(Time.now.year, Time.now.month, Time.now.day, good_closing_hour, 00, 00) ) )
-      time_second = Time.new(Time.now.year, Time.now.month, Time.now.day, good_closing_hour, 00, 00) - Time.now
-      time_hour = time_second / 3600
-      hours = time_hour.floor
-      minutes = ((time_hour - hours) * 60).to_i
-      @open = "Ouvert"
-
-      if (Time.new(Time.now.year, Time.now.month, Time.now.day, good_closing_hour, 00, 00) - Time.now <= 4680)    #Si c'est 1h30 avant la fermeture
-        @fermeture = "Ferme bientôt . #{good_closing_hour}:00 (dans #{hours}:#{minutes}))"
-      else
-        @fermeture = " . Ferme à #{good_closing_hour}:00 (dans #{hours}h:#{minutes}m)"                            #Si il reste plus de 1h30 avant la fermeture
-      end
+    if @shop.time_tables == []
+      @open = "Aucune horaire"
+    else
+      gestion_horaire
     end
 
-
-
-
-
-    # @reviews = @stock.reviews
-    # shop = @stock.shop
-    # day_open = shop.table_times.map[&:day_of_week]
-    rating_star
-    rating_half_star
-
-    # if date? && DateTime.now.hour >
+    if @rating != []
+      @rating_score = (@rating.sum / @rating.count).truncate(2)
+      rating_star
+      rating_half_star
+    else
+      @star = 0
+      @halfstar = 0
+      @rating_score = 0
+      @rating = 0
+    end
   end
-
-  # def opened?
-  #   daytime_compare = (day_open.first..day_open.last).include?(DateTime.now.wday)
-  #   if daytime_compare &&
-
-  # end
 
 
 private
 
   ###DATE#####
 
-  def date?
-    @day_of_week_range.include?(Time.now.wday)
+  def gestion_horaire
+
+    if (open_today? && (Time.now < Time.new(Time.now.year, Time.now.month, Time.now.day, good_opening_hour, 00, 00))) #Matin avant ouverture
+
+        time_second = Time.new(Time.now.year, Time.now.month, Time.now.day, good_opening_hour, 00, 00) - Time.now
+        time_hour = time_second / 3600
+        hours = time_hour.floor
+        minutes = ((time_hour - hours) * 60).to_i
+        if minutes.to_s.length < 2
+            minutes = "0#{minutes}"
+          end
+        @open = "Fermé"
+        @fermeture = " . Ouvre à #{good_opening_hour}:00 (dans #{hours}h:#{minutes}m) "
+
+
+      elsif open_today? && (Time.now > Time.new(Time.now.year, Time.now.month, Time.now.day, good_closing_hour, 00, 00)) #Soir aprés fermeture
+         #!!!!
+        if Time.now.wday == @day_of_week.last
+                                                                       #Si c'est le dernier jour d'ouverture
+          @open = "Fermé"
+          @fermeture = " . Ouvre #{wich_day(@day_of_week.first)} à #{good_opening_hour}h:00m" #Le else possible
+        else                                                                                                       #Si le magasin est ouvert le lendemain
+          time_second = Time.new(Time.now.year, Time.now.month, Time.now.day, 23, 59, 59) - Time.now
+          time_hour = time_second / 3600
+          hours = time_hour.floor + good_opening_hour
+          minutes = ((time_hour - hours) * 60).to_i
+          if minutes.to_s.length < 2
+            minutes = "0#{minutes}"
+          end
+          @open = "Fermé"
+          @fermeture = " . Ouvre demain à #{good_opening_hour}h"
+        end
+
+        # Dans la plage horaire d'ouverture
+      elsif   open_today? && ( (Time.new(Time.now.year, Time.now.month, Time.now.day, good_opening_hour, 00, 00) < Time.now)  && (Time.now < Time.new(Time.now.year, Time.now.month, Time.now.day, good_closing_hour, 00, 00) ) )
+        time_second = Time.new(Time.now.year, Time.now.month, Time.now.day, good_closing_hour, 00, 00) - Time.now
+        time_hour = time_second / 3600
+        hours = time_hour.floor
+        minutes = ((time_hour - hours) * 60).to_i
+        if minutes.to_s.length < 2
+            minutes = "0#{minutes}"
+          end
+        @open = "Ouvert"
+
+        if (Time.new(Time.now.year, Time.now.month, Time.now.day, good_closing_hour, 00, 00) - Time.now <= 4680)    #Si c'est 1h30 avant la fermeture
+          @fermeture = "Ferme bientôt . #{good_closing_hour}:00 (dans #{hours}:#{minutes}))"
+        else
+          @fermeture = " . Ferme à #{good_closing_hour}:00 (dans #{hours}h:#{minutes}m)"                            #Si il reste plus de 1h30 avant la fermeture
+        end
+      else
+        @open = "Fermé"
+        @fermeture = " . Ouvre #{wich_day(@day_of_week.first)} à #{good_opening_hour}h:00m"
+      end
+
+  end
+
+  def open_today?
+    @day_of_week.include?(Time.now.wday)
   end
 
   def good_opening_hour
@@ -91,13 +103,7 @@ private
       end
   end
 
-
     def good_closing_hour
-      # if @closing_hour == nil
-      #   @closing_hour = TimeTable.where("shop_id = '#{@shop.id}' and day_of_week = '#{@day_of_week.first}'").first.closed_at
-      # else
-      #   @closing_hour = TimeTable.where("shop_id = '#{@shop.id}' and day_of_week = '#{Time.now.wday}'").first.closed_at
-      # end
       @shop.time_tables.find_by(day_of_week: Time.now.wday).closed_at
     end
 

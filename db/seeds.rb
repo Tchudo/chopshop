@@ -257,7 +257,7 @@ puts "Reviews creation start !"
 
 reviews = [{
     comment: "C'est vraiment très bon !",
-    rating: ,
+    rating: 0 ,
     user_id: u.id,
     stock_id: st1.id
 },{
@@ -335,9 +335,14 @@ time_table2 = [{
     day_of_week: 3 ,
     shop_id: s2.id ,
 },{
-    opened_at: 9 ,
-    closed_at: 13 ,
+    opened_at: 8 ,
+    closed_at: 16 ,
     day_of_week: 4 ,
+    shop_id: s2.id ,
+},{
+    opened_at: 5 ,
+    closed_at: 16 ,
+    day_of_week: 5 ,
     shop_id: s2.id ,
 }]
 
