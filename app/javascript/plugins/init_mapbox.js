@@ -250,6 +250,7 @@ const initMapbox2 = () => {
         accessToken: mapboxgl.accessToken,
         unit: 'metric',
         profile: 'mapbox/walking',
+        language: 'fr',
         interactive: false,
         styles: style,
           controls: {
@@ -259,7 +260,6 @@ const initMapbox2 = () => {
         }
       });
 
-
     map.on('load', function () {
 
       //Création itinéraire
@@ -267,8 +267,14 @@ const initMapbox2 = () => {
 
         navigator.geolocation.getCurrentPosition((data) => {
 
-          const lat = data.coords.latitude;
-          const long = data.coords.longitude;
+          let lat = data.coords.latitude;
+          let long = data.coords.longitude;
+
+          if (lat === false) {
+            lat = 44.8592094;
+            long = -0.5654924;
+          };
+
           const latDest = markers[0].lat ;
           const longDest = markers[0].lng ;
 
@@ -290,6 +296,42 @@ const initMapbox2 = () => {
     // fitMapToMarkers(map, markers);
 
     map.addControl(directions, 'bottom-left');
+
+    directions.on("route", e => {
+      // routes is an array of route objects as documented here:
+      // https://docs.mapbox.com/api/navigation/#route-object
+      let routes = e.route
+
+        const metric = (m) => {
+          if (m >= 100000) return (m / 1000).toFixed(0) + 'km';
+          if (m >= 10000) return (m / 1000).toFixed(1) + 'km';
+          if (m >= 100) return (m / 1000).toFixed(2) + 'km';
+          return m.toFixed(0) + 'm';
+        };
+
+        const duration = (s) => {
+          var m = Math.floor(s / 60),
+            h = Math.floor(m / 60);
+          s %= 60;
+          m %= 60;
+          if (h === 0 && m === 0) return s + 's';
+          if (h === 0) return m + 'min';
+          return h + 'h ' + m + 'min';
+        };
+
+
+      // Each route object has a distance property
+      const dist = routes.map(r => metric(r.distance));
+      const durationS = routes.map(r => duration(r.duration));
+
+      const instructions = document.getElementById('instructions-iti');
+      instructions.innerHTML = durationS + ' - ' + dist;
+
+
+      // console.log("Route lengths", dist);
+      // console.log("Route duration", durationS);
+    });
+
   }
 
 

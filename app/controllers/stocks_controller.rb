@@ -21,7 +21,8 @@ class StocksController < ApplicationController
 
     @markers = [{
         lat: @stock.shop.latitude,
-        lng: @stock.shop.longitude
+        lng: @stock.shop.longitude,
+        image_url: helpers.asset_url('lily.png')
       }]
 
   end
