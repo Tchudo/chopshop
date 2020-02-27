@@ -33,17 +33,17 @@ class StocksController < ApplicationController
   end
 
   def show
-    
+
+    @stock = Stock.find(params[:id])
+    @rating = @stock.reviews.map(&:rating)
+    @shop = @stock.shop
+    @day_of_week = @shop.time_tables.map(&:day_of_week)
+
     @markers = [{
         lat: @stock.shop.latitude,
         lng: @stock.shop.longitude,
         image_url: helpers.asset_url('lily.png')
     }]
-    
-    @stock = Stock.find(params[:id])
-    @rating = @stock.reviews.map(&:rating)
-    @shop = @stock.shop
-    @day_of_week = @shop.time_tables.map(&:day_of_week)
 
     if @shop.time_tables == []
       @open = "Aucune horaire"
@@ -65,7 +65,7 @@ class StocksController < ApplicationController
 
 
 private
- 
+
 
   ###DATE#####
 

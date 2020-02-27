@@ -4,6 +4,10 @@
 <div class="btn rounded rounded-pill btn-circle bg-warning p-2"><i class="fas fa-chevron-right" style="color: white"></i></div>
 <% end %>
 
+<!-- map -->
+<div class="" id="map-iti" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+
+</div>
 
   <div class="bg-white info-instruction m-0 w-25 rounded">
     <div class="d-flex align-item-center p-1">
@@ -35,10 +39,6 @@
 
 
 
-<!-- map -->
-<div class="" id="map-iti" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
-
-</div>
 
 
 
