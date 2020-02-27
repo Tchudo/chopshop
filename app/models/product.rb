@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  searchkick
+  #searchkick "Elastic"
 
   has_many :product_tags, dependent: :destroy
   has_many :tags, through: :product_tags

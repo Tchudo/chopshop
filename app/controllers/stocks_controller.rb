@@ -1,6 +1,7 @@
 class StocksController < ApplicationController
   def index
-    @products = Product.search(params[:query])
+    #@products = Product.search(params[:query]) "Elastic"
+    @products = Product.all #'sans Elastic'
     @products.each do |product|
       @stocks = Stock.where(product_id: product.id)
       @markers = @stocks.map do |stock|
