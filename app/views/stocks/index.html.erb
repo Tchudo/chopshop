@@ -4,3 +4,10 @@
 <!-- map -->
 <div id="map" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
 </div>
+
+<div class="bg-white info-instruction-bis m-0 w-25 rounded">
+  <div class="d-flex align-item-center p-1">
+   <i class="fas fa-walking" style="font-size: 11px"></i>
+   <p id="instructions-iti-bis" class="m-0 pl-1 text-center" style="font-size: 11px" ></p>
+  </div>
+</div>
