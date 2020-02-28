@@ -37,6 +37,7 @@ class StocksController < ApplicationController
     @review = Review.new
     @reviews = Review.where(stock_id: params[:id])
 
+    @favorite = Favorite.new
 
     @stock = Stock.find(params[:id])
     @rating = @stock.reviews.map(&:rating)
@@ -50,7 +51,7 @@ class StocksController < ApplicationController
     }]
 
     if @shop.time_tables == []
-      @open = "Aucune horaire"
+      @open = "Aucun horaire"
     else
       gestion_horaire
     end

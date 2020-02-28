@@ -391,13 +391,16 @@ const initMapbox2 = () => {
 
         navigator.geolocation.getCurrentPosition((data) => {
 
-          let lat = data.coords.latitude;
-          let long = data.coords.longitude;
+          let lat = 44.8592094;
+          let long = -0.5654924;
 
-          if (lat === false) {
-            lat = 44.8592094;
-            long = -0.5654924;
-          };
+          // let lat = data.coords.latitude;
+          // let long = data.coords.longitude;
+
+          // if (lat === false) {
+          //   lat = 44.8592094;
+          //   long = -0.5654924;
+          // };
 
           const latDest = markers[0].lat ;
           const longDest = markers[0].lng ;
@@ -411,7 +414,7 @@ const initMapbox2 = () => {
           let bound = new mapboxgl.LngLatBounds();
           bound.extend([long, lat]);
           bound.extend([longDest, latDest]);
-          map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 });
+          map.fitBounds(bound, { padding: 70, maxZoom: 15, duration: 500 });
         });
       };
       itineraire();
