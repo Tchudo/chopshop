@@ -19,6 +19,8 @@ gem 'cloudinary', '~> 1.12.0'
 
 gem 'geocoder'
 gem 'searchkick', '~> 4.3.0'
+gem 'gemoji-parser'
+gem 'jquery-rails'
 
 
 group :development do

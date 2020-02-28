@@ -2,3 +2,7 @@
   background: linear-gradient(187deg, rgba(176,231,157,1) 0%, rgba(246,255,238,1) 100%);
   min-height: 100vh;
 }
+
+form:focus {
+   outline: none;
+}
