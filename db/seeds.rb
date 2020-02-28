@@ -232,7 +232,7 @@ stock8= {
     quantity: 3,
     price: 72,
 }
-=======
+
 
 
 st1 = Stock.create!(stock1)

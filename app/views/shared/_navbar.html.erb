@@ -7,9 +7,9 @@
 
 
   <!-- Search form -->
-  <div class="col-sm-12 col-lg-6">
+  <div class="w-75">
    <%= form_tag stocks_path, method: :get, autocomplete: :off do %>
-            <div class="input-group-append p-2 bg-white rounded rounded-pill w-75">
+            <div class="input-group-append p-2 bg-white rounded rounded-pill">
               <%= text_field_tag :query,
                 params[:query],
                 class:"form-control typeahead border-0 shadow-none bg-transparent ",
