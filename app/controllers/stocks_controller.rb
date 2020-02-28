@@ -34,6 +34,10 @@ class StocksController < ApplicationController
 
   def show
 
+    @review = Review.new
+    @reviews = Review.where(stock_id: params[:id])
+
+
     @stock = Stock.find(params[:id])
     @rating = @stock.reviews.map(&:rating)
     @shop = @stock.shop
