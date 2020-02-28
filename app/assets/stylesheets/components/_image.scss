@@ -22,3 +22,23 @@ div.img-size > i > img {
   max-height: 150px;
   border-radius: 6px;
 }
+
+.lilys {
+  width: 50%;
+  height: 50%;
+  position: relative;
+  display: inline-block;
+}
+
+.lilys .lilyb {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 99;
+  width:70px;
+}
+
+.lilys:hover .lilyb {
+  display: inline;
+}
