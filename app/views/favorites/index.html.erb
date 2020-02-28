@@ -1,16 +1,51 @@
 <div class="favorite-bg">
-  <div class="d-flex justify-content-between p-2">
-    <i><%= image_tag "lily_35.png" %></i>
-    <h1 class="text-center text-white">Favorites!</h1>
-    <h1> </h1>
+
+
+  <nav class="navbar navbar-expand-sm bg-transparent justify-content-between" id="nav" style="position: absolute; z-index: 10; width: 100%">
+
+    <!-- Logo à gauche -->
+    <%= link_to "/" do %>
+        <%= image_tag "lily_35.png" %>
+    <% end %>
+
+
+    <!-- Burger -->
+    <div class="dropdown dropleft">
+      <button class="btn bg-transparent border-transparent shadow-none px-1" type="button" data-toggle="dropdown"><i class="fas fa-bars fa-1x" style="color: white;"></i>
+          </button>
+        <% if user_signed_in? %>
+
+          <div class="dropdown-menu rounded border-0 shadow-none" aria-labelledby="dropdownMenu2">
+            <%= link_to favorites_path do %>
+            <button class="dropdown-item shadow-none" type="button">Favoris</button>
+            <% end %>
+            <%#= button_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+            <%= link_to destroy_user_session_path, method: :delete do %>
+              <button class="dropdown-item shadow-none" type="button">Log out</button>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="dropdown-menu rounded border-0 shadow-none" aria-labelledby="dropdownMenu2">
+            <%= link_to new_user_session_path do %>
+            <button class="dropdown-item shadow-none" type="button">Login</button>
+            <% end %>
+          </div>
+        <% end %>
+    </div>
+
+  </nav>
+
+
+  <div class="d-flex justify-content-center p-2">
+    <h1 class="text-center text-white">Favoris <i class="fas fa-heart" style="font-size: 30px;"></i></h1>
   </div>
 
   <div class="container">
 
     <% @favorites.each do |favorite| %>
-    <div class="row d-flex bg-white rounded shadow border m-2">
-      <div class="col-sm-2 py-2 w-25 px-0">
-       <i class="img-resize"><%= cl_image_tag favorite.product.photo.key %></i>
+    <div class="row d-flex bg-white rounded shadow border m-2 border-0">
+      <div class="col-sm-2 w-25 p-0">
+       <i class="img-resize rounded"><%= cl_image_tag favorite.product.photo.key %></i>
       </div>
       <div class="col-sm-9 py-1 w-50">
         <div class="d-flex w-100">
@@ -22,8 +57,8 @@
         </div>
       </div>
       <div class="col-sm-1 w-25 d-flex align-items-center">
-        <%= button_to favorite_path(favorite),method: :delete, data: { confirm: "Are you sure ?"} do %>
-          <i class="far fa-times-circle" id="btn-suppr"></i>
+        <%= button_to favorite_path(favorite),method: :delete, class: " btn p-0 m-0 bg-transparent border-O" do %>
+          <i class="far fa-times-circle" id="btn-suppr" style="color: #FD1015;"></i>
         <% end %>
         <%= link_to stocks_path do %>
         <i class="fa fa-search" id="btn-search"></i>
