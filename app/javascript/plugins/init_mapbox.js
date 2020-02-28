@@ -411,7 +411,7 @@ const initMapbox2 = () => {
           let bound = new mapboxgl.LngLatBounds();
           bound.extend([long, lat]);
           bound.extend([longDest, latDest]);
-          map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 });
+          map.fitBounds(bound, { padding: 70, maxZoom: 15, duration: 500 });
         });
       };
       itineraire();

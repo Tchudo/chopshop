@@ -8,7 +8,7 @@
         </button>
       <% if user_signed_in? %>
         <div class="dropdown-menu rounded border-0" aria-labelledby="dropdownMenu2">
-          <%= link_to do %>
+          <%= link_to favorites_path do %>
           <button class="dropdown-item" type="button">Favoris</button>
           <% end %>
           <%= link_to destroy_user_session_path, method: :delete do %>
