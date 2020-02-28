@@ -3,24 +3,26 @@ class FavoritesController < ApplicationController
     @favorites = Favorite.all
   end
 
-  # def new
-  #   @favorite = Favorite.new
-  # end
+  def new
+    @favorite = Favorite.new
+  end
 
   def create
-    raise
-    @favorite = Favorite.new(user_id: current_user[:id], product_id: params[:product_id])
-    # @favorite.user_id = current_user[:id]
-    # @favorite.product_id = params[:id]
+    @stock = Stock.find(params[:stock_id])
+    @favorite = Favorite.new()
+    @favorite.user_id = current_user[:id]
+    @favorite.product_id = @stock.product.id
 
     if @favorite.save!
-      redirect_to stock_path(params[:id])
+      redirect_to stocks_path(params[:id])
+    else
+      render :new
     end
   end
 
   def destroy
     @favorite = Favorite.find(params[:id])
     @favorite.destroy!
-    redirect_to favorites_path, :notice => "Your favorite has been deleted"
+    redirect_to favorites_path, :notice => "Ce favori a bien été supprimé."
   end
 end
