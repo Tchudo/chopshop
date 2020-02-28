@@ -35,6 +35,12 @@
 
   <p><%= @stock.product.name %></p>
   <p><%= @stock.price %>$</p>
+
+  <!------------------- new-review -------------------->
+
+  <%= render 'index_review' %>
+  <%= render 'newreview' %>
+
 </div>
 
 
@@ -45,6 +51,8 @@
 
 <!-- Modal -->
 
+<!-- card-product -->
+<%#= render 'product_show' %>
 
 <!-- ModalNewFavorite -->
 <!-- <div class="modal fade" id="ModalNewFavorite" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
