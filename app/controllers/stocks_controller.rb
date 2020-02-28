@@ -39,6 +39,7 @@ class StocksController < ApplicationController
     @favorite = Favorite.new
 
     @stock = Stock.find(params[:id])
+    @product = @stock.product
     @rating = @stock.reviews.map(&:rating)
     @shop = @stock.shop
     @day_of_week = @shop.time_tables.map(&:day_of_week)

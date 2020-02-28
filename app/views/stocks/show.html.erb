@@ -16,9 +16,83 @@
    </div>
   </div>
 
+<div class=" bg-white font-color-grey" id="card_show">
+
+
+    <div class="shop_part text-center shadow-sm p-3  bg-white rounded ">
+    <div class="photo_shop"></div>
+    <div class="shop_info ">
+        <h2 ><%= @shop.name %></h2>
+        <div class="time d-flex justify-content-center">
+          <p><%= @open %></p>
+          <p pb-0><%= @fermeture %></p>
+        </div>
+    </div>
+
+  </div>
+
+
+  <div class="product_part d-flex">
+
+    <div class="product_info align-items-center ">
+
+      <div class="product-description mt-3 mx-5">
+        <h2><%= @product.name %></h2>
+        <p><%= @product.brand %></p>
+        <p>Qté :<%= @stock.quantity %></p>
+        <p><%=  %></p>
+      </div>
+
+
+      <div class="rating mr-4 d-flex justify-content-center">
+        <!--<% if @rating_score != 0 %>
+          <p><%= @rating_score %></p>
+        <%end %>-->
+        <% @star.times do  %>
+          <i class="fas fa-star"></i>
+        <%end  %>
+        <% @halfstar.times do %>
+          <i class="fas fa-star-half-alt"></i>
+        <%end  %>
+        <% if @rating != 0 %>
+          <%= @rating.count %>
+        <% end %>
+      </div>
+
+    </div>
+
+
+    <div class="pric d-flex align-items-center">
+      <h2><%= @stock.price %>Euros</h2>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-center" >
+
+      <img class=" product-image" src="https://www.ledahu.net/dahu/wp-content/uploads/cache/images/A-3/A-3-202976579.jpg" alt="">
+
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
 <div class="container">
-  <h2><%= @stock.shop.name %></h2>
-    <% if @rating_score != 0 %>
+
+
+</div>
+
+<!-- card-product -->
+<%#= render 'product_show' %>
+
+
+ <!--
+<h2><%= @stock.shop.name %></h2>
+ <% if @rating_score != 0 %>
       <p><%= @rating_score %></p>
     <%end %>
     <% @star.times do  %>
@@ -35,6 +109,10 @@
 
   <p><%= @stock.product.name %></p>
   <p><%= @stock.price %>$</p>
+
+
+  -->
+
 
   <!------------------- new-review -------------------->
 
@@ -79,3 +157,4 @@
     </div>
   </div>
 </div> -->
+
