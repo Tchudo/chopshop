@@ -1,4 +1,6 @@
 class Shop < ApplicationRecord
+
+
   belongs_to :user
   has_many :stocks, dependent: :destroy
   has_many :time_tables
@@ -11,4 +13,9 @@ class Shop < ApplicationRecord
 
   # validates address, presence: true
   # validates user_id, presence: true
+
+
+
+
+
 end

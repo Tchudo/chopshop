@@ -4,5 +4,11 @@ class SearchesController < ApplicationController
 
     @products = Product.all #"Sans Elastic"
     #@products = Product.reindex "Elastic"
+
   end
+
+
+
+
+
 end
