@@ -8,8 +8,8 @@
 <div class="" id="map-iti" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
 
 </div>
-
-  <div class="bg-white info-instruction m-0 w-25 rounded">
+<div class="bg-white" style="height: 50vh;">
+  <div class="bg-white info-instruction m-0 w-25 rounded ">
     <div class="d-flex align-item-center p-1">
      <i class="fas fa-walking" style="font-size: 11px"></i>
      <p id="instructions-iti" class="m-0 pl-1 text-center" style="font-size: 11px" ></p>
@@ -55,7 +55,7 @@
           <i class="fas fa-star-half-alt"></i>
         <%end  %>
         <% if @rating != 0 %>
-          <%= @rating.count %>
+          <%= " #{@rating.count} note(s)" %>
         <% end %>
       </div>
 
@@ -73,6 +73,41 @@
     </div>
   </div>
 
+  <!-- card-product -->
+  <%#= render 'product_show' %>
+
+
+   <!--
+  <h2><%= @stock.shop.name %></h2>
+   <% if @rating_score != 0 %>
+        <p><%= @rating_score %></p>
+      <%end %>
+      <% @star.times do  %>
+        <i class="fas fa-star"></i>
+      <%end  %>
+      <% @halfstar.times do %>
+        <i class="fas fa-star-half-alt"></i>
+      <%end  %>
+      <% if @rating != 0 %>
+        <%= @rating.count %>
+      <% end %>
+
+        <h2> <%= @open %> <%= @fermeture%></h2>
+
+    <p><%= @stock.product.name %></p>
+    <p><%= @stock.price %>$</p>
+
+
+    -->
+
+
+    <!------------------- new-review -------------------->
+    <div class="d-flex justify-content-around pt-4">
+      <%= render 'index_review' %>
+      <%= render 'newreview' %>
+    </div>
+  </div>
+</div>
 </div>
 
 
@@ -81,45 +116,6 @@
 
 
 
-<div class="container">
-
-
-</div>
-
-<!-- card-product -->
-<%#= render 'product_show' %>
-
-
- <!--
-<h2><%= @stock.shop.name %></h2>
- <% if @rating_score != 0 %>
-      <p><%= @rating_score %></p>
-    <%end %>
-    <% @star.times do  %>
-      <i class="fas fa-star"></i>
-    <%end  %>
-    <% @halfstar.times do %>
-      <i class="fas fa-star-half-alt"></i>
-    <%end  %>
-    <% if @rating != 0 %>
-      <%= @rating.count %>
-    <% end %>
-
-      <h2> <%= @open %> <%= @fermeture%></h2>
-
-  <p><%= @stock.product.name %></p>
-  <p><%= @stock.price %>$</p>
-
-
-  -->
-
-
-  <!------------------- new-review -------------------->
-
-  <%= render 'index_review' %>
-  <%= render 'newreview' %>
-
-</div>
 
 
 
