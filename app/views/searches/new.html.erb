@@ -8,7 +8,7 @@
         </button>
       <% if user_signed_in? %>
         <div class="dropdown-menu rounded border-0" aria-labelledby="dropdownMenu2">
-          <%= link_to do %>
+          <%= link_to favorites_path do %>
           <button class="dropdown-item" type="button">Favoris</button>
           <% end %>
           <%= link_to destroy_user_session_path, method: :delete do %>
@@ -43,35 +43,23 @@
   <div class="row justify-content-center">
     <div class="col-sm-12 col-lg-6">
 
-      <!-- OLD Search form -->
-      <!-- <div class="p-1 bg-white rounded rounded-pill">
-        <div class="input-group">
-          <input type="search" placeholder="" class="form-control border-0 shadow-none bg-transparent">
-          <%#= link_to stocks_path do %>
-
-            <div class="input-group-append">
-              <button class="btn shadow-none"><i class="fa fa-search" style="color: #F4AA5B;"></i></button>
-            </div>
-          </div>
-        <%# end %>
-      </div> -->
-      <!-- OLD Fin search form -->
-
  <!-- Search form -->
-      <%= form_tag stocks_path, method: :get do %>
+      <%= form_tag stocks_path, method: :get, autocomplete: :off do %>
             <div class="input-group-append p-2 bg-white rounded rounded-pill">
               <%= text_field_tag :query,
                 params[:query],
-                class: "form-control border-0 shadow-none bg-transparent",
+                class:"form-control typeahead border-0 shadow-none bg-transparent ",
                 placeholder: "Recherchez un produit..."
               %>
 
-              <%= button_tag :submit, class:'border-0 shadow-none bg-transparent' do %>
-                  <i class="fa fa-search" style="color: #F4AA5B;"></i>
+              <%= button_tag :submit, class:'border-0 shadow-none bg-transparent btn' do %>
+                  <i class="fa fa-search shadow-none" style="color: #F4AA5B;"></i>
               <% end %>
             </div>
       <% end %>
 <!-- Fin search form -->
+
+
 
 
     </div>

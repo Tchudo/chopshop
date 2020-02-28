@@ -68,33 +68,40 @@ puts "Shop construction start !"
 shop1 = {
     name: "Pizza Nico",
     user_id: u.id ,
-    address: "134 cours balguerie stuttenberg",
+    address: "134 Cours Balguerie Stuttenberg, 33300 Bordeaux",
     category: "Pizzeria"
   }
 shop2 = {
     name: "Chez paul",
     user_id: u.id ,
-    address: "51 cours du medoc",
+    address: "51 cours du medoc, 33300 Bordeaux",
     category: "Boulangerie"
   }
 shop3 = {
     name: "Le baraka",
     user_id: u.id ,
-    address: "4 cours balguerie stuttenberg",
+    address: "4 Cours Balguerie Stuttenberg, 33300 Bordeaux",
     category: "Kebab"
   }
 shop4 = {
     name: "Makadam Fitness",
     user_id: u.id ,
-    address: "113 cours balguerie stuttenberg",
+    address: "90 Cours Balguerie Stuttenberg, 33300 Bordeaux",
     category: "Pour les biscotos"
   }
 shop5 = {
     name: "La rotisserie",
     user_id: u.id ,
-    address: "place saint martial",
+    address: "place saint martial, 33300 Bordeaux",
     category: "Des gros cochons"
   }
+
+shop6 = {
+  name: "Le Kiosque à Pizzas",
+  user_id: u.id ,
+  address: "453bis Cours de la Libération, 33400 Talence",
+  category: "Pizzeria"
+}
 
 s1 = Shop.create!(shop1)
 s2 = Shop.create!(shop2)
@@ -102,9 +109,13 @@ s3 = Shop.create!(shop3)
 s4 = Shop.create!(shop4)
 s5 = Shop.create!(shop5)
 
+s6 = Shop.create!(shop6)
+
+
 
 
 #------------------------SHOP-DONE------------------
+
 
 puts "Shops created ok"
 puts "Product construction start !"
@@ -138,16 +149,28 @@ product4 = {
 
   }
 product5 = {
-    name: "Poulet du marché",
+    name: "Chicken Poulet du marché",
     brand: "Chez robert",
     description: "Bien grillé avec des patates"
   }
+
+
+product6 = {
+    name: "Pizza",
+    brand: "Bob",
+    description: "La pire des Pizzas"
+
+  }
+
 
 p1 = Product.create!(product1)
 p2 = Product.create!(product2)
 p3 = Product.create!(product3)
 p4 = Product.create!(product4)
 p5 = Product.create!(product5)
+
+p6 = Product.create!(product6)
+
 
 
 
@@ -191,11 +214,43 @@ stock5 = {
     price: 8,
 }
 
+stock6= {
+    product_id: p1.id ,
+    shop_id: s2.id ,
+    quantity: 2 ,
+    price: 18,
+}
+stock7= {
+    product_id: p1.id ,
+    shop_id: s4.id ,
+    quantity: 1 ,
+    price: 36,
+}
+stock8= {
+    product_id: p6.id ,
+    shop_id: s6.id ,
+    quantity: 3,
+    price: 72,
+}
+
+
+
 st1 = Stock.create!(stock1)
 st2 = Stock.create!(stock2)
 st3 = Stock.create!(stock3)
 st4 = Stock.create!(stock4)
 st5 = Stock.create!(stock5)
+
+st6 = Stock.create!(stock6)
+st7 = Stock.create!(stock7)
+st8 = Stock.create!(stock8)
+puts "Stocks created ok !"
+puts "Tags creation start !"
+
+tag1 = Tag.create!(label: "fast")
+tag2 = Tag.create!(label: "sport")
+tag3 = Tag.create!(label: "healthy")
+
 
 
 
@@ -219,6 +274,7 @@ tag5 = Tag.create!(tags[4])
 
 #--------------------------TAG-DONE---------------------
 
+
 puts "Tags created ok"
 puts " Produt tags creation start !"
 
@@ -230,16 +286,16 @@ product_tags = [{
     tag_id: tag1.id ,
     product_id: p1.id ,
 }, {
-    tag_id: tag2.id ,
+    tag_id: tag1.id ,
     product_id: p2.id ,
 }, {
-    tag_id: tag3.id ,
+    tag_id: tag1.id ,
     product_id: p3.id ,
 }, {
-    tag_id: tag4.id ,
+    tag_id: tag2.id ,
     product_id: p4.id ,
 }, {
-    tag_id: tag5.id ,
+    tag_id: tag3.id ,
     product_id: p5.id ,
 }]
 
@@ -384,6 +440,11 @@ file5 = URI.open('https://fotomelia.com/wp-content/uploads/edd/2015/12/banque-d-
 
 p5.photo.attach(io: file5, filename: 'poulet.png', content_type: 'image/png')
 puts "Image5 loaded OK"
+
+file6 = URI.open('https://fotomelia.com/wp-content/uploads/edd/2015/12/banque-d-images-et-photos-gratuites-libres-de-droits-t%C3%A9l%C3%A9chargement-gratuits20-1560x1170.jpg')
+
+p6.photo.attach(io: file6, filename: 'poulet.png', content_type: 'image/png')
+puts "Image6 loaded OK"
 
 
 

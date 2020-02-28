@@ -1,38 +1,42 @@
 class StocksController < ApplicationController
+
+
+
   def index
 
-    #@products = Product.search(params[:query]) "Elastic"
-    # @products = Product.all #'sans Elastic'
-    # @products.each do |product|
-    #   @stocks = Stock.where(product_id: product.id)
-    #   @markers = @stocks.map do |stock|
-    #     {
-    #     lat: stock.shop.latitude,
-    #     lng: stock.shop.longitude,
-    #     infoWindow: render_to_string(partial: "info_window", locals: { shop: stock.shop , stock: stock}),
-    #     image_url: helpers.asset_url('lily.png')
-    #   }
-    #   end
+    # @products = Product.all
+    # params[:query].split(" ").each do |word|
+    #   @products = @products.where(id: @products.search(word).map(&:id))
     # end
 
-    @stocks = Stock.all
-    shops_address = []
-    @stocks.each do |stock|
-      shops_address << stock.shop
-    end
-    @markers = shops_address.map do |shop|
-      {
-        lat: shop.latitude,
-        lng: shop.longitude,
-        infoWindow: render_to_string(partial: "info_window", locals: { shop: shop , stock: @stocks.find(shop.id)}),
-        image_url: helpers.asset_url('lily.png'),
-      }
+    # @products = Product.search(params[:query], emoji: true)
+    @products = Product.all #'sans Elastic'
+
+    @stocks = []
+    @products.each do |product|
+      product_stocks = Stock.where(product_id: product.id)
+      product_stocks.each do |stock|
+        @stocks << stock
+      end
     end
 
+      @markers = @stocks.map do |stock|
+        {
+        lat: stock.shop.latitude,
+        lng: stock.shop.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { shop: stock.shop , product: stock.product, stock: stock}),
+        image_url: helpers.asset_url('lily.png')
+      }
+      end
 
   end
 
   def show
+
+    @review = Review.new
+    @reviews = Review.where(stock_id: params[:id])
+
+    @favorite = Favorite.new
 
     @stock = Stock.find(params[:id])
     @product = @stock.product
@@ -47,7 +51,7 @@ class StocksController < ApplicationController
     }]
 
     if @shop.time_tables == []
-      @open = "Aucune horaire"
+      @open = "Aucun horaire"
     else
       gestion_horaire
     end

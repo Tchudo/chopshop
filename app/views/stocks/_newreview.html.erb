@@ -1,0 +1,27 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-warning text-white" data-toggle="modal" data-target="#exampleModalCenter">
+  Ajouter un avis
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Ajouter un avis</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <%= simple_form_for [@stock, @review] do |f| %>
+            <%= f.input :comment, label: "Commentaire", error: "Veuillez renseigner ce champ" %>
+            <%= f.input :rating, label: "Note", error: "La note doit être comprise entre 0 et 5" %>
+            <%= f.button :submit, class: "btn btn-warning text-white" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
