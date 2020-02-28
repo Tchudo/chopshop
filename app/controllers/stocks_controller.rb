@@ -33,7 +33,7 @@ class StocksController < ApplicationController
   end
 
   def show
-
+    @favorite = Favorite.new
     @stock = Stock.find(params[:id])
     @rating = @stock.reviews.map(&:rating)
     @shop = @stock.shop
@@ -46,7 +46,7 @@ class StocksController < ApplicationController
     }]
 
     if @shop.time_tables == []
-      @open = "Aucune horaire"
+      @open = "Aucun horaire"
     else
       gestion_horaire
     end

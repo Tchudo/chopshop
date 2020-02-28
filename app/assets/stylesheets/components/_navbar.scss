@@ -10,3 +10,21 @@
 .navbar-lewagon .navbar-brand img {
   width: 40px;
 }
+a {
+  text-decoration: none;
+}
+#nav > div > div > a > button:active {
+  background-color: white;
+  text-decoration: none;
+  color: #0E0000;
+}
+#nav > div > div > a > button:hover {
+  text-decoration: none;
+}
+#nav > div > div > a.dropdown-item:active {
+  background-color: transparent;
+  text-decoration: none;
+}
+body {
+  text-decoration: none;
+}
