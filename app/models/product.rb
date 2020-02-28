@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  # searchkick
+  searchkick  #ElasticSearch
 
 
   has_many :product_tags, dependent: :destroy
@@ -14,9 +14,9 @@ class Product < ApplicationRecord
   validates :name, presence: true
   # validates :product_sku, uniqueness: true
 
-  # def search_data
-  #   attributes.merge(shops: self.shops.map(&:name).to_s, addresses: self.shops.map(&:address).to_s, tags: self.tags.map(&:label).to_s )
-  # end
+  def search_data  #ElasticSearch
+    attributes.merge(shops: self.shops.map(&:name).to_s, addresses: self.shops.map(&:address).to_s, tags: self.tags.map(&:label).to_s )
+  end
 
 
 end
