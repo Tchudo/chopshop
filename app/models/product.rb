@@ -1,5 +1,6 @@
 class Product < ApplicationRecord
-  #searchkick "Elastic"
+  searchkick  #ElasticSearch
+
 
   has_many :product_tags, dependent: :destroy
   has_many :tags, through: :product_tags
@@ -9,8 +10,13 @@ class Product < ApplicationRecord
   has_one_attached :photo
 
 
+
   validates :name, presence: true
   # validates :product_sku, uniqueness: true
+
+  def search_data  #ElasticSearch
+    attributes.merge(shops: self.shops.map(&:name).to_s, addresses: self.shops.map(&:address).to_s, tags: self.tags.map(&:label).to_s )
+  end
 
 
 end

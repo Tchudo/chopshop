@@ -11,3 +11,15 @@
     transform: rotate(180deg);
   }
 }
+
+.btn:focus {
+  outline: none;
+}
+
+.text-white {
+  color: white;
+}
+
+.text-yellow {
+  color: rgb(247, 198, 22);
+}
