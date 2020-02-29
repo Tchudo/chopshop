@@ -37,38 +37,38 @@
   <p><%= @stock.price %>$</p>
 </div>
 
-<!-- <button class="btn p-0 m-0 bg-transparent border-O shadow-none" data-toggle="modal" data-target="#ModalNewFavorite"> <i class="fa fa-heart shadow-none"
-  <%# @favorite_user.each do | user | %>
-    <%# if user == @stock.product.id  %>
-    style="color: pink"
-    <%# else %>
-    style="color: gray"
-    <%# end %>
-    <%#raise  %>
-  <%# end %>
-></i></button> -->
+
+
+
+
+<button class="btn p-0 m-0 bg-transparent border-O shadow-none" data-toggle="modal" data-target="#ModalNewFavorite"> <i class="fa fa-heart shadow-none"
+  <% if @favorite_user.include? @stock.product.id  %>
+  style="color: pink; cursor: auto;"
+  <% else %>
+  style="color: gray"
+  <% end %>
+></i></button>
 
 <!-- Modal -->
 
-<%# @favorite_user.each do | user | %>
-  <%# if user != @stock.product_id  %>
-<!-- ModalNewFavorite -->
-<!--     <div class="modal fade" id="ModalNewFavorite" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg h-75" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-            <div class="container mt-4 text-center">
-              <h5>Voulez-vous ajouter <strong><%#= @stock.product.name %></strong> aux favoris ?</h5>
-              <div class="mx-5 d-flex justify-content-center">
-                <%#= simple_form_for [@stock, @favorite] do |f| %>
-                  <%#= f.submit 'Oui', class: 'btn btn-success m-4' %>
-                <%# end %>
-                <button type="button" class="btn btn-warning m-4" data-dismiss="modal">Non</button>
-              </div>
+<% unless @favorite_user.include? @stock.product.id  %>
+  <!-- ModalNewFavorite -->
+  <div class="modal fade" id="ModalNewFavorite" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg h-75" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="container mt-4 text-center">
+            <h5>Voulez-vous ajouter <strong><%= @stock.product.name %></strong> aux favoris ?</h5>
+            <div class="mx-5 d-flex justify-content-center">
+              <%= simple_form_for [@stock, @favorite] do |f| %>
+                <%= f.submit 'Oui', class: 'btn btn-success m-4' %>
+              <% end %>
+              <button type="button" class="btn btn-warning m-4" data-dismiss="modal">Non</button>
             </div>
           </div>
         </div>
       </div>
-    </div> -->
-  <%# end %>
-<%# end %>
+    </div>
+  </div>
+<% end %>
+
