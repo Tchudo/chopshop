@@ -13,10 +13,10 @@ class FavoritesController < ApplicationController
     @favorite.user_id = current_user[:id]
     @favorite.product_id = @stock.product.id
 
-    if @favorite.save!
-      redirect_to stocks_path(params[:id])
+    if @favorite.save
+      redirect_to stock_path(@stock.id), :notice => "Ce produit a bien été ajouté."
     else
-      render :new
+      redirect_to stock_path(@stock.id), :notice => "Ce produit est déjà dans les favoris."
     end
   end
 

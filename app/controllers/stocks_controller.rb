@@ -39,6 +39,7 @@ class StocksController < ApplicationController
     @reviews = Review.where(stock_id: params[:id])
 
     @favorite = Favorite.new
+    @favorite_user = Favorite.where(user_id: current_user[:id]).map(&:product_id)
 
     @stock = Stock.find(params[:id])
     @product = @stock.product
