@@ -4,15 +4,15 @@ class StocksController < ApplicationController
 
   def index
       # ---------------#ElasticSearch
-    @products = Product.all
-    params[:query].split(" ").each do |word|
-      @products = @products.where(id: @products.search(word).map(&:id))
-    end
+    # @products = Product.all
+    # params[:query].split(" ").each do |word|
+    #   @products = @products.where(id: @products.search(word).map(&:id))
+    # end
 
     # @products = Product.search(params[:query], emoji: true)
     #-----------------#ElasticSearch
 
-    #@products = Product.all #'sans Elastic'
+    @products = Product.all #'sans Elastic'
 
     @stocks = []
     @products.each do |product|

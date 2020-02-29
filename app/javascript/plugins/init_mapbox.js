@@ -455,6 +455,7 @@ const initMapbox2 = () => {
       instructions.innerHTML = durationS + ' - ' + dist;
 
 
+
       // console.log("Route lengths", dist);
       // console.log("Route duration", durationS);
     });
