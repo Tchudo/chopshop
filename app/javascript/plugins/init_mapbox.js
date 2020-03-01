@@ -461,15 +461,13 @@ const initMapbox2 = () => {
       // };
 
       stepsArray[0].forEach( element => {
-        tripInstructions.push('<li>' + element.maneuver.instruction + '</li>');
+        tripInstructions.push('<li>' + element.maneuver.instruction) + '</li>';
         instructionsSteps.innerHTML = tripInstructions;
       });
 
-      console.log(tripInstructions);
-
     });
 
-  }
+  };
 
 
 
