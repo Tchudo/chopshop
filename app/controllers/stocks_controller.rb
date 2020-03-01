@@ -4,15 +4,15 @@ class StocksController < ApplicationController
 
   def index
       # ---------------#ElasticSearch
-    @products = Product.all
-    params[:query].split(" ").each do |word|
-      @products = @products.where(id: @products.search(word).map(&:id))
-    end
+    # @products = Product.all
+    # params[:query].split(" ").each do |word|
+    #   @products = @products.where(id: @products.search(word).map(&:id))
+    # end
 
     # @products = Product.search(params[:query], emoji: true)
     #-----------------#ElasticSearch
 
-    #@products = Product.all #'sans Elastic'
+    @products = Product.all #'sans Elastic'
 
     @stocks = []
     @products.each do |product|
@@ -54,7 +54,7 @@ class StocksController < ApplicationController
     }]
 
     if @shop.time_tables == []
-      @open = "Aucun horaire"
+      @open = "Aucuns horaires"
     else
       gestion_horaire
     end
@@ -89,7 +89,7 @@ private
             minutes = "0#{minutes}"
           end
         @open = "Fermé"
-        @fermeture = " . Ouvre à #{good_opening_hour}:00 (dans #{hours}h:#{minutes}m) "
+        @fermeture = "Ouvre à #{good_opening_hour}:00 (dans #{hours}h:#{minutes}m) "
 
 
       elsif open_today? && (Time.now > Time.new(Time.now.year, Time.now.month, Time.now.day, good_closing_hour, 00, 00)) #Soir aprés fermeture
@@ -97,7 +97,7 @@ private
         if Time.now.wday == @day_of_week.last
                                                                        #Si c'est le dernier jour d'ouverture
           @open = "Fermé"
-          @fermeture = " . Ouvre #{wich_day(@day_of_week.first)} à #{good_opening_hour}h:00m" #Le else possible
+          @fermeture = "Ouvre #{wich_day(@day_of_week.first)} à #{good_opening_hour}h:00m" #Le else possible
         else                                                                                                       #Si le magasin est ouvert le lendemain
           time_second = Time.new(Time.now.year, Time.now.month, Time.now.day, 23, 59, 59) - Time.now
           time_hour = time_second / 3600
@@ -107,7 +107,7 @@ private
             minutes = "0#{minutes}"
           end
           @open = "Fermé"
-          @fermeture = " . Ouvre demain à #{good_opening_hour}h"
+          @fermeture = "Ouvre demain à #{good_opening_hour}h"
         end
 
         # Dans la plage horaire d'ouverture
@@ -122,13 +122,13 @@ private
         @open = "Ouvert"
 
         if (Time.new(Time.now.year, Time.now.month, Time.now.day, good_closing_hour, 00, 00) - Time.now <= 4680)    #Si c'est 1h30 avant la fermeture
-          @fermeture = "Ferme bientôt . #{good_closing_hour}:00 (dans #{hours}:#{minutes}))"
+          @fermeture = "Ferme bientôt. #{good_closing_hour}:00 (dans #{hours}h:#{minutes}m)"
         else
-          @fermeture = " . Ferme à #{good_closing_hour}:00 (dans #{hours}h:#{minutes}m)"                            #Si il reste plus de 1h30 avant la fermeture
+          @fermeture = "Ferme à #{good_closing_hour}:00 (dans #{hours}h:#{minutes}m)"                            #Si il reste plus de 1h30 avant la fermeture
         end
       else
         @open = "Fermé"
-        @fermeture = " . Ouvre #{wich_day(@day_of_week.first)} à #{good_opening_hour}h:00m"
+        @fermeture = "Ouvre #{wich_day(@day_of_week.first)} à #{good_opening_hour}h:00m"
       end
 
 
@@ -155,19 +155,19 @@ private
     def wich_day(date_number)
       case date_number
       when 0
-        return "Sunday"
+        return "Dimanche"
       when 1
-        return "Monday"
+        return "Lundi"
       when 2
-        return "Tuesday"
+        return "Mardi"
       when 3
-        return "Wednesday"
+        return "Mercredi"
       when 4
-        return "Thursday"
+        return "Jeudi"
       when 5
-        return "Friday"
+        return "Vendredi"
       when 6
-        return "Saturday"
+        return "Samedi"
       end
     end
 
