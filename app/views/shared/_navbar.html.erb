@@ -8,7 +8,7 @@
 
   <!-- Search form -->
   <div class="w-75">
-   <%= form_tag stocks_path, method: :get, autocomplete: :off do %>
+   <%= form_tag searches_new_path, method: :get, autocomplete: :off do %>
             <div class="input-group-append p-2 bg-white rounded rounded-pill">
               <%= text_field_tag :query,
                 params[:query],

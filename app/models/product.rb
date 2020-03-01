@@ -15,7 +15,7 @@ class Product < ApplicationRecord
   # validates :product_sku, uniqueness: true
 
   def search_data  #ElasticSearch
-    attributes.merge(shops: self.shops.map(&:name).to_s, addresses: self.shops.map(&:address).to_s, tags: self.tags.map(&:label).to_s )
+    attributes.merge(shops: self.shops.map(&:name), addresses: self.shops.map(&:address), tags: self.tags.map(&:label) )
   end
 
 

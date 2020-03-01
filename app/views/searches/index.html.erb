@@ -29,7 +29,7 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-sm-12 col-lg-6">
-       <h1>NEW</h1>
+      <h1>INDEX</h1>
       <%= image_tag "lily_70.png", class: "mx-auto d-block", id: "lily" %>
 
       <h1 class="text-center my-2 text-white">ShopChop!</h1>
@@ -48,10 +48,8 @@
             <div class="input-group-append p-2 bg-white rounded rounded-pill">
               <%= text_field_tag :query,
                 params[:query],
-                id:"search",
                 class:"form-control typeahead border-0 shadow-none bg-transparent ",
-                placeholder: "Recherchez un produit...",
-                onkeyup: "this.form.submit();"
+                placeholder: "Recherchez un produit..."
               %>
 
               <%= button_tag :submit, class:'border-0 shadow-none bg-transparent btn' do %>
@@ -60,25 +58,6 @@
             </div>
       <% end %>
 <!-- Fin search form -->
-
-    <div class="col-sm-12 col-lg-12">
-      <ul>
-        <% if @products.nil?  %>
-        <% elsif @products.size == 0  %>
-          <p>aucun produit trouvé</p>
-        <% else %>
-          <% @products.each do |product|  %>
-            <li>
-              <div class="img-size">
-                <i><%= cl_image_tag product.photo.key%></i>
-                <%= link_to product.name, search_stocks_path(product) %>
-
-              </div>
-            </li>
-          <% end %>
-        <% end %>
-      </ul>
-    </div>
 
 
     </div>

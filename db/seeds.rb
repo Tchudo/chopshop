@@ -103,13 +103,28 @@ shop6 = {
   category: "Pizzeria"
 }
 
+shop7 = {
+  name: "Leroy Merlin",
+  user_id: u.id ,
+  address: "3 Rue Dumont d'Urville, 33300 Bordeaux",
+  category: "Bricolage grande surface"
+}
+
+shop8 = {
+  name: "Bricorelais",
+  user_id: u.id ,
+  address: "115 Cours Victor Hugo, 33000 Bordeaux",
+  category: "Bricolage"
+}
+
 s1 = Shop.create!(shop1)
 s2 = Shop.create!(shop2)
 s3 = Shop.create!(shop3)
 s4 = Shop.create!(shop4)
 s5 = Shop.create!(shop5)
-
 s6 = Shop.create!(shop6)
+s7 = Shop.create!(shop7)
+s8 = Shop.create!(shop8)
 
 
 
@@ -125,7 +140,7 @@ puts "Product construction start !"
 
 
 product1 = {
-    name: "Pizza",
+    name: "Pizza Nico",
     brand: "Nico",
     description: "La meilleure des Pizzas"
 
@@ -156,9 +171,30 @@ product5 = {
 
 
 product6 = {
-    name: "Pizza",
+    name: "Pizza Hut",
     brand: "Bob",
     description: "La pire des Pizzas"
+
+  }
+
+  product7 = {
+    name: "VIS METAUX TETE FRAISEE BOMBEE TFB POZI 6X50 ALUMINIUM",
+    brand: "VIS EXPRESS",
+    description: "Diametre=6, Matiere=Aluminium, Norme=DIN 966"
+
+  }
+
+  product8 = {
+    name: "VIS POUR BOIS ET AGGLOMERE TETE RONDE ",
+    brand: "VIS EXPRESS",
+    description: "TR POZI 2 4X80 FILETEE SUR 48 ACIER ZING BLANC"
+
+  }
+
+  product9 = {
+    name: "VBA/VIS POUR BOIS ET AGGLOMERE TETE RONDE",
+    brand: "LEGRAND",
+    description: "TR POZI 3 6X35 ACIER ZINGUE NOIR"
 
   }
 
@@ -170,6 +206,10 @@ p4 = Product.create!(product4)
 p5 = Product.create!(product5)
 
 p6 = Product.create!(product6)
+
+p7 = Product.create!(product7)
+p8 = Product.create!(product8)
+p9 = Product.create!(product9)
 
 
 
@@ -233,6 +273,48 @@ stock8= {
     price: 72,
 }
 
+stock9= {
+    product_id: p7.id ,
+    shop_id: s7.id ,
+    quantity: 10,
+    price: 1.2,
+}
+
+stock10= {
+    product_id: p7.id ,
+    shop_id: s8.id ,
+    quantity: 3,
+    price: 1.8,
+}
+
+stock11= {
+    product_id: p8.id ,
+    shop_id: s7.id ,
+    quantity: 20,
+    price: 0.7,
+}
+
+stock12= {
+    product_id: p8.id ,
+    shop_id: s8.id ,
+    quantity: 5,
+    price: 1.5,
+}
+
+stock13= {
+    product_id: p9.id ,
+    shop_id: s7.id ,
+    quantity: 30,
+    price: 0.6,
+}
+
+stock14= {
+    product_id: p9.id ,
+    shop_id: s8.id ,
+    quantity: 3,
+    price: 1.4,
+}
+
 
 
 st1 = Stock.create!(stock1)
@@ -244,13 +326,14 @@ st5 = Stock.create!(stock5)
 st6 = Stock.create!(stock6)
 st7 = Stock.create!(stock7)
 st8 = Stock.create!(stock8)
+st9 = Stock.create!(stock9)
+st10 = Stock.create!(stock10)
+st11 = Stock.create!(stock11)
+st12 = Stock.create!(stock12)
+st13 = Stock.create!(stock13)
+st14 = Stock.create!(stock14)
 puts "Stocks created ok !"
 puts "Tags creation start !"
-
-tag1 = Tag.create!(label: "fast")
-tag2 = Tag.create!(label: "sport")
-tag3 = Tag.create!(label: "healthy")
-
 
 
 
@@ -263,12 +346,11 @@ puts "Tags creation start !"
 
 
 
-tags = [label: "pizza", label: "Sandwich", label: "kebab", label: "barre", label: "poulet"]
-tag1 = Tag.create!(tags[0])
-tag2 = Tag.create!(tags[1])
-tag3 = Tag.create!(tags[2])
-tag4 = Tag.create!(tags[3])
-tag5 = Tag.create!(tags[4])
+tag1 = Tag.create!(label: "fast food")
+tag2 = Tag.create!(label: "sportive")
+tag3 = Tag.create!(label: "healthy")
+tag4 = Tag.create!(label: "amateur")
+tag5 = Tag.create!(label: "expert")
 
 
 
@@ -297,6 +379,15 @@ product_tags = [{
 }, {
     tag_id: tag3.id ,
     product_id: p5.id ,
+}, {
+    tag_id: tag5.id ,
+    product_id: p7.id ,
+}, {
+    tag_id: tag5.id ,
+    product_id: p8.id ,
+}, {
+    tag_id: tag4.id ,
+    product_id: p9.id ,
 }]
 
 ProductTag.create!(product_tags)
@@ -445,6 +536,21 @@ file6 = URI.open('https://fotomelia.com/wp-content/uploads/edd/2015/12/banque-d-
 
 p6.photo.attach(io: file6, filename: 'poulet.png', content_type: 'image/png')
 puts "Image6 loaded OK"
+
+file7 = URI.open('https://media.castorama.fr/is/image/Castorama/NPC_HT_1806_choisir_vis_2?wid=720&$jpgp$')
+
+p7.photo.attach(io: file7, filename: 'poulet.png', content_type: 'image/png')
+puts "Image7 loaded OK"
+
+file8 = URI.open('https://cdn.quincaillerie.pro/images/c94fdd8bf3df64a84b8d/0/0/P106254.png')
+
+p8.photo.attach(io: file8, filename: 'poulet.png', content_type: 'image/png')
+puts "Image8 loaded OK"
+
+file9 = URI.open('https://www.bricodepot.fr/images/page_prod_big/105000/105179.jpg')
+
+p9.photo.attach(io: file9, filename: 'poulet.png', content_type: 'image/png')
+puts "Image9 loaded OK"
 
 
 
