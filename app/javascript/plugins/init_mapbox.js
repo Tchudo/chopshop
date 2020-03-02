@@ -79,7 +79,6 @@ const initMapbox = () => {
       // Add a marker at the result's coordinates
       geocoder.on('result', function(ev) {
         map.getSource('single-point').setData(ev.result.geometry);
-        console.log(ev.result.geometry.coordinates);
       });
     });
 
@@ -426,9 +425,6 @@ const initMapbox2 = () => {
         }
       });
 
-      // Listen for the `result` event from the Geocoder
-      // `result` event is triggered when a user makes a selection
-      // Add a marker at the result's coordinates
       geocoder.on('result', function(ev) {
         map.getSource('single-point').setData(ev.result.geometry);
         console.log(ev.result.geometry.coordinates);
@@ -438,8 +434,6 @@ const initMapbox2 = () => {
     document.getElementById('geocoder-2').appendChild(geocoder.onAdd(map));
 
   };
-
-
 
 };
 
