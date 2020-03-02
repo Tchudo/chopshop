@@ -1,4 +1,5 @@
 require "open-uri"
+require 'openfoodfacts'
 
 puts "Destruction : start"
 puts "3"
@@ -446,7 +447,72 @@ file6 = URI.open('https://fotomelia.com/wp-content/uploads/edd/2015/12/banque-d-
 p6.photo.attach(io: file6, filename: 'poulet.png', content_type: 'image/png')
 puts "Image6 loaded OK"
 
+file = URI.open('https://static.openfoodfacts.org/images/products/762/221/044/9283/front_fr.286.400.jpg')
+article = Product.new(name: 'NES', description: "A great console")
+article.photo.attach(io: file, filename: 'nes.png', content_type: 'image/png')
+article.save
+puts "its good"
 
+
+# ---------------------- OPEN FOOD FACTS --------------------
+
+product_names = ["Chocolat", "Biscuit", "Confiture"]
+
+product_names.each do |product_name|
+  products = Openfoodfacts::Product.search(product_name, locale: 'fr', page_size: 5)
+
+  products.each do |product|
+    my_product = Openfoodfacts::Product.get(product.code, locale: 'fr')
+    my_new_product = Product.create!({
+      name: my_product.product_name,
+      description: my_product.ingredients_text_fr,
+      product_sku: my_product.code,
+      brand: my_product.brands
+    })
+    puts "#{my_new_product.name} has been created"
+    file = URI.open(my_product.image_front_url)
+  puts "Image loaded"
+
+    my_new_product.photo.attach(io: file, filename: "#{product.code}.jpg", content_type: 'image/jpg')
+    puts "Product save !"
+
+  end
+end
+
+
+
+
+
+
+
+
+
+
+
+# my_product = products.first
+
+# #p my_product
+
+# the_product = Openfoodfacts::Product.get(my_product.code, locale: 'fr')
+
+# puts "the product done"
+
+# product7 = {
+#     name: the_product.product_name,
+#     description: the_product.ingredients_text_fr,
+#     product_sku: the_product.code,
+#     brand: the_product.brands
+#   }
+
+# p7 = Product.create!(product7)
+
+puts "API good !"
+
+
+
+
+
+#------------------------------------------------------------
 
 puts "SEED DONE :D"
 

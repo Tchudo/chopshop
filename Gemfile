@@ -22,6 +22,9 @@ gem 'searchkick', '~> 4.3.0'
 gem 'gemoji-parser'
 gem 'jquery-rails'
 
+# ------- Open food facts ----------------
+gem 'openfoodfacts'
+
 
 group :development do
   gem 'web-console', '>= 3.3.0'
