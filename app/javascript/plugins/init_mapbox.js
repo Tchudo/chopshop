@@ -344,13 +344,8 @@ const style = [{
 
 const initMapbox2 = () => {
   const mapElement = document.getElementById('map-iti');
-  const fitMapToMarkers = (map, markers) => {
-    const bounds = new mapboxgl.LngLatBounds();
-    markers.forEach(marker => bounds.extend([ marker.lng, marker.lat ]));
-    map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 });
-  };
 
-  if (mapElement) { // only build a map if there's a div#map to inject into
+  if (mapElement) {
     mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
 
     ///map
@@ -376,6 +371,7 @@ const initMapbox2 = () => {
         profile: 'mapbox/walking',
         language: 'fr',
         interactive: false,
+        steps: true,
         styles: style,
           controls: {
           inputs: false,
@@ -414,7 +410,7 @@ const initMapbox2 = () => {
           let bound = new mapboxgl.LngLatBounds();
           bound.extend([long, lat]);
           bound.extend([longDest, latDest]);
-          map.fitBounds(bound, { padding: 70, maxZoom: 15, duration: 500 });
+          map.fitBounds(bound, { padding: 90, maxZoom: 15, duration: 500 });
         });
       };
       itineraire();
@@ -454,13 +450,24 @@ const initMapbox2 = () => {
       const instructions = document.getElementById('instructions-iti');
       instructions.innerHTML = durationS + ' - ' + dist;
 
+      const instructionsSteps = document.getElementById('instructions-steps');
+      const stepsArray = routes.map(r => r.legs[0].steps);
+      // const stepsArray = routes.map(r => r.legs[0].steps[0].maneuver.instruction);
 
+      let tripInstructions = [];
+      // for (let i = 0; i < stepsArray.length; i++) {
+      //   tripInstructions.push('<br><li>' + stepsArray[i].maneuver.instruction) + '</li>';
+      //   instructionsSteps.innerHTML = tripInstructions;
+      // };
 
-      // console.log("Route lengths", dist);
-      // console.log("Route duration", durationS);
+      stepsArray[0].forEach( element => {
+        tripInstructions.push('<li>' + element.maneuver.instruction) + '</li>';
+        instructionsSteps.innerHTML = tripInstructions;
+      });
+
     });
 
-  }
+  };
 
 
 

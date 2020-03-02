@@ -6,6 +6,14 @@
   <div class="btn rounded rounded-pill btn-circle bg-warning p-2"><i class="fas fa-chevron-right" style="color: white"></i></div>
 <% end %>
 
+<!-- btn instructions -->
+<div class="dropdown dropright">
+  <div class="btn rounded rounded-pill btn-circle-norm bg-success p-2" data-toggle="dropdown"><i class="fas fa-map-signs" style="color: white"></i></div>
+  <ol class="dropdown-menu rounded border-0 p-2 w-75 overflow-auto" id="instructions-steps" style="background-color: rgba(0,0,0,0.7);">
+  </ol>
+</div>
+
+
 <!-- map -->
 <div class="" id="map-iti" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
 </div>
@@ -125,7 +133,7 @@
       </div>
     </div>
 
-
+<!-- <div id="instructions-steps"></div> -->
 
    <!--
   <h2><%#= @stock.shop.name %></h2>
