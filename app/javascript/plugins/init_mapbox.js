@@ -1,6 +1,6 @@
 import mapboxgl from 'mapbox-gl';
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
-// var MapboxDirections = require('@mapbox/mapbox-gl-directions');
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 
 const initMapbox = () => {
   const mapElement = document.getElementById('map');
@@ -44,119 +44,48 @@ const initMapbox = () => {
       }), 'bottom-right'
     );
 
+    const geocoder = new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      mapboxgl: mapboxgl,
+      marker: false,
+      language: 'fr',
+      placeholder: "Entrer votre adresse"
+    });
+
+    map.addControl(geocoder);
 
 
+    map.on('load', function() {
+      map.addSource('single-point', {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features: []
+        }
+      });
 
+      map.addLayer({
+        id: 'point',
+        source: 'single-point',
+        type: 'circle',
+        paint: {
+          'circle-radius': 10,
+          'circle-color': '#448ee4'
+        }
+      });
 
+      // Listen for the `result` event from the Geocoder
+      // `result` event is triggered when a user makes a selection
+      // Add a marker at the result's coordinates
+      geocoder.on('result', function(ev) {
+        map.getSource('single-point').setData(ev.result.geometry);
+        console.log(ev.result.geometry.coordinates);
+      });
+    });
 
+    document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
 
-
-
-
-
-
-
-
-
-  //   //MapboxDirection
-  //   const directions = new MapboxDirections({
-  //       accessToken: mapboxgl.accessToken,
-  //       unit: 'metric',
-  //       profile: 'mapbox/walking',
-  //       language: 'fr',
-  //       interactive: false,
-  //       styles: style,
-  //         controls: {
-  //         inputs: false,
-  //         instructions: false,
-  //         profileSwitcher: false
-  //       }
-  //     });
-
-  //   markers.forEach((marker) => {
-  //     map.on('load', function () {
-  //     //Création itinéraire
-  //     const itineraireBis = () => {
-
-  //       navigator.geolocation.getCurrentPosition((data) => {
-
-  //         let lat = data.coords.latitude;
-  //         let long = data.coords.longitude;
-
-  //         if (lat === false) {
-  //           lat = 44.8592094;
-  //           long = -0.5654924;
-  //         };
-
-  //         const latDest = marker.lat ;
-  //         const longDest = marker.lng ;
-
-  //         const createMarker = new mapboxgl.Marker()
-  //           .setLngLat([long, lat])
-  //           .addTo(map);
-
-  //         directions.setOrigin([long, lat]);
-  //         directions.setDestination([longDest, latDest]);
-  //         let bound = new mapboxgl.LngLatBounds();
-  //         bound.extend([long, lat]);
-  //         bound.extend([longDest, latDest]);
-  //         map.fitBounds(bound, {padding: 70, maxZoom: 15, duration: 100});
-  //       });
-  //     };
-  //     itineraireBis();
-  //   });
-
-  //   // fitMapToMarkers(map, markers);
-
-  //   map.addControl(directions, 'bottom-left');
-
-  //   directions.on("route", e => {
-  //     // routes is an array of route objects as documented here:
-  //     // https://docs.mapbox.com/api/navigation/#route-object
-  //     let routes = e.route
-
-  //       const metric = (m) => {
-  //         if (m >= 100000) return (m / 1000).toFixed(0) + 'km';
-  //         if (m >= 10000) return (m / 1000).toFixed(1) + 'km';
-  //         if (m >= 100) return (m / 1000).toFixed(2) + 'km';
-  //         return m.toFixed(0) + 'm';
-  //       };
-
-  //       const duration = (s) => {
-  //         var m = Math.floor(s / 60),
-  //           h = Math.floor(m / 60);
-  //         s %= 60;
-  //         m %= 60;
-  //         if (h === 0 && m === 0) return s + 's';
-  //         if (h === 0) return m + 'min';
-  //         return h + 'h ' + m + 'min';
-  //       };
-
-
-  //     // Each route object has a distance property
-  //     const dist = routes.map(c => metric(c.distance));
-  //     const durationS = routes.map(c => duration(c.duration));
-
-  //     const instructions = document.getElementById('instructions-iti-bis');
-  //     instructions.innerHTML = durationS + ' - ' + dist;
-
-
-  //     // console.log("Route lengths", dist);
-  //     // console.log("Route duration", durationS);
-  //   });
-
-  // });
-
-
-
-
-
-
-
-
-
-
-  }
+  };
 };
 
 
@@ -466,6 +395,47 @@ const initMapbox2 = () => {
       });
 
     });
+
+    const geocoder = new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      mapboxgl: mapboxgl,
+      marker: false,
+      language: 'fr',
+      placeholder: "Entrer votre adresse"
+    });
+
+    map.addControl(geocoder);
+
+
+    map.on('load', function() {
+      map.addSource('single-point', {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features: []
+        }
+      });
+
+      map.addLayer({
+        id: 'point',
+        source: 'single-point',
+        type: 'circle',
+        paint: {
+          'circle-radius': 10,
+          'circle-color': '#448ee4'
+        }
+      });
+
+      // Listen for the `result` event from the Geocoder
+      // `result` event is triggered when a user makes a selection
+      // Add a marker at the result's coordinates
+      geocoder.on('result', function(ev) {
+        map.getSource('single-point').setData(ev.result.geometry);
+        console.log(ev.result.geometry.coordinates);
+      });
+    });
+
+    document.getElementById('geocoder-2').appendChild(geocoder.onAdd(map));
 
   };
 
