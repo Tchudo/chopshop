@@ -13,6 +13,9 @@
   </ol>
 </div>
 
+<button id="btn-add-2" class="btn-circle-add-2 border-0 rounded rounded-pill shadow-none bg-white py-1 px-2"><i class="fas fa-map-marker-alt" style="color: #F4AA5B; font-size: 30px"></i></button>
+<div id="geocoder-2" class="geocoder-2"></div>
+
 
 <!-- map -->
 <div class="" id="map-iti" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
@@ -195,3 +198,19 @@
 <% end %>
 
 
+<script>
+
+  const div = document.getElementById('geocoder-2');
+  const displayS = (d) => {
+    if (d.style.display === "none") {
+      d.style.display = "block";
+    } else {
+      d.style.display = "none";
+    }};
+  const search = document.getElementById('btn-add-2');
+  search.addEventListener('click', (event) => {
+    displayS(div);
+  });
+
+
+</script>
