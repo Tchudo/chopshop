@@ -11,7 +11,8 @@ class SearchesController < ApplicationController
   end
 
   def create
-      @products = Product.searchable_by(params[:query])
+    @products = Product.all
+      #@products = Product.searchable_by(params[:query])
 
       respond_to do |format|
         format.html { redirect_to root_path }
