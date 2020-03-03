@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   end
   resources :favorites, only:[:index, :destroy]
   resources :baskets, only:[:index, :destroy]
+  resources :itinaries, only: [:index]
 end
