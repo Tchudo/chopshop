@@ -13,7 +13,6 @@ class StocksController < ApplicationController
     #-----------------#ElasticSearch
 
     @products = Product.all #'sans Elastic'
-
     @stocks = []
     @products.each do |product|
       product_stocks = Stock.where(product_id: product.id)
