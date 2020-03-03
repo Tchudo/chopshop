@@ -14,9 +14,9 @@ TimeTable.destroy_all
 
 puts "TableTime destroyed!"
 
-Review.destroy_all
+# Review.destroy_all
 
-puts "Reviews destroyed !"
+# puts "Reviews destroyed !"
 
 Stock.destroy_all
 
@@ -26,19 +26,19 @@ Shop.destroy_all
 
 puts "Shops destroyed!"
 
-ProductTag.destroy_all
+# ProductTag.destroy_all
 
-Tag.destroy_all
-
-
-puts "tag and products_tag destroyed!"
-
-Product.destroy_all
-
-puts "Products destroyed!"
+# Tag.destroy_all
 
 
-puts "Tags destroyed!"
+# puts "tag and products_tag destroyed!"
+
+# Product.destroy_all
+
+# puts "Products destroyed!"
+
+
+# puts "Tags destroyed!"
 
 User.destroy_all
 
@@ -46,50 +46,52 @@ puts "Users destroyed!"
 
 
 
-# #---------------------------DESTRUCTION-DONE-------------------
+# # #---------------------------DESTRUCTION-DONE-------------------
 
 puts "User construction start !"
 
-# # #############################USER-CREATION########################
+# # # #############################USER-CREATION########################
 
 
 
 user = {email: "dezanneaucharlotte@gmail.com", password:"charlotte"}
 u = User.create!(user)
 
+# cat = {label: "null"}
+# c = Category.create!(cat)
 
+# # #-----------------------------USER-DONE---------------------------
 
-# #-----------------------------USER-DONE---------------------------
+# puts "User created ok"
 
-puts "User created ok"
+# # ------------------------- OPEN FOOD FACTS ------------------------
+# # ----------------------Product creation start ---------------------
 
-# ------------------------- OPEN FOOD FACTS ------------------------
-# ----------------------Product creation start ---------------------
+# puts "Product creation start"
 
-puts "Product creation start"
+# product_names = ["Chocolat", "Biscuit", "Confiture", "Conserve", "Poisson", "Marron", "Châtaigne", "Beurre", "Pain"]
 
-product_names = ["Chocolat", "Biscuit", "Confiture", "Conserve", "Poisson", "Marron", "Châtaigne", "Beurre", "Pain"]
+# product_names.each do |product_name|
+#   products = Openfoodfacts::Product.search(product_name, locale: 'fr', page_size: 1)
 
-product_names.each do |product_name|
-  products = Openfoodfacts::Product.search(product_name, locale: 'fr', page_size: 1)
+#   products.each do |product|
+#     my_product = Openfoodfacts::Product.get(product.code, locale: 'fr')
+#     my_new_product = Product.create!({
+#       name: my_product.product_name,
+#       description: my_product.ingredients_text_fr,
+#       product_sku: my_product.code,
+#       brand: my_product.brands,
+#       category_id: c.id
+#     })
+#     puts "#{my_new_product.name} has been created"
+#     file = URI.open(my_product.image_front_url)
+#     puts "Image loaded"
 
-  products.each do |product|
-    my_product = Openfoodfacts::Product.get(product.code, locale: 'fr')
-    my_new_product = Product.create!({
-      name: my_product.product_name,
-      description: my_product.ingredients_text_fr,
-      product_sku: my_product.code,
-      brand: my_product.brands
-    })
-    puts "#{my_new_product.name} has been created"
-    file = URI.open(my_product.image_front_url)
-    puts "Image loaded"
+#     my_new_product.photo.attach(io: file, filename: "#{product.code}.jpg", content_type: 'image/jpg')
+#     puts "Product save !"
 
-    my_new_product.photo.attach(io: file, filename: "#{product.code}.jpg", content_type: 'image/jpg')
-    puts "Product save !"
-
-  end
-end
+#   end
+# end
 
 
 #---------------------------PRODUCT-END-------------------------------
@@ -211,22 +213,22 @@ end
 #-----------------------------------------------------------
 
 #----------------------- Tags creation ---------------------
-puts "Creation tags"
+# puts "Creation tags"
 
 
-my_actual_products = Product.all
-my_actual_products.each do |product|
-  info_product = Openfoodfacts::Product.get(product.product_sku, locale: 'fr')
+# my_actual_products = Product.all
+# my_actual_products.each do |product|
+#   info_product = Openfoodfacts::Product.get(product.product_sku, locale: 'fr')
 
-  info_product.categories.split(',').each do |info|
-    tag = Tag.create!(label: info)
+#   info_product.categories.split(',').each do |info|
+#     tag = Tag.create!(label: info)
 
-    ProductTag.create!(tag_id: tag.id, product_id: product.id)
-    puts "Product tag created ok"
-  end
+#     ProductTag.create!(tag_id: tag.id, product_id: product.id)
+#     puts "Product tag created ok"
+#   end
 
 
-end
+# end
 
 
 #-----------------------------------------------------------
