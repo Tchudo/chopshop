@@ -1,156 +1,216 @@
 <!-- navbar -->
 <%= render 'shared/navbar' %>
+
+<!-- btn back -->
 <%= link_to stocks_path do%>
-<div class="btn rounded rounded-pill btn-circle bg-warning p-2"><i class="fas fa-chevron-right" style="color: white"></i></div>
+  <div class="btn rounded rounded-pill btn-circle bg-warning p-2"><i class="fas fa-chevron-right" style="color: white"></i></div>
 <% end %>
+
+<!-- btn instructions -->
+<div class="dropdown dropright">
+  <div class="btn rounded rounded-pill btn-circle-norm bg-success p-2" data-toggle="dropdown"><i class="fas fa-map-signs" style="color: white"></i></div>
+  <ol class="dropdown-menu rounded border-0 p-2 w-75 overflow-auto" id="instructions-steps" style="background-color: rgba(0,0,0,0.7);">
+  </ol>
+</div>
+
+<button id="btn-add-2" class="btn-circle-add-2 border-0 rounded rounded-pill shadow-none bg-white py-1 px-2"><i class="fas fa-map-marker-alt" style="color: #F4AA5B; font-size: 30px"></i></button>
+<div id="geocoder-2" class="geocoder-2"></div>
+
 
 <!-- map -->
 <div class="" id="map-iti" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
-
 </div>
+
+
 <div class="bg-white" style="height: 50vh;">
-  <div class="bg-white info-instruction m-0 w-25 rounded ">
+
+
+<!--   <div class="bg-white info-instruction m-0 w-25 rounded ">
     <div class="d-flex align-item-center p-1">
-     <i class="fas fa-walking" style="font-size: 11px"></i>
-     <p id="instructions-iti" class="m-0 pl-1 text-center" style="font-size: 11px" ></p>
-   </div>
-  </div>
+    <i class="fas fa-walking" style="font-size: 11px"></i>
+    <p id="instructions-iti" class="m-0 pl-1 text-center" style="font-size: 11px" ></p>
+    </div>
+  </div> -->
 
-<div class=" bg-white font-color-grey" id="card_show">
+  <div class="bg-white font-color-grey" id="card_show">
 
+    <!-- Infos shop -->
+    <div class="shop_part text-center shadow-sm p-3 bg-white rounded">
+      <div class="photo_shop">
 
-    <div class="shop_part text-center shadow-sm p-3  bg-white rounded ">
-    <div class="photo_shop"></div>
-    <div class="shop_info ">
-        <h2 ><%= @shop.name %></h2>
-        <div class="time d-flex justify-content-center">
-          <p><%= @open %></p>
-          <p pb-0><%= @fermeture %></p>
+      </div>
+      <div class="">
+          <h4><%= @shop.name %></h4>
+          <div class="d-flex justify-content-around align-items-center p-0 m-0">
+            <div class="col-6 p-0">
+              <p class="p-0 m-0"><%= @open %></p>
+              <p class="p-0 m-0"><%= @fermeture %></p>
+            </div>
+            <div class="col-6 p-0">
+              <i class="fas fa-walking" style="font-size: 18px"></i>
+              <p id="instructions-iti" class="m-0 p-0"></p>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <!-- Infos product -->
+    <div class="d-flex mt-2">
+      <div class="col-6 p-0 m-0">
+        <div class="product-description pt-1 px-2 mb-2">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5><%= @product.name %></h5>
+            <button class="btn p-0 m-0 bg-transparent border-O shadow-none" data-toggle="modal" data-target="#ModalNewFavorite"> <i class="fa fa-heart shadow-none"
+              <% if @favorite_user.include? @stock.product.id  %>
+              style="color: #f688bb; cursor: auto; font-size: 20px;"
+              <% else %>
+              style="color: gray; font-size: 20px;"
+              <% end %>
+            ></i></button>
+          </div>
+          <p><strong>Marque :</strong> <%= @product.brand %></p>
+          <p><strong>Qté :</strong> <%= @stock.quantity %></p>
+          <p><%= @product.description %></p>
         </div>
-    </div>
 
-  </div>
+        <!-- Rating -->
+        <div class="d-flex px-2 justify-content-between">
+          <!--<%# if @rating_score != 0 %>
+            <p><%= @rating_score %></p>
+          <%#end %>-->
+          <div class="d-flex align-items-center">
+            <% @star.times do  %>
+              <i class="fas fa-star" style="font-size: 13px; color: #ffcc00;"></i>
+            <%end  %>
+            <% @halfstar.times do %>
+              <i class="fas fa-star-half-alt" style="font-size: 13px; color: #ffcc00;"></i>
+            <%end  %>
+            <% if @rating != 0 %>
+              <p class="m-0 pl-1"><%= " #{@rating.count} note(s)" %></p>
+            <% end %>
+          </div>
+
+          <div>
+            <%= render 'newreview' %>
+          </div>
+        </div>
+
+        <div class="card overflow-auto ml-2 mr-5 mt-2" id="comments">
+        <% if @reviews.present? %>
+          <% @reviews.each do |review| %>
+          <div class="">
+            <div class="d-flex p-1 text-yellow">
+              <% review.rating.times do  %>
+                <i class="fas fa-star" style="font-size: 13px;"></i>
+              <%end  %>
+            </div>
+            <p class="mb-1 border-bottom"><%= review.comment %></p>
+          </div>
+          <% end %>
+          <% else %>
+            <p>Soyez le premier à donner votre avis</p>
+          <% end %>
+        </div>
 
 
-  <div class="product_part d-flex">
-
-    <div class="product_info align-items-center ">
-
-      <div class="product-description mt-3 mx-5">
-        <h2><%= @product.name %></h2>
-        <p><%= @product.brand %></p>
-        <p>Qté :<%= @stock.quantity %></p>
-        <p><%=  %></p>
       </div>
 
+      <div class="col-6 text-center">
+        <div class="img-size-large my-2">
+          <i><%= cl_image_tag @product.photo.key%></i>
+        </div>
 
-      <div class="rating mr-4 d-flex justify-content-center">
-        <!--<% if @rating_score != 0 %>
-          <p><%= @rating_score %></p>
-        <%end %>-->
-        <% @star.times do  %>
-          <i class="fas fa-star"></i>
-        <%end  %>
-        <% @halfstar.times do %>
-          <i class="fas fa-star-half-alt"></i>
-        <%end  %>
-        <% if @rating != 0 %>
-          <%= " #{@rating.count} note(s)" %>
-        <% end %>
+        <div class="pric">
+          <h2><%= @stock.price %> €</h2>
+        </div>
+
       </div>
-
     </div>
 
+    <div class="row">
+      <div class="col-6">
 
-    <div class="pric d-flex align-items-center">
-      <h2><%= @stock.price %>Euros</h2>
+      </div>
+      <div class="col-6">
+
+      </div>
     </div>
 
-    <div class="d-flex align-items-center justify-content-center" >
-
-      <img class=" product-image" src="https://www.ledahu.net/dahu/wp-content/uploads/cache/images/A-3/A-3-202976579.jpg" alt="">
-
-    </div>
-  </div>
-
-  <!-- card-product -->
-  <%#= render 'product_show' %>
-
+<!-- <div id="instructions-steps"></div> -->
 
    <!--
-  <h2><%= @stock.shop.name %></h2>
-   <% if @rating_score != 0 %>
+  <h2><%#= @stock.shop.name %></h2>
+   <%# if @rating_score != 0 %>
         <p><%= @rating_score %></p>
-      <%end %>
-      <% @star.times do  %>
+      <%#end %>
+      <%# @star.times do  %>
         <i class="fas fa-star"></i>
-      <%end  %>
-      <% @halfstar.times do %>
+      <%#end  %>
+      <%# @halfstar.times do %>
         <i class="fas fa-star-half-alt"></i>
-      <%end  %>
-      <% if @rating != 0 %>
-        <%= @rating.count %>
-      <% end %>
+      <%#end  %>
+      <%# if @rating != 0 %>
+        <%#= @rating.count %>
+      <%# end %>
 
         <h2> <%= @open %> <%= @fermeture%></h2>
 
-    <p><%= @stock.product.name %></p>
+    <p><%#= @stock.product.name %></p>
     <p><%= @stock.price %>$</p>
 
 
     -->
 
 
-    <!------------------- new-review -------------------->
-    <div class="d-flex justify-content-around pt-4">
-      <%= render 'index_review' %>
-      <%= render 'newreview' %>
-    </div>
+
+
   </div>
 </div>
-</div>
 
 
 
 
-
-
-
-
-
-
-<!-- <button class="btn p-0 m-0 bg-transparent border-O" data-toggle="modal" data-target="#ModalNewFavorite"> <i class="fa fa-heart"></i></button> -->
 
 
 
 <!-- Modal -->
 
-<!-- card-product -->
-<%#= render 'product_show' %>
-
 <!-- ModalNewFavorite -->
-<!-- <div class="modal fade" id="ModalNewFavorite" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg h-75" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title" id="exampleModalLabel">Ajouter aux favoris ?</h2>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="container mt-4">
-          <div class="mx-5">
-            <%#= simple_form_for [@stock, @favorite] do |f| %>
-              <%#= f.button :submit, class: 'btn btn-primary ' %>
-            <%#end %>
+<% unless @favorite_user.include? @stock.product.id  %>
+  <!-- ModalNewFavorite -->
+  <div class="modal fade" id="ModalNewFavorite" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg h-75" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="container mt-4 text-center">
+            <h5>Voulez-vous ajouter <strong><%= @stock.product.name %></strong> aux favoris ?</h5>
+            <div class="mx-5 d-flex justify-content-center">
+              <%= simple_form_for [@stock, @favorite] do |f| %>
+                <%= f.submit 'Oui', class: 'btn btn-success m-4' %>
+              <% end %>
+              <button type="button" class="btn btn-warning m-4" data-dismiss="modal">Non</button>
+            </div>
           </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-      </div>
     </div>
   </div>
-</div> -->
+<% end %>
 
+
+<script>
+
+  const div = document.getElementById('geocoder-2');
+  const displayS = (d) => {
+    if (d.style.display === "none") {
+      d.style.display = "block";
+    } else {
+      d.style.display = "none";
+    }};
+  const search = document.getElementById('btn-add-2');
+  search.addEventListener('click', (event) => {
+    displayS(div);
+  });
+
+
+</script>

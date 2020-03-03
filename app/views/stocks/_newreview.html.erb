@@ -1,6 +1,6 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-warning text-white" data-toggle="modal" data-target="#exampleModalCenter">
-  Ajouter un avis
+<button type="button" class="btn p-0 m-0 bg-transparent border-O shadow-none" data-toggle="modal" data-target="#exampleModalCenter">
+  <i class="far fa-edit" style="color: #F4AA5B; cursor: pointer;"></i>
 </button>
 
 <!-- Modal -->
@@ -18,7 +18,7 @@
           <%= simple_form_for [@stock, @review] do |f| %>
             <%= f.input :comment, label: "Commentaire", error: "Veuillez renseigner ce champ" %>
             <%= f.input :rating, label: "Note", error: "La note doit être comprise entre 0 et 5" %>
-            <%= f.button :submit, class: "btn btn-warning text-white" %>
+            <%= f.submit 'Créer mon avis', class: 'btn btn-success ml-0' %>
           <% end %>
         </div>
       </div>

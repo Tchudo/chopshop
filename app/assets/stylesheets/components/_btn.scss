@@ -23,3 +23,18 @@
 .text-yellow {
   color: rgb(247, 198, 22);
 }
+
+.btn-circle-norm {
+  width: 10%;
+  position: absolute;
+  z-index: 10;
+  top: 110px;
+  left: 2%;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.strike {
+  text-decoration: line-through;
+}

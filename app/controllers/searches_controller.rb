@@ -11,21 +11,13 @@ class SearchesController < ApplicationController
   end
 
   def create
-
       @products = Product.searchable_by(params[:query])
 
       respond_to do |format|
         format.html { redirect_to root_path }
         format.js  # <-- will render `app/views/searches/create.js.erb`
       end
-
   end
-
-
-
-
-
-
 
 
 end

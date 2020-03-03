@@ -7,14 +7,44 @@
       <h6 class="mb-0 mt-1"><%= product.name %></h6>
       <p><%= shop.name %></p>
       <p><%= product.description %></p>
+      <p><%= shop.address %></p>
+      <p><%= truncate(product.description, :length => 100) %></p>
     </div>
     <div class="d-flex justify-content-between align-item-center px-4">
       <h4><%="#{stock.price}€" %></h4>
+    </div>
+    <div class="d-flex justify-content-around align-items-center p-2">
+
+      <% if @basket_user.include? stock.id  %>
+        <%= simple_form_for [stock, basket] do |f| %>
+          <%= button_tag :submit, class: 'btn border shadow-none' do %>
+          <i class="fas fa-shopping-basket shadow-none" style="color: #cfcfcf; cursor: auto; font-size: 20px;"></i>
+          <% end %>
+        <% end %>
+      <% else %>
+        <%= simple_form_for [stock, basket] do |f| %>
+          <%= button_tag :submit, class: 'btn btn-outline-success shadow-none' do %>
+          <i class="fas fa-shopping-basket shadow-none " style="color: #A8D384; font-size: 20px;"></i>
+          <% end %>
+        <% end %>
+      <% end %>
+
       <%= link_to stock_path(stock.id) do %>
         <button class="btn btn-warning px-2 py-1">
-          <i class="fas fa-chevron-right" style="color: white;"></i>
+          <i class="fas fa-chevron-right" style="color: white;"></i><i class="fas fa-chevron-right" style="color: white;"></i>
         </button>
       <% end %>
+
     </div>
   </div>
 </div>
+
+
+<!--     <div class="d-flex justify-content-between align-items-center mb-2">
+      <button class="btn p-0 m-0 bg-warning border-O shadow-none" data-toggle="modal" data-target="#ModalNewBasket">
+        <i class="fas fa-shopping-basket shadow-none" style="color: white; cursor: auto; font-size: 20px;"></i>
+      </button>
+    </div> -->
+
+
+

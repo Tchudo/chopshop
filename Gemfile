@@ -22,6 +22,11 @@ gem 'searchkick', '~> 4.3.0'
 gem 'gemoji-parser'
 gem 'jquery-rails'
 
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+
+# ------- Open food facts ----------------
+gem 'openfoodfacts'
+
 
 group :development do
   gem 'web-console', '>= 3.3.0'

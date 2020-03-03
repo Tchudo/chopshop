@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
-  searchkick  #ElasticSearch
+  #searchkick  #ElasticSearch
 
-
+  belongs_to :category
   has_many :product_tags, dependent: :destroy
   has_many :tags, through: :product_tags
   has_many :favorites
@@ -14,9 +14,11 @@ class Product < ApplicationRecord
   validates :name, presence: true
   # validates :product_sku, uniqueness: true
 
+
   def search_data  #ElasticSearch
     attributes.merge(shops: self.shops.map(&:name), addresses: self.shops.map(&:address), tags: self.tags.map(&:label) )
   end
+
 
   def self.searchable_by(words)
     if words.blank?
