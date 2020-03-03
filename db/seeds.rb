@@ -46,18 +46,19 @@ puts "Users destroyed!"
 
 
 
-# #---------------------------DESTRUCTION-DONE-------------------
+# # #---------------------------DESTRUCTION-DONE-------------------
 
 puts "User construction start !"
 
-# # #############################USER-CREATION########################
+# # # #############################USER-CREATION########################
 
 
 
 user = {email: "dezanneaucharlotte@gmail.com", password:"charlotte"}
 u = User.create!(user)
 
-
+cat = {label: "null"}
+c = Category.create!(cat)
 
 # #-----------------------------USER-DONE---------------------------
 
@@ -79,7 +80,8 @@ product_names.each do |product_name|
       name: my_product.product_name,
       description: my_product.ingredients_text_fr,
       product_sku: my_product.code,
-      brand: my_product.brands
+      brand: my_product.brands,
+      category_id: c.id
     })
     puts "#{my_new_product.name} has been created"
     file = URI.open(my_product.image_front_url)
