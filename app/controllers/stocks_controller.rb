@@ -23,6 +23,7 @@ class StocksController < ApplicationController
     end
 
     @basket = Basket.new
+    @basket_user = Basket.where(user_id: current_user[:id]).map(&:stock_id)
 
       @markers = @stocks.map do |stock|
         {

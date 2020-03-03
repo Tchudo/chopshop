@@ -11,12 +11,11 @@ class BasketsController < ApplicationController
     @stock = Stock.find(params[:stock_id])
     @basket = Basket.new()
     @basket.user_id = current_user[:id]
-    @basket.product_id = @stock.product.id
+    @basket.stock_id = @stock.product.id
 
     if @basket.save
-      redirect_to stock_path(@stock.id), :notice => "Ce produit a bien été ajouté au panier."
     else
-      redirect_to stock_path(@stock.id), :notice => "Ce produit est déjà dans le panier."
+      redirect_to baskets_path, :notice => "Ce produit est déjà dans le panier."
     end
   end
 
