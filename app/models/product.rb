@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   #searchkick  #ElasticSearch
 
-
+  belongs_to :category
   has_many :product_tags, dependent: :destroy
   has_many :tags, through: :product_tags
   has_many :favorites
