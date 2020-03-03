@@ -1,0 +1,22 @@
+
+<ul>
+  <% if @products.nil?  %>
+  <% elsif @products.size == 0  %>
+
+      <h3 class="text-center m-4  " style="font-size: 20px; color: #f27a02;">désolé, nous n'avons trouvé aucun produit correspondant...</h3>
+
+  <% else %>
+    <% @products.each do |product|  %>
+      <li>
+        <div class="card-product rounded rounded-pill">
+          <%= cl_image_tag product.photo.key%>
+          <!-- <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" /> -->
+          <div class="card-product-infos">
+            <h2><%= link_to product.name, search_stocks_path(product) %></h2>
+            <p>Product description with <strong>relevant info</strong> only.</p>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
