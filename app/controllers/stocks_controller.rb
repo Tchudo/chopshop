@@ -22,11 +22,13 @@ class StocksController < ApplicationController
       end
     end
 
+    @basket = Basket.new
+
       @markers = @stocks.map do |stock|
         {
         lat: stock.shop.latitude,
         lng: stock.shop.longitude,
-        infoWindow: render_to_string(partial: "info_window", locals: { shop: stock.shop , product: stock.product, stock: stock}),
+        infoWindow: render_to_string(partial: "info_window", locals: { shop: stock.shop , product: stock.product, stock: stock, basket: @basket}),
         image_url: helpers.asset_url('lily.png')
       }
       end
