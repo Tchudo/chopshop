@@ -207,7 +207,31 @@ Shop.all.ids.each do |id|
   Stock.create!(new_stock)
 end
 
-  puts "stocks created"
+
+#shop7 = {
+#  name: "Leroy Merlin",
+#  user_id: u.id ,
+#  address: "3 Rue Dumont d'Urville, 33300 Bordeaux",
+#  category: "Bricolage grande surface"
+#}
+
+#shop8 = {
+#  name: "Bricorelais",
+#  user_id: u.id ,
+#  address: "115 Cours Victor Hugo, 33000 Bordeaux",
+#  category: "Bricolage"
+#}
+
+#s1 = Shop.create!(shop1)
+#s2 = Shop.create!(shop2)
+#s3 = Shop.create!(shop3)
+#s4 = Shop.create!(shop4)
+#s5 = Shop.create!(shop5)
+#s6 = Shop.create!(shop6)
+#s7 = Shop.create!(shop7)
+#s8 = Shop.create!(shop8)
+
+#  puts "stocks created"
 
 
 #-----------------------------------------------------------
@@ -231,7 +255,14 @@ my_actual_products.each do |product|
 end
 
 
-#-----------------------------------------------------------
+
+
+#product1 = {
+#    name: "Pizza Nico",
+#   brand: "Nico",
+#    description: "La meilleure des Pizzas"
+
+  
 
 # ------------------------TIME-TABLE-CREATION---------------
 puts "Time table creation start"
@@ -254,10 +285,41 @@ puts "Time table creation end"
 puts "SEED DONE :D"
 
 
+#product6 = {
+#    name: "Pizza Hut",
+#    brand: "Bob",
+#    description: "La pire des Pizzas"
+
+
+
+  product7 = {
+    name: "VIS METAUX TETE FRAISEE BOMBEE TFB POZI 6X50 ALUMINIUM",
+    brand: "VIS EXPRESS",
+    description: "Diametre=6, Matiere=Aluminium, Norme=DIN 966"
+
+  }
+
+  product8 = {
+    name: "VIS POUR BOIS ET AGGLOMERE TETE RONDE ",
+    brand: "VIS EXPRESS",
+    description: "TR POZI 2 4X80 FILETEE SUR 48 ACIER ZING BLANC"
+
+  }
+
+  product9 = {
+    name: "VBA/VIS POUR BOIS ET AGGLOMERE TETE RONDE",
+    brand: "LEGRAND",
+    description: "TR POZI 3 6X35 ACIER ZINGUE NOIR"
+
+  }
 
 
 # ############################SHOP-CREATION#######################
 
+
+p7 = Product.create!(product7)
+p8 = Product.create!(product8)
+p9 = Product.create!(product9)
 
 
 # shop1 = {
@@ -312,8 +374,53 @@ puts "SEED DONE :D"
 # #------------------------SHOP-DONE------------------
 
 
+
+#stock9= {
+#    product_id: p7.id ,
+#    shop_id: s7.id ,
+#    quantity: 10,
+#    price: 1.2,
+#}
+
+#stock10= {
+#    product_id: p7.id ,
+#    shop_id: s8.id ,
+#    quantity: 3,
+#    price: 1.8,
+#}
+
+#stock11= {
+#    product_id: p8.id ,
+#    shop_id: s7.id ,
+#    quantity: 20,
+#    price: 0.7,
+#}
+
+#stock12= {
+#    product_id: p8.id ,
+ #   shop_id: s8.id ,
+#    quantity: 5,
+#    price: 1.5,
+#}
+
+#stock13= {
+#    product_id: p9.id ,
+#    shop_id: s7.id ,
+#    quantity: 30,
+ #   price: 0.6,
+#}
+
+#stock14= {
+ #   product_id: p9.id ,
+ #   shop_id: s8.id ,
+ #   quantity: 3,
+#    price: 1.4,
+#}
+
+
 # puts "Shops created ok"
 # puts "Product construction start !"
+
 
 # ####################PRODUCT-CREATION##################
 
@@ -350,6 +457,19 @@ puts "SEED DONE :D"
 #   }
 
 
+#st6 = Stock.create!(stock6)
+#st7 = Stock.create!(stock7)
+#st8 = Stock.create!(stock8)
+#st9 = Stock.create!(stock9)
+#st10 = Stock.create!(stock10)
+#st11 = Stock.create!(stock11)
+#st12 = Stock.create!(stock12)
+#st13 = Stock.create!(stock13)
+#st14 = Stock.create!(stock14)
+#puts "Stocks created ok !"
+#puts "Tags creation start !"
+
+=======
 # product6 = {
 #     name: "Pizza",
 #     brand: "Bob",
@@ -377,6 +497,12 @@ puts "SEED DONE :D"
 # ########################STOCK-CREATION####################
 
 
+
+#tag1 = Tag.create!(label: "fast food")
+#tag2 = Tag.create!(label: "sportive")
+#tag3 = Tag.create!(label: "healthy")
+#tag4 = Tag.create!(label: "amateur")
+#tag5 = Tag.create!(label: "expert")
 
 # stock1 = {
 #     product_id: p1.id ,
@@ -409,6 +535,7 @@ puts "SEED DONE :D"
 #     price: 8,
 # }
 
+
 # stock6= {
 #     product_id: p1.id ,
 #     shop_id: s2.id ,
@@ -430,6 +557,50 @@ puts "SEED DONE :D"
 
 
 
+
+#puts "Tags created ok"
+#puts " Produt tags creation start !"
+
+##########################PRODUCT-TAD-CREATION##############
+##
+
+
+#product_tags = [{
+#    tag_id: tag1.id ,
+#    product_id: p1.id ,
+#}, {
+#    tag_id: tag1.id ,
+#    product_id: p2.id ,
+#}, {
+#    tag_id: tag1.id ,
+#    product_id: p3.id ,
+#}, {
+#    tag_id: tag2.id ,
+#    product_id: p4.id ,
+#}, {
+#    tag_id: tag3.id ,
+#    product_id: p5.id ,
+#}, {
+#    tag_id: tag5.id ,
+#    product_id: p7.id ,
+#}, {
+#    tag_id: tag5.id ,
+#    product_id: p8.id ,
+#}, {
+ #   tag_id: tag4.id ,
+#    product_id: p9.id ,
+#}]
+
+#ProductTag.create!(product_tags)
+
+
+
+#--------------------------PRODUCT-TAD-END----------------
+
+#puts "Product tag created ok"
+
+
+#puts "Reviews creation start !"
 
 
 # st1 = Stock.create!(stock1)
@@ -578,6 +749,21 @@ puts "SEED DONE :D"
 #     day_of_week: 6 ,  #day_of_week : 6 => samedi
 #     shop_id: s1.id
 # }]
+
+file7 = URI.open('https://media.castorama.fr/is/image/Castorama/NPC_HT_1806_choisir_vis_2?wid=720&$jpgp$')
+
+p7.photo.attach(io: file7, filename: 'poulet.png', content_type: 'image/png')
+puts "Image7 loaded OK"
+
+file8 = URI.open('https://cdn.quincaillerie.pro/images/c94fdd8bf3df64a84b8d/0/0/P106254.png')
+
+p8.photo.attach(io: file8, filename: 'poulet.png', content_type: 'image/png')
+puts "Image8 loaded OK"
+
+file9 = URI.open('https://www.bricodepot.fr/images/page_prod_big/105000/105179.jpg')
+
+p9.photo.attach(io: file9, filename: 'poulet.png', content_type: 'image/png')
+puts "Image9 loaded OK"
 
 
 # time_table2 = [{

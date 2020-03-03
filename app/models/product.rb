@@ -14,9 +14,22 @@ class Product < ApplicationRecord
   validates :name, presence: true
   # validates :product_sku, uniqueness: true
 
-  # def search_data  #ElasticSearch
-  #   attributes.merge(shops: self.shops.map(&:name).to_s, addresses: self.shops.map(&:address).to_s, tags: self.tags.map(&:label).to_s )
-  # end
 
+  def search_data  #ElasticSearch
+    attributes.merge(shops: self.shops.map(&:name), addresses: self.shops.map(&:address), tags: self.tags.map(&:label) )
+  end
+
+
+  def self.searchable_by(words)
+    if words.blank?
+      products = []
+    else
+      products = Product.all
+      words.split(" ").each do |word|
+        products = products.where(id: products.search(word).map(&:id))
+      end
+    end
+    return products
+  end
 
 end

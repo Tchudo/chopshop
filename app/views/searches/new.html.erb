@@ -29,44 +29,82 @@
 
 </nav>
 
-<div class="container">
+<!-- <div class="container">
   <div class="row justify-content-center">
     <div class="col-sm-12 col-lg-6">
 
+
+
+
       <div class="lily" id="lily"></div>
+
       <%#= image_tag "lily_70.png", class: "mx-auto d-block", id: "lily" %>
 
       <h1 class="text-center my-2 text-white">ShopChop!</h1>
 
     </div>
   </div>
-</div>
+</div> -->
 
 <!-- Container Search -->
-<div class="container my-4">
+<div class="container my-4" id="research">
   <div class="row justify-content-center">
-    <div class="col-sm-12 col-lg-6">
+
 
  <!-- Search form -->
-      <%= form_tag stocks_path, method: :get, autocomplete: :off do %>
-            <div class="input-group-append p-2 bg-white rounded rounded-pill">
-              <%= text_field_tag :query,
-                params[:query],
-                class:"form-control typeahead border-0 shadow-none bg-transparent ",
-                placeholder: "Recherchez un produit..."
-              %>
+      <div class="col-sm-12 col-lg-6">
+        <%= form_tag searches_path, method: :post, autocomplete: :off, id:"search", remote: true do %>
+              <div class="input-group-append bg-white rounded rounded-pill d-flex justify-content-between p-2 px-4">
+                <%= link_to new_search_path do %>
+                <i class="fas fa-barcode shadow-none pt-1" style="font-size: 30px; color: #F4AA5B;"></i>
+                <% end %>
+                <%= text_field_tag :query,
+                  params[:query],
+                  class:"form-control typeahead border-0 shadow-none bg-transparent align-middle",
+                  placeholder: "Recherchez un produit...",
+                  autofocus: "true"
+                %>
 
-              <%= button_tag :submit, class:'border-0 shadow-none bg-transparent btn' do %>
-                  <i class="fa fa-search shadow-none" style="color: #F4AA5B;"></i>
-              <% end %>
-            </div>
-      <% end %>
+                <%= button_tag :submit, id:"search_button", class:'border-0 shadow-none bg-transparent btn' do %>
+                    <i class="fa fa-search shadow-none" style="color: #F4AA5B;"></i>
+                <% end %>
+              </div>
+        <% end %>
+      </div>
 <!-- Fin search form -->
 
 
 
 
-    </div>
+     <!--  Affichage des produits trouvés -->
+      <div class="col-sm-12 col-lg-6">
+        <ul>
+          <li>
+            <div class="card-product rounded rounded-pill p-2 px-4">
+
+              <i class="fas fa-history" style="font-size: 30px; color: #F4AA5B;"></i>
+
+              <div class="card-product-infos">
+                <h2><%= link_to "Historique de mes recherches", root_path %></h2>
+              </div>
+            </div>
+          </li>
+           <li>
+            <div class="card-product rounded rounded-pill px-4">
+              <i class="far fa-heart" style="font-size: 30px; color: #F4AA5B;"></i>
+              <div class="card-product-infos">
+                <h2><%= link_to "Recherchez dans mes favoris", root_path %></h2>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-sm-12 col-lg-12" id="list-results">
+          <%#= render "_searches_results", products: @products %>
+      </div>
+
+
   </div>
 </div>
 

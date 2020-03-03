@@ -93,6 +93,13 @@ ActiveRecord::Schema.define(version: 2020_03_02_162353) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
+  create_table "searches", force: :cascade do |t|
+    t.string "name"
+    t.integer "stocks"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "shops", force: :cascade do |t|
     t.string "name"
     t.string "category"

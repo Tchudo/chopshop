@@ -6693,6 +6693,11 @@ quickselect@^2.0.0:
   resolved "https://registry.yarnpkg.com/quickselect/-/quickselect-2.0.0.tgz#f19680a486a5eefb581303e023e98faaf25dd018"
   integrity sha512-RKJ22hX8mHe3Y6wH/N3wCM6BWtjaxIyyUIkpHOvfFnxdI4yD4tBXEBKSbriGujF6jnSVkJrffuo6vxACiSSxIw==
 
+rails-ujs@^5.2.4-1:
+  version "5.2.4-1"
+  resolved "https://registry.yarnpkg.com/rails-ujs/-/rails-ujs-5.2.4-1.tgz#8005323a71d22b1456a9ddd9ca1b0148007fa6e0"
+  integrity sha512-qKxLeisxyWVHx1nnRv9GWA7pjMQ0oTyzRLoYLbZGaxr6vDtMxQ27wO8qfj3vpzc5FkrVbDpZqvTklDznaDVgAQ==
+
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/randombytes/-/randombytes-2.1.0.tgz#df6f84372f0270dc65cdf6291349ab7a473d4f2a"

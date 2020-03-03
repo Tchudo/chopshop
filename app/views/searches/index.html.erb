@@ -1,0 +1,75 @@
+<div class="home-page">
+
+  <nav class="navbar navbar-expand-sm bg-transparent justify-content-end" id="nav">
+
+  <!-- Burger -->
+  <div class="dropdown dropleft">
+    <button class="btn bg-transparent border-transparent shadow-none px-1" type="button" data-toggle="dropdown"><i class="fas fa-bars fa-1x" style="color: white;"></i>
+        </button>
+      <% if user_signed_in? %>
+        <div class="dropdown-menu rounded border-0" aria-labelledby="dropdownMenu2">
+          <%= link_to favorites_path do %>
+          <button class="dropdown-item" type="button">Favoris</button>
+          <% end %>
+          <%= link_to destroy_user_session_path, method: :delete do %>
+          <button class="dropdown-item" type="button">Log out</button>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="dropdown-menu rounded border-0" aria-labelledby="dropdownMenu2">
+          <%= link_to new_user_session_path do %>
+          <button class="dropdown-item" type="button">Login</button>
+          <% end %>
+        </div>
+      <% end %>
+  </div>
+
+</nav>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-sm-12 col-lg-6">
+
+      <%= image_tag "lily_70.png", class: "mx-auto d-block", id: "lily" %>
+
+      <h1 class="text-center my-2 text-white">ChopShop!</h1>
+
+    </div>
+  </div>
+</div>
+
+<!-- Container Search -->
+<div class="container my-4">
+  <div class="row justify-content-center">
+    <div class="col-sm-12 col-lg-6">
+
+ <!-- Search form -->
+
+            <div class="input-group-append p-2 bg-white rounded rounded-pill d-flex justify-content-between">
+
+              <%= link_to new_search_path do %>
+                <i class="fas fa-barcode shadow-none pt-1 px-4" style="font-size: 30px; color: #F4AA5B;"></i>
+              <% end %>
+
+              <%= link_to new_search_path, class:'border-0 shadow-none bg-transparent btn', style:"color:#848D91;" do %>
+                "Recherchez un produit..."
+              <% end %>
+
+              <span class='border-0 shadow-none bg-transparent flex-grow-1'></span>
+
+              <%= link_to new_search_path, class:'border-0 shadow-none bg-transparent btn' do %>
+                  <i class="fa fa-search shadow-none" style="color: #F4AA5B;"></i>
+              <% end %>
+            </div>
+
+
+<!-- Fin search form -->
+
+
+    </div>
+  </div>
+</div>
+
+<!-- <h1>Searches#new</h1> -->
+
+</div>
