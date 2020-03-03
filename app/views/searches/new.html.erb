@@ -73,3 +73,23 @@
 <!-- <h1>Searches#new</h1> -->
 
 </div>
+
+<script>
+
+  const change = () => {
+    document.getElementById('lily').classList.toggle("lilyb");
+  };
+
+
+const changeTime = () => {
+    setInterval(
+    () => {
+      change();
+    },
+    3000
+  );
+};
+
+changeTime();
+
+</script>
