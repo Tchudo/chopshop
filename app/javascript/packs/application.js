@@ -6,23 +6,24 @@ import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css'
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 
-import { initMapbox, initMapbox2 } from '../plugins/init_mapbox';
+import { initMapbox, initMapbox2, initMapbox3 } from '../plugins/init_mapbox';
 // import { autoSubmit } from '../plugins/auto_submit';
 
 Rails.start();
 
 initMapbox();
 initMapbox2();
+initMapbox3();
 
 // autoSubmit();
 
-const searchForm = document.getElementById('search');
-const inputForm = document.getElementById('query');
+// const searchForm = document.getElementById('search');
+// const inputForm = document.getElementById('query');
 
-inputForm.addEventListener("keyup", (event) => {
-// console.log(event.currentTarget.value);
-Rails.fire(searchForm, 'submit');
-});
+// inputForm.addEventListener("keyup", (event) => {
+// // console.log(event.currentTarget.value);
+// Rails.fire(searchForm, 'submit');
+// });
 
 
 

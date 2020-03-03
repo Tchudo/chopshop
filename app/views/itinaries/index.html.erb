@@ -1,1 +1,15 @@
-<h1>test</h1>
+<!-- nav-bar -->
+<%= render 'shared/navbar' %>
+
+<!-- map -->
+<div class="" id="map-iti-opti" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+</div>
+
+<p id="instructions-iti" class="m-0 p-0"></p>
+
+<!-- btn instructions -->
+<div class="dropdown dropright">
+  <div class="btn rounded rounded-pill btn-circle-norm bg-success p-2" data-toggle="dropdown"><i class="fas fa-map-signs" style="color: white"></i></div>
+  <ol class="dropdown-menu rounded border-0 p-2 w-75 overflow-auto" id="instructions-steps" style="background-color: rgba(0,0,0,0.7);">
+  </ol>
+</div>
