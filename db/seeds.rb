@@ -262,7 +262,7 @@ end
 #   brand: "Nico",
 #    description: "La meilleure des Pizzas"
 
-  
+
 
 # ------------------------TIME-TABLE-CREATION---------------
 puts "Time table creation start"
@@ -292,34 +292,34 @@ puts "SEED DONE :D"
 
 
 
-  product7 = {
-    name: "VIS METAUX TETE FRAISEE BOMBEE TFB POZI 6X50 ALUMINIUM",
-    brand: "VIS EXPRESS",
-    description: "Diametre=6, Matiere=Aluminium, Norme=DIN 966"
+#   product7 = {
+#     name: "VIS METAUX TETE FRAISEE BOMBEE TFB POZI 6X50 ALUMINIUM",
+#     brand: "VIS EXPRESS",
+#     description: "Diametre=6, Matiere=Aluminium, Norme=DIN 966"
 
-  }
+#   }
 
-  product8 = {
-    name: "VIS POUR BOIS ET AGGLOMERE TETE RONDE ",
-    brand: "VIS EXPRESS",
-    description: "TR POZI 2 4X80 FILETEE SUR 48 ACIER ZING BLANC"
+#   product8 = {
+#     name: "VIS POUR BOIS ET AGGLOMERE TETE RONDE ",
+#     brand: "VIS EXPRESS",
+#     description: "TR POZI 2 4X80 FILETEE SUR 48 ACIER ZING BLANC"
 
-  }
+#   }
 
-  product9 = {
-    name: "VBA/VIS POUR BOIS ET AGGLOMERE TETE RONDE",
-    brand: "LEGRAND",
-    description: "TR POZI 3 6X35 ACIER ZINGUE NOIR"
+#   product9 = {
+#     name: "VBA/VIS POUR BOIS ET AGGLOMERE TETE RONDE",
+#     brand: "LEGRAND",
+#     description: "TR POZI 3 6X35 ACIER ZINGUE NOIR"
 
-  }
-
-
-# ############################SHOP-CREATION#######################
+#   }
 
 
-p7 = Product.create!(product7)
-p8 = Product.create!(product8)
-p9 = Product.create!(product9)
+# # ############################SHOP-CREATION#######################
+
+
+# p7 = Product.create!(product7)
+# p8 = Product.create!(product8)
+# p9 = Product.create!(product9)
 
 
 # shop1 = {
@@ -469,7 +469,7 @@ p9 = Product.create!(product9)
 #puts "Stocks created ok !"
 #puts "Tags creation start !"
 
-=======
+
 # product6 = {
 #     name: "Pizza",
 #     brand: "Bob",
@@ -750,20 +750,20 @@ p9 = Product.create!(product9)
 #     shop_id: s1.id
 # }]
 
-file7 = URI.open('https://media.castorama.fr/is/image/Castorama/NPC_HT_1806_choisir_vis_2?wid=720&$jpgp$')
+# file7 = URI.open('https://media.castorama.fr/is/image/Castorama/NPC_HT_1806_choisir_vis_2?wid=720&$jpgp$')
 
-p7.photo.attach(io: file7, filename: 'poulet.png', content_type: 'image/png')
-puts "Image7 loaded OK"
+# p7.photo.attach(io: file7, filename: 'poulet.png', content_type: 'image/png')
+# puts "Image7 loaded OK"
 
-file8 = URI.open('https://cdn.quincaillerie.pro/images/c94fdd8bf3df64a84b8d/0/0/P106254.png')
+# file8 = URI.open('https://cdn.quincaillerie.pro/images/c94fdd8bf3df64a84b8d/0/0/P106254.png')
 
-p8.photo.attach(io: file8, filename: 'poulet.png', content_type: 'image/png')
-puts "Image8 loaded OK"
+# p8.photo.attach(io: file8, filename: 'poulet.png', content_type: 'image/png')
+# puts "Image8 loaded OK"
 
-file9 = URI.open('https://www.bricodepot.fr/images/page_prod_big/105000/105179.jpg')
+# file9 = URI.open('https://www.bricodepot.fr/images/page_prod_big/105000/105179.jpg')
 
-p9.photo.attach(io: file9, filename: 'poulet.png', content_type: 'image/png')
-puts "Image9 loaded OK"
+# p9.photo.attach(io: file9, filename: 'poulet.png', content_type: 'image/png')
+# puts "Image9 loaded OK"
 
 
 # time_table2 = [{

@@ -10,7 +10,7 @@ resources :searches, only:[:index,:new, :create ], shallow: true do
       resources :favorites, only:[:create]
       resources :baskets, only:[:create]
     end
-
+end
   resources :favorites, only:[:index, :destroy]
   resources :baskets, only:[:index, :destroy]
   resources :itinaries, only: [:index]
