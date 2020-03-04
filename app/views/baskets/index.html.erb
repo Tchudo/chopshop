@@ -38,38 +38,46 @@
 
   </nav>
 
-
-  <div class="d-flex justify-content-center p-2">
-    <h1 class="text-center text-white">Favoris <i class="fas fa-heart" style="font-size: 30px;"></i></h1>
-  </div>
+<div class="d-flex justify-content-center p-2">
+  <h1 class="text-center text-white">Panier <i class="fas fa-shopping-basket" style="font-size: 30px;"></i></h1>
+</div>
 
   <div class="container">
 
-    <% @favorites.each do |favorite| %>
-
-    <div class="row d-flex bg-white rounded shadow border m-2 border-0" style="min-height: 120px;">
-
+    <% @baskets.each do |basket| %>
+    <div class="row d-flex bg-white rounded shadow border m-2 border-0">
       <div class="col-sm-2 w-25 p-0">
-       <i class="img-resize rounded"><%= cl_image_tag favorite.product.photo.key %></i>
+       <i class="img-resize rounded"><%= cl_image_tag basket.stock.product.photo.key %></i>
       </div>
       <div class="col-sm-9 py-1 w-50">
         <div class="d-flex w-100">
           <div class="d-block">
-            <strong><p class="m-0"><%= favorite.product.name %></p></strong>
-            <i><%= favorite.product.brand %></i>
-            <p class="overflow-auto p-O" style="height: 70px; font-size: 13px;"><%= favorite.product.description %></p>
+            <strong><p class="m-0"><%= basket.stock.product.name %></p></strong>
+            <i><%= basket.stock.product.brand %></i>
           </div>
         </div>
       </div>
       <div class="col-sm-1 w-25 d-flex align-items-center">
-        <%= button_to favorite_path(favorite),method: :delete, class: " btn p-0 m-0 bg-transparent border-O" do %>
+        <%= button_to basket_path(basket), method: :delete, class: " btn p-0 m-0 bg-transparent border-O" do %>
           <i class="far fa-times-circle" id="btn-suppr" style="color: #bbbbbb;"></i>
         <% end %>
-        <%#= link_to stocks_path do %>
-        <i class="fa fa-search" id="btn-search"></i>
-        <%# end %>
       </div>
     </div>
     <% end %>
   </div>
+
+<div class="container text-center">
+  <div class="row">
+    <div class="col-12">
+
+      <%= link_to itinaries_path do %>
+        <button class='btn btn-warning shadow-none rounded rounded-pill px-5 m-4'>
+          <i class="fas fa-route shadow-none " style="color: white; font-size: 40px;"></i>
+        </button>
+      <% end %>
+
+    </div>
+  </div>
 </div>
+
+</div> <!--  Background -->

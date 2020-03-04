@@ -3,6 +3,7 @@ class StocksController < ApplicationController
 
 
   def index
+
       # ---------------#ElasticSearch
     # @products = Product.all
     # params[:query].split(" ").each do |word|
@@ -12,21 +13,28 @@ class StocksController < ApplicationController
     # @products = Product.search(params[:query], emoji: true)
     #-----------------#ElasticSearch
 
-    @products = Product.all #'sans Elastic'
 
-    @stocks = []
-    @products.each do |product|
-      product_stocks = Stock.where(product_id: product.id)
+    #@products = Product.all #'sans Elastic'
+
+   @product = Product.find(params[:search_id])
+
+
+     @stocks = []
+    # @products.each do |product|
+      product_stocks =  Stock.where(product_id: @product.id)
+
       product_stocks.each do |stock|
         @stocks << stock
       end
-    end
+
+    @basket = Basket.new
+    @basket_user = Basket.where(user_id: current_user[:id]).map(&:stock_id)
 
       @markers = @stocks.map do |stock|
         {
         lat: stock.shop.latitude,
         lng: stock.shop.longitude,
-        infoWindow: render_to_string(partial: "info_window", locals: { shop: stock.shop , product: stock.product, stock: stock}),
+        infoWindow: render_to_string(partial: "info_window", locals: { shop: stock.shop , product: stock.product, stock: stock, basket: @basket}),
         image_url: helpers.asset_url('lily.png')
       }
       end

@@ -16,6 +16,11 @@
   height: 50vh;
 }
 
+#map-iti-opti {
+  width: 100%;
+  height: 100vh;
+}
+
 .marker {
   background-repeat: no-repeat;
   cursor: pointer;
@@ -54,4 +59,63 @@
     font-family: Roboto;
     color: white;
   }
+}
+#geocoder > div > svg {
+  display: none;
+}
+
+.btn-circle-add {
+  position: absolute;
+  z-index: 4;
+  top: 9%;
+  left: 2%;
+}
+.mapboxgl-ctrl-geocoder .mapboxgl-ctrl {
+  i {
+    display: none;
+  }
+}
+.mapboxgl-ctrl-top-right {
+  display: none;
+}
+
+.geocoder {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  width: 50%;
+  left: 52%;
+  margin-left: -50%;
+  top: 9%;
+  i {
+    display: none;
+  }
+}
+.mapboxgl-ctrl-geocoder {
+  min-width: 100%;
+}
+
+.btn-circle-add-2 {
+  position: absolute;
+  z-index: 10;
+  left: 2%;
+  top: 22%;
+}
+.geocoder-2 {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  width: 50%;
+  left: 52%;
+  margin-left: -50%;
+  top: 22%;
+  i {
+    display: none;
+  }
+}
+#geocoder-2 > div > svg {
+  display: none;
+}
+#geocoder-2 > div > div.mapboxgl-ctrl-geocoder--pin-right > button > svg {
+  display: none;
 }

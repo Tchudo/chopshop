@@ -2,16 +2,23 @@
 <%= render 'shared/navbar' %>
 
 <!-- btn back -->
-<%= link_to stocks_path do%>
+<%= link_to stock_path do%>
   <div class="btn rounded rounded-pill btn-circle bg-warning p-2"><i class="fas fa-chevron-right" style="color: white"></i></div>
 <% end %>
 
 <!-- btn instructions -->
 <div class="dropdown dropright">
   <div class="btn rounded rounded-pill btn-circle-norm bg-success p-2" data-toggle="dropdown"><i class="fas fa-map-signs" style="color: white"></i></div>
-  <ol class="dropdown-menu rounded border-0 p-2 w-75 overflow-auto" id="instructions-steps" style="background-color: rgba(0,0,0,0.7);">
+  <ol class="dropdown-menu rounded border-0 p-2 w-75 overflow-auto" id="instructions-steps" style="background-color: rgba(0,0,0,0.7); max-height: 130px;">
   </ol>
 </div>
+
+
+<!-- btn address -->
+
+<button id="btn-add-2" class=" btn btn-circle-add-2 border-0 rounded rounded-pill bg-white py-1 px-2 shadow-none"><i class="fas fa-map-marker-alt" style="color: #F4AA5B; font-size: 30px"></i></button>
+
+<div id="geocoder-2" class="geocoder-2"></div>
 
 
 <!-- map -->
@@ -19,7 +26,7 @@
 </div>
 
 
-<div class="bg-white" style="height: 50vh;">
+<div class="bg-white" style="height: 53vh;">
 
 
 <!--   <div class="bg-white info-instruction m-0 w-25 rounded ">
@@ -54,7 +61,7 @@
     <!-- Infos product -->
     <div class="d-flex mt-2">
       <div class="col-6 p-0 m-0">
-        <div class="product-description pt-1 px-2 mb-2">
+        <div class="product-description pt-1 px-2">
           <div class="d-flex justify-content-between align-items-center mb-2">
             <h5><%= @product.name %></h5>
             <button class="btn p-0 m-0 bg-transparent border-O shadow-none" data-toggle="modal" data-target="#ModalNewFavorite"> <i class="fa fa-heart shadow-none"
@@ -67,7 +74,7 @@
           </div>
           <p><strong>Marque :</strong> <%= @product.brand %></p>
           <p><strong>Qté :</strong> <%= @stock.quantity %></p>
-          <p><%= @product.description %></p>
+          <p class="overflow-auto" style="max-height: 45px;"><%= @product.description %></p>
         </div>
 
         <!-- Rating -->
@@ -105,7 +112,7 @@
           </div>
           <% end %>
           <% else %>
-            <p>Soyez le premier à donner votre avis</p>
+            <p>Soyez le premier à donner votre avis.</p>
           <% end %>
         </div>
 
@@ -195,3 +202,19 @@
 <% end %>
 
 
+<script>
+
+  const div = document.getElementById('geocoder-2');
+  const displayS = (d) => {
+    if (d.style.display === "none") {
+      d.style.display = "block";
+    } else {
+      d.style.display = "none";
+    }};
+  const search = document.getElementById('btn-add-2');
+  search.addEventListener('click', (event) => {
+    displayS(div);
+  });
+
+
+</script>

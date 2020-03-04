@@ -6,31 +6,70 @@
   <% end %>
 
 
-  <!-- Search form -->
-  <div class="w-75">
-   <%= form_tag stocks_path, method: :get, autocomplete: :off do %>
-            <div class="input-group-append p-2 bg-white rounded rounded-pill">
-              <%= text_field_tag :query,
-                params[:query],
-                class:"form-control typeahead border-0 shadow-none bg-transparent ",
-                placeholder: "Recherchez un produit..."
-              %>
 
-              <%= button_tag :submit, class:'border-0 shadow-none bg-transparent btn' do %>
-                  <i class="fa fa-search shadow-none" style="color: #F4AA5B;"></i>
-              <% end %>
+  <div class="w-75">
+     <!-- Search form -->
+      <div class="col-sm-12 col-lg-6">
+        <%= form_tag searches_path, method: :post, autocomplete: :off, id:"search", remote: true do %>
+              <div class="input-group-append bg-white rounded rounded-pill d-flex justify-content-between p-2 px-4">
+                <%= link_to products_path do %>
+                <i class="fas fa-barcode shadow-none pt-1" style="font-size: 30px; color: #F4AA5B;"></i>
+                <% end %>
+                <%= text_field_tag :query,
+                  params[:query],
+                  class:"form-control typeahead border-0 shadow-none bg-transparent align-middle",
+                  placeholder: "Recherchez un produit..."
+                  # onFocus: "document.getElementById('choice').style.visibility = 'visible'",
+                  # onFocusout: "document.getElementById('choice').style.visibility = 'hidden'"
+                %>
+
+                <%= button_tag :submit, id:"search_button", class:'border-0 shadow-none bg-transparent btn' do %>
+                    <i class="fa fa-search shadow-none" style="color: #F4AA5B;"></i>
+                <% end %>
+              </div>
+        <% end %>
+      </div>
+
+      <!--  Affichage des produits trouvés -->
+      <!-- <div class="col-sm-12 col-lg-6" id="choice" style="visibility: hidden">
+        <ul>
+          <li>
+            <div class="card-product rounded rounded-pill p-2 px-4">
+
+              <i class="fas fa-history" style="font-size: 30px; color: #F4AA5B;"></i>
+
+              <div class="card-product-infos">
+                <h2><%#= link_to "Historique de mes recherches", root_path %></h2>
+              </div>
             </div>
-      <% end %>
+          </li>
+           <li>
+            <div class="card-product rounded rounded-pill px-4">
+              <i class="far fa-heart" style="font-size: 30px; color: #F4AA5B;"></i>
+              <div class="card-product-infos">
+                <h2><%#= link_to "Recherchez dans mes favoris", root_path %></h2>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div> -->
+
+      <div class="col-sm-12 col-lg-12" id="list-results">
+          <%#= render "_searches_results", products: @products %>
+      </div>
   </div>
 
 
   <!-- Burger -->
   <div class="dropdown dropleft">
-    <button class="btn bg-transparent border-transparent shadow-none px-1" type="button" data-toggle="dropdown"><i class="fas fa-bars fa-1x" style="color: #A8D384;"></i>
+    <button class="btn border-transparent shadow-none px-1" type="button" data-toggle="dropdown" ><i class="fas fa-bars fa-1x" style="color: #A8D384;"></i>
         </button>
       <% if user_signed_in? %>
 
         <div class="dropdown-menu rounded border-0" aria-labelledby="dropdownMenu2">
+          <%= link_to baskets_path do %>
+          <button class="dropdown-item" type="button">Panier</button>
+          <% end %>
           <%= link_to favorites_path do %>
           <button class="dropdown-item" type="button">Favoris</button>
           <% end %>

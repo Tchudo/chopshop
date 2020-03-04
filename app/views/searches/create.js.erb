@@ -1,0 +1,14 @@
+
+// function refreshForm(innerHTML) {
+//   const newReviewForm = document.getElementById('search');
+//   newReviewForm.innerHTML = innerHTML;
+// }
+
+function addResult(resultHTML) {
+  const results = document.getElementById('list-results');
+  results.innerHTML = resultHTML  ;
+
+  // results.insertAdjacentHTML('beforeend', resultHTML);
+}
+
+  addResult('<%= j render "searches_results", products: @products %>');
