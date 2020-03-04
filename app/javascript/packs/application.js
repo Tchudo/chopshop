@@ -39,4 +39,8 @@ initMapbox3();
 // $(document).on('turbolinks:load', load_quagga);
 load_quagga();
 
+import {eventDisplay} from '../components/eventcard';
+eventDisplay();
+
 console.log("all JS read");
+

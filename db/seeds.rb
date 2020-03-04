@@ -9,8 +9,17 @@
 # puts "1"
 # puts "Boom!"
 
+
+##########################DESTRUCTION-START######################
+Event.destroy_all
+
+puts "Event destroyed !"
+
+TimeTable.destroy_all
+
 # ##########################DESTRUCTION-START######################
 # TimeTable.destroy_all
+
 
 # puts "TableTime destroyed!"
 
@@ -749,7 +758,89 @@ st1 = Stock.create!(stock1)
 
 # puts "Time tables creation start !"
 
+TimeTable.create!(time_table2)
+TimeTable.create!(time_table)
+
+
+
+#---------------------------TIME-TABLE-END--------------
+puts "TimeTable created ok !"
+puts "Start creation Event !"
+
+##############################EVENT-CREATION############
+
+event1start_date = Date.new(2020,3,4)
+event1end_date = Date.new(2020,3,4)
+
+event1 = {
+    name: "Vide grenier des forains" ,
+    category: "vide grenier" ,
+    description: "Vente de reliques foraine" ,
+    address: "Place saint-martial, 33000 Bordeaux" ,
+    start_date: event1start_date,
+    end_date: event1end_date,
+    time_opening: 9 ,
+    time_closing: 19 ,
+}
+
+
+event2start_date = Date.new(2020,4,3)
+event2end_date = Date.new(2020,4,3)
+
+event2 = {
+    name: "Soirée moule-brite" ,
+    category: "repas de quartier" ,
+    description: "Viens prendre un moule frite en maillot de bain !" ,
+    address: "Jardin public, 33000 Bordeaux" ,
+    start_date: event2start_date,
+    end_date: event2end_date,
+    time_opening: 19 ,
+    time_closing: 22 ,
+}
+
+event4start_date = Date.new(2020,10,5)
+event4end_date = Date.new(2020,11,5)
+
+event4 = {
+    name: "T-shirt mémé" ,
+    category: "Sortie pour vieux" ,
+    description: "Concours de miss 70 +" ,
+    address: "Place des Quinquonces, 33000 Bordeaux" ,
+    start_date: event4start_date,
+    end_date: event4end_date,
+    time_opening: 7 ,
+    time_closing: 19 ,
+}
+
+event3start_date = Date.new(2020,5,4)
+event3end_date =  Date.new(2020,5,7)
+
+event3 = {
+    name: "Vernissage sauvage sur voiture" ,
+    category: "rencontre artistique" ,
+    description: "Du tunning à l'ancienne pour petits et grands." ,
+    address: "87 quai des queyries, 33000 bordeaux" ,
+    start_date: event3start_date,
+    end_date: event3end_date,
+    time_opening: 13 ,
+    time_closing: 19 ,
+}
+
+ev1 = Event.create!(event1)
+ev2 = Event.create!(event2)
+ev3 = Event.create!(event3)
+ev4 = Event.create!(event4)
+
+#-----------------------------EVENT-END-----------------
+
+
+puts "Load image"
+
+
+file1 = URI.open('https://fotomelia.com/wp-content/uploads/2018/01/fotomelia-images-gratuites-38-1560x1041.jpg')
+
 # #############################TIME-TABLE-CREATION#########
+
 
 
 
@@ -856,8 +947,29 @@ puts "Image1 loaded OK"
 
 # file5 = URI.open('https://fotomelia.com/wp-content/uploads/edd/2015/12/banque-d-images-et-photos-gratuites-libres-de-droits-t%C3%A9l%C3%A9chargement-gratuits20-1560x1170.jpg')
 
+
+###images event####
+puts "alors ?"
+vide_grenier_img = URI.open('https://www.falicon.fr/wp-content/uploads/2018/09/videgrenier-1024x640.png')
+puts "ca marche ?"
+ev1.photo.attach(io: vide_grenier_img, filename: 'vide_grenier_img.png'   , content_type:'image/png')
+puts "vide_grenier_img loaded OK"
+
+moule_bite_img = URI.open('https://lh6.googleusercontent.com/proxy/9ImYG6R_aONplnsXVM_aY772heIUREnC5zrsWVX4UOMgZOE15rHGhWgnHPMui1DoIRlnizNxA-aulhBPHUm8TZLZFl9cBVJBO1sGJIj9e0-HGJTrdqnjIheNcMnlwjm_graDFE19IYyy5ZD9x267-Q')
+ev2.photo.attach(io: moule_bite_img, filename: 'moule_bite_img.jpg' , content_type: 'image/jpg')
+puts "moule_bite_img loaded OK"
+
+vernissage_sauvage_img = URI.open('https://jondi.fr/wp-content/uploads/2018/09/carton-invit-sauvages-imaginaires-1024x726.jpg')
+ev3.photo.attach(io: vernissage_sauvage_img, filename: 'vernissage_sauvage_img.jpg' ,content_type: 'image/jpg')
+puts "vernissage_sauvage_img loaded OK"
+
+vieux_storie_img = URI.open('https://thewiffhotstove.files.wordpress.com/2013/12/old-lady-friend.jpg')
+ev4.photo.attach(io: vieux_storie_img, filename: 'vieux_storie_img.jpg' ,content_type: 'image/jpg')
+puts "vieux_storie_img loaded OK"
+
 # p5.photo.attach(io: file5, filename: 'poulet.png', content_type: 'image/png')
 # puts "Image5 loaded OK"
+puts "Seed done ! :D"
 
 # file6 = URI.open('https://fotomelia.com/wp-content/uploads/edd/2015/12/banque-d-images-et-photos-gratuites-libres-de-droits-t%C3%A9l%C3%A9chargement-gratuits20-1560x1170.jpg')
 
