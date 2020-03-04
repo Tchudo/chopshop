@@ -1,0 +1,32 @@
+#barcode-scanner canvas.drawingBuffer, #barcode-scanner video.drawingBuffer {
+  display: none;
+}
+
+#barcode-scanner canvas, #barcode-scanner video {
+  width: 100%;
+  height: auto;
+  border-radius: 30px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border: 5px solid #F4AA5B;
+
+}
+
+#barcard {
+
+
+
+}
+
+#screen {
+  opacity: 1;
+  padding:10px;
+  color: rgb(150, 150, 150);
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+
+  // filter: blur(1.5rem);
+
+
+
