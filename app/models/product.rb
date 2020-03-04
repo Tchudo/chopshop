@@ -4,7 +4,7 @@ class Product < ApplicationRecord
   belongs_to :category
   has_many :product_tags, dependent: :destroy
   has_many :tags, through: :product_tags
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
   has_many :stocks, dependent: :destroy
   has_many :shops, through: :stocks
   has_one_attached :photo
