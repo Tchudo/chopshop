@@ -1,280 +1,289 @@
-# require "open-uri"
-# require 'openfoodfacts'
-# require 'nokogiri'
-# require 'faker'
+require "open-uri"
+require 'openfoodfacts'
+require 'nokogiri'
+require 'faker'
 
-# puts "Destruction : start"
-# puts "3"
-# puts "2"
-# puts "1"
-# puts "Boom!"
+puts "Destruction : start"
+puts "3"
+puts "2"
+puts "1"
+puts "Boom!"
 
-# ##########################DESTRUCTION-START######################
+
+##########################DESTRUCTION-START######################
+Event.destroy_all
+
+puts "Event destroyed !"
+
 # TimeTable.destroy_all
 
-# puts "TableTime destroyed!"
-
-# Review.destroy_all
-
-# puts "Reviews destroyed !"
-
-# Stock.destroy_all
-
-# puts "Stock destroyed !"
-
-# Shop.destroy_all
-
-# puts "Shops destroyed!"
-
-# ProductTag.destroy_all
-
-# Tag.destroy_all
+##########################DESTRUCTION-START######################
+TimeTable.destroy_all
 
 
-# puts "tag and products_tag destroyed!"
+puts "TableTime destroyed!"
 
-# Product.destroy_all
+Review.destroy_all
 
-# puts "Products destroyed!"
+puts "Reviews destroyed !"
 
+Stock.destroy_all
 
-# puts "Tags destroyed!"
+puts "Stock destroyed !"
 
-# User.destroy_all
+Shop.destroy_all
 
-# puts "Users destroyed!"
+puts "Shops destroyed!"
 
+ProductTag.destroy_all
 
-
-
-# # # #---------------------------DESTRUCTION-DONE-------------------
-
-
-# puts "User construction start !"
+Tag.destroy_all
 
 
-# # # # #############################USER-CREATION########################
+puts "tag and products_tag destroyed!"
+
+Product.destroy_all
+
+puts "Products destroyed!"
+
+
+puts "Tags destroyed!"
+
+User.destroy_all
+
+puts "Users destroyed!"
 
 
 
 
+# # #---------------------------DESTRUCTION-DONE-------------------
 
 
-# user = {email: "dezanneaucharlotte@gmail.com", password:"charlotte"}
-# u = User.create!(user)
+puts "User construction start !"
 
-# cat = {label: "null"}
-# c = Category.create!(cat)
+
+# # # #############################USER-CREATION########################
+
+
+
+
+
+
+user = {email: "dezanneaucharlotte@gmail.com", password:"charlotte"}
+u = User.create!(user)
+
+cat = {label: "null"}
+c = Category.create!(cat)
 
 
 # -----------------------------USER-DONE---------------------------
 
 
-# puts "User created ok"
+puts "User created ok"
 
-# # ------------------------- OPEN FOOD FACTS ------------------------
-# # ----------------------Product creation start ---------------------
+# ------------------------- OPEN FOOD FACTS ------------------------
+# ----------------------Product creation start ---------------------
 
-# puts "Product creation start"
+puts "Product creation start"
 
-# product_names = ["Chocolat", "Biscuit", "Confiture", "Conserve", "Poisson", "Marron", "Châtaigne", "Beurre", "Pain"]
+product_names = ["Chocolat", "Biscuit", "Confiture", "Conserve", "Poisson", "Marron", "Châtaigne", "Beurre", "Pain"]
 
-# product_names.each do |product_name|
-#   products = Openfoodfacts::Product.search(product_name, locale: 'fr', page_size: 1)
+product_names.each do |product_name|
+  products = Openfoodfacts::Product.search(product_name, locale: 'fr', page_size: 1)
 
-#   products.each do |product|
-#     my_product = Openfoodfacts::Product.get(product.code, locale: 'fr')
-#     my_new_product = Product.create!({
-#       name: my_product.product_name,
-#       description: my_product.ingredients_text_fr,
-#       product_sku: my_product.code,
-#       brand: my_product.brands,
-#       category_id: c.id
-#     })
-#     puts "#{my_new_product.name} has been created"
-#     file = URI.open(my_product.image_front_url)
-#     puts "Image loaded"
+  products.each do |product|
+    my_product = Openfoodfacts::Product.get(product.code, locale: 'fr')
+    my_new_product = Product.create!({
+      name: my_product.product_name,
+      description: my_product.ingredients_text_fr,
+      product_sku: my_product.code,
+      brand: my_product.brands,
+      category_id: c.id
+    })
+    puts "#{my_new_product.name} has been created"
+    file = URI.open(my_product.image_front_url)
+    puts "Image loaded"
 
-#     my_new_product.photo.attach(io: file, filename: "#{product.code}.jpg", content_type: 'image/jpg')
-#     puts "Product save !"
+    my_new_product.photo.attach(io: file, filename: "#{product.code}.jpg", content_type: 'image/jpg')
+    puts "Product save !"
 
-#   end
-# end
-
-
-# #---------------------------PRODUCT-END-------------------------------
+  end
+end
 
 
-
-# #---------------------- Shop address Chartrons -----------------------
-
-# puts "Chartrons Shop construction start !"
-
-# addresses = ["3 Cours Balguerie Stuttenberg, 33300 Bordeaux", "8 Cours Balguerie Stuttenberg, 33300 Bordeaux",
-# "20 Cours Balguerie Stuttenberg, 33300 Bordeaux", "31 Cours Balguerie Stuttenberg, 33300 Bordeaux",
-# "36 Cours Balguerie Stuttenberg, 33300 Bordeaux", "46 Cours Balguerie Stuttenberg, 33300 Bordeaux",
-# "53 Cours Balguerie Stuttenberg, 33300 Bordeaux", "67 Cours Balguerie Stuttenberg, 33300 Bordeaux",
-# "87 Cours Balguerie Stuttenberg, 33300 Bordeaux", "101 Cours Balguerie Stuttenberg, 33300 Bordeaux",
-# "110 Cours Balguerie Stuttenberg, 33300 Bordeaux", "131 Cours Balguerie Stuttenberg, 33300 Bordeaux",
-# "154 Cours Balguerie Stuttenberg, 33300 Bordeaux", "167 Cours Balguerie Stuttenberg, 33300 Bordeaux",
-# "230 Cours Balguerie Stuttenberg, 33300 Bordeaux", "270 Cours Balguerie Stuttenberg, 33300 Bordeaux",
-# "3 Cours du Médoc, 33300 Bordeaux", "8 Cours du Médoc, 33300 Bordeaux",
-# "20 Cours du Médoc, 33300 Bordeaux", "31 Cours du Médoc, 33300 Bordeaux",
-# "36 Cours du Médoc, 33300 Bordeaux", "46 Cours du Médoc, 33300 Bordeaux",
-# "53 Cours du Médoc, 33300 Bordeaux", "67 Cours du Médoc, 33300 Bordeaux",
-# "87 Cours du Médoc, 33300 Bordeaux", "101 Cours du Médoc, 33300 Bordeaux",
-# "110 Cours du Médoc, 33300 Bordeaux", "131 Cours du Médoc, 33300 Bordeaux",
-# "154 Cours du Médoc, 33300 Bordeaux", "167 Cours du Médoc, 33300 Bordeaux",
-# "34 Cours Portal, 33000 Bordeaux", "34 Cours de Verdun, 33000 Bordeaux",
-# "50 Cours de Verdun, 33000 Bordeaux", "34 Cours de la Marne, 33300 Bordeaux",
-# "12 Cours de Verdun, 33000 Bordeaux", "34 Rue Lagrange, 33000 Bordeaux",
-# "11 Rue Lagrange, 33000 Bordeaux", "67 Rue Lagrange, 33000 Bordeaux",
-# "22 Rue Lagrange, 33000 Bordeaux", "100 Rue Lagrange, 33000 Bordeaux",
-# "3 Rue Lagrange, 33000 Bordeaux", "66 Rue Lagrange, 33000 Bordeaux",
-# "37 Rue Lombard, 33300 Bordeaux", "12 Rue Lombard, 33300 Bordeaux",
-# "22 Rue Dupaty, 33300 Bordeaux", "109 Rue Dupaty, 33300 Bordeaux",
-# "78 Rue Dupaty, 33300 Bordeaux", "122 Rue Dupaty, 33300 Bordeaux",
-# "13 Cours Georges Clemenceau, 33000 Bordeaux", "28 Cours Georges Clemenceau, 33000 Bordeaux",
-# "7 Rue Etienne Huyard, 33300 Bordeaux", "12 Rue Lucien Duffau, 33300 Bordeaux",
-# "20 Avenue Emile Counord, 33300 Bordeaux", "34 Avenue Emile Counord, 33300 Bordeaux",
-# "53 Avenue Emile Counord, 33300 Bordeaux", "71 Avenue Emile Counord, 33300 Bordeaux",
-# "88 Avenue Emile Counord, 33300 Bordeaux", "104 Avenue Emile Counord, 33300 Bordeaux",
-# "128 Avenue Emile Counord, 33300 Bordeaux", "145 Avenue Emile Counord, 33300 Bordeaux",
-# "163 Avenue Emile Counord, 33300 Bordeaux", "176 Avenue Emile Counord, 33300 Bordeaux",
-# "203 Avenue Emile Counord, 33300 Bordeaux", "229 Avenue Emile Counord, 33300 Bordeaux"]
-
-# addresses.each do |address|
-#   Faker::Config.locale = 'fr'
-#   new_shop = {
-#      name: Faker::Company.name,
-#      user_id: u.id ,
-#      address: address,
-#      category: Faker::Commerce.department(max: 1)
-#   }
-# Shop.create!(new_shop)
-# end
-
-# puts "shops in Chartrons created"
-
-
-# # #------------------------------------------------------------------
-
-# # #---------------------- Shop address Talence -----------------------
-
-# puts "Talence Shop construction start !"
-
-# talence_addresses = ["310 Cours de la Libération, 33400 Talence", "540 Cours de la Libération, 33400 Talence",
-# "350 Cours de la Libération, 33400 Talence", "387 Cours de la Libération, 33400 Talence",
-# "429 Cours de la Libération, 33400 Talence", "456 Cours de la Libération, 33400 Talence",
-# "499 Cours de la Libération, 33400 Talence", "510 Cours de la Libération, 33400 Talence",
-# "540 Cours de la Libération, 33400 Talence",
-# "156 Rue Lamartine, 33400 Talence", "110 Rue Lamartine, 33400 Talence",
-# "43 Rue Lamartine, 33400 Talence", "11 Avenue Georges Lasserre, 33400 Talence",
-# "100 Avenue Roul, 33400 Talence", "22 Avenue Roul, 33400 Talence",
-# "2 Rue de Tremeuge, 33400 Talence", "16 Rue de Tremeuge, 33400 Talence",
-# "48 Rue de Tremeuge, 33400 Talence", "23 Rue Frédéric Sévène, 33400 Talence",
-# "76 Rue Frédéric Sévène, 33400 Talence", "108 Rue Frédéric Sévène, 33400 Talence",
-# "160 Rue Frédéric Sévène, 33400 Talence", "129 Rue Frédéric Sévène, 33400 Talence",
-# "112 Rue Camille Pelletan, 33400 Talence", "87 Rue Camille Pelletan, 33400 Talence",
-# "45 Rue Camille Pelletan, 33400 Talence", "23 Rue Camille Pelletan, 33400 Talence",
-# "2 Rue Camille Pelletan, 33400 Talence", "67 Rue Camille Pelletan, 33400 Talence",
-# "12 Rue Roustaing, 33400 Talence", "45 Rue Roustaing, 33400 Talence",
-# "87 Rue Roustaing, 33400 Talence", "120 Rue Roustaing, 33400 Talence",
-#  "3 Cours Gambetta, 33400 Talence", "45 Cours Gambetta, 33400 Talence",
-# "87 Cours Gambetta, 33400 Talence", "108 Cours Gambetta, 33400 Talence",
-# "126 Cours Gambetta, 33400 Talence", "151 Cours Gambetta, 33400 Talence",
-# "187 Cours Gambetta, 33400 Talence", "204 Cours Gambetta, 33400 Talence",
-# "232 Cours Gambetta, 33400 Talence", "249 Cours Gambetta, 33400 Talence" ]
-
-# talence_addresses.each do |address|
-#   Faker::Config.locale = 'fr'
-#   new_shop = {
-#      name: Faker::Company.name,
-#      user_id: u.id ,
-#      address: address,
-#      category: Faker::Commerce.department(max: 1)
-#   }
-# Shop.create!(new_shop)
-# end
-
-# puts "shops in Talence created"
-
-# # ---------------------------- Stocks creation ----------------------------
-
-# puts "stock in creation"
-
-# Shop.all.ids.each do |id|
-#   Faker::Config.locale = 'fr'
-#   new_stock = {
-#     product_id: Product.all.ids.sample,
-#     shop_id: id,
-#     quantity: rand(1..20),
-#     price: Faker::Commerce.price(range: 3..15),
-#   }
-
-#   Stock.create!(new_stock)
-# end
-
-
-# #shop7 = {
-# #  name: "Leroy Merlin",
-# #  user_id: u.id ,
-# #  address: "3 Rue Dumont d'Urville, 33300 Bordeaux",
-# #  category: "Bricolage grande surface"
-# #}
-
-# #shop8 = {
-# #  name: "Bricorelais",
-# #  user_id: u.id ,
-# #  address: "115 Cours Victor Hugo, 33000 Bordeaux",
-# #  category: "Bricolage"
-# #}
-
-# #s1 = Shop.create!(shop1)
-# #s2 = Shop.create!(shop2)
-# #s3 = Shop.create!(shop3)
-# #s4 = Shop.create!(shop4)
-# #s5 = Shop.create!(shop5)
-# #s6 = Shop.create!(shop6)
-# #s7 = Shop.create!(shop7)
-# #s8 = Shop.create!(shop8)
-
-# #  puts "stocks created"
-
-
-# #-----------------------------------------------------------
-
-# #----------------------- Tags creation ---------------------
-# puts "Creation tags"
-
-
-# my_actual_products = Product.all
-# my_actual_products.each do |product|
-#   info_product = Openfoodfacts::Product.get(product.product_sku, locale: 'fr')
-
-#   info_product.categories.split(',').each do |info|
-#     tag = Tag.create!(label: info)
-
-#     ProductTag.create!(tag_id: tag.id, product_id: product.id)
-#     puts "Product tag created ok"
-#   end
-
-
-# end
+#---------------------------PRODUCT-END-------------------------------
 
 
 
+#---------------------- Shop address Chartrons -----------------------
 
-# #product1 = {
-# #    name: "Pizza Nico",
-# #   brand: "Nico",
-# #    description: "La meilleure des Pizzas"
+puts "Chartrons Shop construction start !"
+
+addresses = ["3 Cours Balguerie Stuttenberg, 33300 Bordeaux", "8 Cours Balguerie Stuttenberg, 33300 Bordeaux",
+"20 Cours Balguerie Stuttenberg, 33300 Bordeaux", "31 Cours Balguerie Stuttenberg, 33300 Bordeaux",
+"36 Cours Balguerie Stuttenberg, 33300 Bordeaux", "46 Cours Balguerie Stuttenberg, 33300 Bordeaux",
+"53 Cours Balguerie Stuttenberg, 33300 Bordeaux", "67 Cours Balguerie Stuttenberg, 33300 Bordeaux",
+"87 Cours Balguerie Stuttenberg, 33300 Bordeaux", "101 Cours Balguerie Stuttenberg, 33300 Bordeaux",
+"110 Cours Balguerie Stuttenberg, 33300 Bordeaux", "131 Cours Balguerie Stuttenberg, 33300 Bordeaux",
+"154 Cours Balguerie Stuttenberg, 33300 Bordeaux", "167 Cours Balguerie Stuttenberg, 33300 Bordeaux",
+"230 Cours Balguerie Stuttenberg, 33300 Bordeaux", "270 Cours Balguerie Stuttenberg, 33300 Bordeaux",
+"3 Cours du Médoc, 33300 Bordeaux", "8 Cours du Médoc, 33300 Bordeaux",
+"20 Cours du Médoc, 33300 Bordeaux", "31 Cours du Médoc, 33300 Bordeaux",
+"36 Cours du Médoc, 33300 Bordeaux", "46 Cours du Médoc, 33300 Bordeaux",
+"53 Cours du Médoc, 33300 Bordeaux", "67 Cours du Médoc, 33300 Bordeaux",
+"87 Cours du Médoc, 33300 Bordeaux", "101 Cours du Médoc, 33300 Bordeaux",
+"110 Cours du Médoc, 33300 Bordeaux", "131 Cours du Médoc, 33300 Bordeaux",
+"154 Cours du Médoc, 33300 Bordeaux", "167 Cours du Médoc, 33300 Bordeaux",
+"34 Cours Portal, 33000 Bordeaux", "34 Cours de Verdun, 33000 Bordeaux",
+"50 Cours de Verdun, 33000 Bordeaux", "34 Cours de la Marne, 33300 Bordeaux",
+"12 Cours de Verdun, 33000 Bordeaux", "34 Rue Lagrange, 33000 Bordeaux",
+"11 Rue Lagrange, 33000 Bordeaux", "67 Rue Lagrange, 33000 Bordeaux",
+"22 Rue Lagrange, 33000 Bordeaux", "100 Rue Lagrange, 33000 Bordeaux",
+"3 Rue Lagrange, 33000 Bordeaux", "66 Rue Lagrange, 33000 Bordeaux",
+"37 Rue Lombard, 33300 Bordeaux", "12 Rue Lombard, 33300 Bordeaux",
+"22 Rue Dupaty, 33300 Bordeaux", "109 Rue Dupaty, 33300 Bordeaux",
+"78 Rue Dupaty, 33300 Bordeaux", "122 Rue Dupaty, 33300 Bordeaux",
+"13 Cours Georges Clemenceau, 33000 Bordeaux", "28 Cours Georges Clemenceau, 33000 Bordeaux",
+"7 Rue Etienne Huyard, 33300 Bordeaux", "12 Rue Lucien Duffau, 33300 Bordeaux",
+"20 Avenue Emile Counord, 33300 Bordeaux", "34 Avenue Emile Counord, 33300 Bordeaux",
+"53 Avenue Emile Counord, 33300 Bordeaux", "71 Avenue Emile Counord, 33300 Bordeaux",
+"88 Avenue Emile Counord, 33300 Bordeaux", "104 Avenue Emile Counord, 33300 Bordeaux",
+"128 Avenue Emile Counord, 33300 Bordeaux", "145 Avenue Emile Counord, 33300 Bordeaux",
+"163 Avenue Emile Counord, 33300 Bordeaux", "176 Avenue Emile Counord, 33300 Bordeaux",
+"203 Avenue Emile Counord, 33300 Bordeaux", "229 Avenue Emile Counord, 33300 Bordeaux"]
+
+addresses.each do |address|
+  Faker::Config.locale = 'fr'
+  new_shop = {
+     name: Faker::Company.name,
+     user_id: u.id ,
+     address: address,
+     category: Faker::Commerce.department(max: 1)
+  }
+Shop.create!(new_shop)
+end
+
+puts "shops in Chartrons created"
+
+
+# #------------------------------------------------------------------
+
+# #---------------------- Shop address Talence -----------------------
+
+puts "Talence Shop construction start !"
+
+talence_addresses = ["310 Cours de la Libération, 33400 Talence", "540 Cours de la Libération, 33400 Talence",
+"350 Cours de la Libération, 33400 Talence", "387 Cours de la Libération, 33400 Talence",
+"429 Cours de la Libération, 33400 Talence", "456 Cours de la Libération, 33400 Talence",
+"499 Cours de la Libération, 33400 Talence", "510 Cours de la Libération, 33400 Talence",
+"540 Cours de la Libération, 33400 Talence",
+"156 Rue Lamartine, 33400 Talence", "110 Rue Lamartine, 33400 Talence",
+"43 Rue Lamartine, 33400 Talence", "11 Avenue Georges Lasserre, 33400 Talence",
+"100 Avenue Roul, 33400 Talence", "22 Avenue Roul, 33400 Talence",
+"2 Rue de Tremeuge, 33400 Talence", "16 Rue de Tremeuge, 33400 Talence",
+"48 Rue de Tremeuge, 33400 Talence", "23 Rue Frédéric Sévène, 33400 Talence",
+"76 Rue Frédéric Sévène, 33400 Talence", "108 Rue Frédéric Sévène, 33400 Talence",
+"160 Rue Frédéric Sévène, 33400 Talence", "129 Rue Frédéric Sévène, 33400 Talence",
+"112 Rue Camille Pelletan, 33400 Talence", "87 Rue Camille Pelletan, 33400 Talence",
+"45 Rue Camille Pelletan, 33400 Talence", "23 Rue Camille Pelletan, 33400 Talence",
+"2 Rue Camille Pelletan, 33400 Talence", "67 Rue Camille Pelletan, 33400 Talence",
+"12 Rue Roustaing, 33400 Talence", "45 Rue Roustaing, 33400 Talence",
+"87 Rue Roustaing, 33400 Talence", "120 Rue Roustaing, 33400 Talence",
+ "3 Cours Gambetta, 33400 Talence", "45 Cours Gambetta, 33400 Talence",
+"87 Cours Gambetta, 33400 Talence", "108 Cours Gambetta, 33400 Talence",
+"126 Cours Gambetta, 33400 Talence", "151 Cours Gambetta, 33400 Talence",
+"187 Cours Gambetta, 33400 Talence", "204 Cours Gambetta, 33400 Talence",
+"232 Cours Gambetta, 33400 Talence", "249 Cours Gambetta, 33400 Talence" ]
+
+talence_addresses.each do |address|
+  Faker::Config.locale = 'fr'
+  new_shop = {
+     name: Faker::Company.name,
+     user_id: u.id ,
+     address: address,
+     category: Faker::Commerce.department(max: 1)
+  }
+Shop.create!(new_shop)
+end
+
+puts "shops in Talence created"
+
+# ---------------------------- Stocks creation ----------------------------
+
+puts "stock in creation"
+
+Shop.all.ids.each do |id|
+  Faker::Config.locale = 'fr'
+  new_stock = {
+    product_id: Product.all.ids.sample,
+    shop_id: id,
+    quantity: rand(1..20),
+    price: Faker::Commerce.price(range: 3..15),
+  }
+
+  Stock.create!(new_stock)
+end
+
+
+#shop7 = {
+#  name: "Leroy Merlin",
+#  user_id: u.id ,
+#  address: "3 Rue Dumont d'Urville, 33300 Bordeaux",
+#  category: "Bricolage grande surface"
+#}
+
+#shop8 = {
+#  name: "Bricorelais",
+#  user_id: u.id ,
+#  address: "115 Cours Victor Hugo, 33000 Bordeaux",
+#  category: "Bricolage"
+#}
+
+#s1 = Shop.create!(shop1)
+#s2 = Shop.create!(shop2)
+#s3 = Shop.create!(shop3)
+#s4 = Shop.create!(shop4)
+#s5 = Shop.create!(shop5)
+#s6 = Shop.create!(shop6)
+#s7 = Shop.create!(shop7)
+#s8 = Shop.create!(shop8)
+
+#  puts "stocks created"
+
+
+#-----------------------------------------------------------
+
+#----------------------- Tags creation ---------------------
+puts "Creation tags"
+
+
+my_actual_products = Product.all
+my_actual_products.each do |product|
+  info_product = Openfoodfacts::Product.get(product.product_sku, locale: 'fr')
+
+  info_product.categories.split(',').each do |info|
+    tag = Tag.create!(label: info)
+
+    ProductTag.create!(tag_id: tag.id, product_id: product.id)
+    puts "Product tag created ok"
+  end
+
+
+end
 
 
 
 
-# # ------------------------TIME-TABLE-CREATION---------------
-# puts "Time table creation start"
+#product1 = {
+#    name: "Pizza Nico",
+#   brand: "Nico",
+#    description: "La meilleure des Pizzas"
+
+
+
+
+# ------------------------TIME-TABLE-CREATION---------------
+puts "Time table creation start"
 
 my_shops = Shop.all
 my_shops.each do |shop|
@@ -314,8 +323,8 @@ end
 
 # puts "Time table creation end"
 
-# #-------------------------------------------------------------
-# puts "SEED DONE :D"
+#-------------------------------------------------------------
+puts "SEED DONE :D"
 
 
 #product6 = {
@@ -363,7 +372,7 @@ end
 #   }
   shop1 = {
      name: "Chez paul",
-     user_id: 27,
+     user_id: u.id,
      address: "51 cours du medoc, 33300 Bordeaux",
      category: "Boulangerie"
  }
@@ -749,7 +758,89 @@ st1 = Stock.create!(stock1)
 
 # puts "Time tables creation start !"
 
+# TimeTable.create!(time_table2)
+# TimeTable.create!(time_table)
+
+
+
+#---------------------------TIME-TABLE-END--------------
+puts "TimeTable created ok !"
+puts "Start creation Event !"
+
+##############################EVENT-CREATION############
+
+event1start_date = Date.new(2020,3,4)
+event1end_date = Date.new(2020,3,4)
+
+event1 = {
+    name: "Vide grenier des forains" ,
+    category: "vide grenier" ,
+    description: "Vente de reliques foraine" ,
+    address: "Place saint-martial, 33000 Bordeaux" ,
+    start_date: event1start_date,
+    end_date: event1end_date,
+    time_opening: 9 ,
+    time_closing: 19 ,
+}
+
+
+event2start_date = Date.new(2020,4,3)
+event2end_date = Date.new(2020,4,3)
+
+event2 = {
+    name: "Soirée moule-brite" ,
+    category: "repas de quartier" ,
+    description: "Viens prendre un moule frite en maillot de bain !" ,
+    address: "Jardin public, 33000 Bordeaux" ,
+    start_date: event2start_date,
+    end_date: event2end_date,
+    time_opening: 19 ,
+    time_closing: 22 ,
+}
+
+event4start_date = Date.new(2020,10,5)
+event4end_date = Date.new(2020,11,5)
+
+event4 = {
+    name: "T-shirt mémé" ,
+    category: "Sortie pour vieux" ,
+    description: "Concours de miss 70 +" ,
+    address: "Place des Quinquonces, 33000 Bordeaux" ,
+    start_date: event4start_date,
+    end_date: event4end_date,
+    time_opening: 7 ,
+    time_closing: 19 ,
+}
+
+event3start_date = Date.new(2020,5,4)
+event3end_date =  Date.new(2020,5,7)
+
+event3 = {
+    name: "Vernissage sauvage sur voiture" ,
+    category: "rencontre artistique" ,
+    description: "Du tunning à l'ancienne pour petits et grands." ,
+    address: "87 quai des queyries, 33000 bordeaux" ,
+    start_date: event3start_date,
+    end_date: event3end_date,
+    time_opening: 13 ,
+    time_closing: 19 ,
+}
+
+ev1 = Event.create!(event1)
+ev2 = Event.create!(event2)
+ev3 = Event.create!(event3)
+ev4 = Event.create!(event4)
+
+#-----------------------------EVENT-END-----------------
+
+
+puts "Load image"
+
+
+file1 = URI.open('https://fotomelia.com/wp-content/uploads/2018/01/fotomelia-images-gratuites-38-1560x1041.jpg')
+
 # #############################TIME-TABLE-CREATION#########
+
 
 
 
@@ -856,8 +947,29 @@ puts "Image1 loaded OK"
 
 # file5 = URI.open('https://fotomelia.com/wp-content/uploads/edd/2015/12/banque-d-images-et-photos-gratuites-libres-de-droits-t%C3%A9l%C3%A9chargement-gratuits20-1560x1170.jpg')
 
+
+###images event####
+puts "alors ?"
+vide_grenier_img = URI.open('https://www.falicon.fr/wp-content/uploads/2018/09/videgrenier-1024x640.png')
+puts "ca marche ?"
+ev1.photo.attach(io: vide_grenier_img, filename: 'vide_grenier_img.png'   , content_type:'image/png')
+puts "vide_grenier_img loaded OK"
+
+moule_bite_img = URI.open('https://lh6.googleusercontent.com/proxy/9ImYG6R_aONplnsXVM_aY772heIUREnC5zrsWVX4UOMgZOE15rHGhWgnHPMui1DoIRlnizNxA-aulhBPHUm8TZLZFl9cBVJBO1sGJIj9e0-HGJTrdqnjIheNcMnlwjm_graDFE19IYyy5ZD9x267-Q')
+ev2.photo.attach(io: moule_bite_img, filename: 'moule_bite_img.jpg' , content_type: 'image/jpg')
+puts "moule_bite_img loaded OK"
+
+vernissage_sauvage_img = URI.open('https://jondi.fr/wp-content/uploads/2018/09/carton-invit-sauvages-imaginaires-1024x726.jpg')
+ev3.photo.attach(io: vernissage_sauvage_img, filename: 'vernissage_sauvage_img.jpg' ,content_type: 'image/jpg')
+puts "vernissage_sauvage_img loaded OK"
+
+vieux_storie_img = URI.open('https://thewiffhotstove.files.wordpress.com/2013/12/old-lady-friend.jpg')
+ev4.photo.attach(io: vieux_storie_img, filename: 'vieux_storie_img.jpg' ,content_type: 'image/jpg')
+puts "vieux_storie_img loaded OK"
+
 # p5.photo.attach(io: file5, filename: 'poulet.png', content_type: 'image/png')
 # puts "Image5 loaded OK"
+puts "Seed done ! :D"
 
 # file6 = URI.open('https://fotomelia.com/wp-content/uploads/edd/2015/12/banque-d-images-et-photos-gratuites-libres-de-droits-t%C3%A9l%C3%A9chargement-gratuits20-1560x1170.jpg')
 

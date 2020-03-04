@@ -17,7 +17,7 @@
         <div class="container">
           <%= simple_form_for [@stock, @review] do |f| %>
             <%= f.input :comment, label: "Commentaire", error: "Veuillez renseigner ce champ" %>
-            <%= f.input :rating, label: "Note", error: "La note doit être comprise entre 0 et 5" %>
+            <%= f.input :rating, collection: 0..5, label: "Note", error: "La note doit être comprise entre 0 et 5" %>
             <%= f.submit 'Créer mon avis', class: 'btn btn-success ml-0' %>
           <% end %>
         </div>

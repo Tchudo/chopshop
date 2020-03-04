@@ -53,6 +53,21 @@ ActiveRecord::Schema.define(version: 2020_03_02_162353) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "events", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "category"
+    t.text "description"
+    t.float "latitude"
+    t.float "longitude"
+    t.date "start_date"
+    t.date "end_date"
+    t.integer "time_opening"
+    t.integer "time_closing"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "favorites", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "product_id"
