@@ -314,30 +314,55 @@ const initMapbox2 = () => {
         }
       });
 
-    map.on('load', function () {
+    const geocoder = new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      mapboxgl: mapboxgl,
+      marker: false,
+      language: 'fr',
+      placeholder: "Entrer votre adresse"
+    });
 
-      //Création itinéraire
-      const itineraire = () => {
+    map.addControl(geocoder);
 
-        navigator.geolocation.getCurrentPosition((data) => {
 
-          let lat = 44.8592094;
-          let long = -0.5654924;
+    map.on('load', function() {
+      map.addSource('single-point', {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features: []
+        }
+      });
 
-          // let lat = data.coords.latitude;
-          // let long = data.coords.longitude;
+      map.addLayer({
+        id: 'point',
+        source: 'single-point',
+        type: 'circle',
+        paint: {
+          'circle-radius': 10,
+          'circle-color': '#448ee4'
+        }
+      });
 
-          // if (lat === false) {
-          //   lat = 44.8592094;
-          //   long = -0.5654924;
-          // };
+      geocoder.on('result', function(ev) {
+        map.getSource('single-point').setData(ev.result.geometry);
+        const newCoord = ev.result.geometry.coordinates;
+        itineraire(newCoord[1],newCoord[0]);
+      });
+    });
+
+    document.getElementById('geocoder-2').appendChild(geocoder.onAdd(map));
+
+    //Création itinéraire
+      const itineraire = (lt, lg) => {
+
+          let lat = lt;
+          let long = lg;
+          // let lat = 44.8592094;
+          // let long = -0.5654924;
 
           const latDest = markers[0].lat ;
           const longDest = markers[0].lng ;
-
-          // const createMarker = new mapboxgl.Marker()
-          //   .setLngLat([long, lat])
-          //   .addTo(map);
 
           directions.setOrigin([long, lat]);
           directions.setDestination([longDest, latDest]);
@@ -345,9 +370,11 @@ const initMapbox2 = () => {
           bound.extend([long, lat]);
           bound.extend([longDest, latDest]);
           map.fitBounds(bound, { padding: 90, maxZoom: 15, duration: 500 });
-        });
       };
-      itineraire();
+
+    map.on('load', function () {
+
+      itineraire(44.859221, -0.5657);
 
     });
     // fitMapToMarkers(map, markers);
@@ -400,44 +427,6 @@ const initMapbox2 = () => {
       });
 
     });
-
-    const geocoder = new MapboxGeocoder({
-      accessToken: mapboxgl.accessToken,
-      mapboxgl: mapboxgl,
-      marker: false,
-      language: 'fr',
-      placeholder: "Entrer votre adresse"
-    });
-
-    map.addControl(geocoder);
-
-
-    map.on('load', function() {
-      map.addSource('single-point', {
-        type: 'geojson',
-        data: {
-          type: 'FeatureCollection',
-          features: []
-        }
-      });
-
-      map.addLayer({
-        id: 'point',
-        source: 'single-point',
-        type: 'circle',
-        paint: {
-          'circle-radius': 10,
-          'circle-color': '#448ee4'
-        }
-      });
-
-      geocoder.on('result', function(ev) {
-        map.getSource('single-point').setData(ev.result.geometry);
-        console.log(ev.result.geometry.coordinates);
-      });
-    });
-
-    document.getElementById('geocoder-2').appendChild(geocoder.onAdd(map));
 
   };
 
