@@ -4,7 +4,11 @@ class SearchesController < ApplicationController
     #Product.reindex # avec "Elastic"
     #@products = Product.all #"Sans Elastic"
    # Product.reindex # avec "Elastic"
+     @events = Event.order(:start_date)
   end
+
+
+   
 
 
   def new
@@ -19,6 +23,10 @@ class SearchesController < ApplicationController
         format.js  # <-- will render `app/views/searches/create.js.erb`
       end
   end
+
+
+
+
 
 
 end
