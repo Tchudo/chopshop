@@ -30,6 +30,8 @@ class StocksController < ApplicationController
     @basket = Basket.new
     @basket_user = Basket.where(user_id: current_user[:id]).map(&:stock_id)
 
+
+
       @markers = @stocks.map do |stock|
         {
         lat: stock.shop.latitude,
