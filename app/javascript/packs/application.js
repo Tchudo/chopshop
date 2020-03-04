@@ -11,3 +11,5 @@ initMapbox2();
 import { changeTime } from '../shared/animation';
 changeTime();
 
+import {eventDisplay} from '../components/eventcard';
+eventDisplay();

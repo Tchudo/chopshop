@@ -2,6 +2,25 @@
 
   <nav class="navbar navbar-expand-sm bg-transparent justify-content-end" id="nav">
 
+  <div class="lily-logo">
+    <!-- <h1 id="mini-title" class="text-center my-2 text-white">ShopChop!</h1> -->
+    <div class="mini-logo_lily"></div>
+  </div>
+
+  <%= form_tag stocks_path, method: :get, autocomplete: :off, class: 'search-new-place' do %>
+            <div class="input-group-append p-2 bg-white rounded rounded-pill">
+              <%= text_field_tag :query,
+                params[:query],
+                class:"form-control typeahead border-0 shadow-none bg-transparent ",
+                placeholder: "Recherchez un produit..."
+              %>
+
+              <%= button_tag :submit, class:'border-0 shadow-none bg-transparent btn' do %>
+                  <i class="fa fa-search shadow-none" style="color: #F4AA5B;"></i>
+              <% end %>
+            </div>
+      <% end %>
+
   <!-- Burger -->
   <div class="dropdown dropleft">
     <button class="btn bg-transparent border-transparent shadow-none px-1" type="button" data-toggle="dropdown"><i class="fas fa-bars fa-1x" style="color: white;"></i>
@@ -23,17 +42,28 @@
         </div>
       <% end %>
   </div>
+  <div class="event-btn">
+    <i class="fas fa-walking"></i>
 
+          <% if @events.event_today? %>
+
+            <p></p>
+          <% end %>
+  </div>
 </nav>
 
-<div class="container">
+<div id="chop-container" class="container">
   <div class="row justify-content-center">
     <div class="col-sm-12 col-lg-6">
 
-      <div class="lily" id="lily"></div>
+      <div class="lily" id="lily">
+
+
+
+      </div>
       <%#= image_tag "lily_70.png", class: "mx-auto d-block", id: "lily" %>
 
-      <h1 class="text-center my-2 text-white">ShopChop!</h1>
+      <h1 id="main-title" class="text-center my-2 text-white">ShopChop!</h1>
 
     </div>
   </div>
@@ -45,7 +75,7 @@
     <div class="col-sm-12 col-lg-6">
 
  <!-- Search form -->
-      <%= form_tag stocks_path, method: :get, autocomplete: :off do %>
+      <%= form_tag stocks_path, method: :get, autocomplete: :off, class: 'search-bar' do %>
             <div class="input-group-append p-2 bg-white rounded rounded-pill">
               <%= text_field_tag :query,
                 params[:query],
@@ -63,9 +93,110 @@
 
 
 
-    </div>
+
+   </div>
   </div>
 </div>
+
+
+<div class="card-event-container display-card ">
+
+
+      <% if @events.event_today? %>
+
+        <div class="today">
+          <h2>Aujourd'hui</h2>
+        </div>
+
+        <% @events.return_today_event.each do |event| %>
+
+           <div class="card-test" >
+            <div class="image-event-test" data-toggle="modal" data-target="#event<%=event.id %>" style="background-image: url('<%= cl_image_path event.photo.key, height: 300, width: 400, crop: :fill %>')">
+
+            </div>
+
+            <div class="card-info-test">
+              <div class="main-info-test">
+                <h3><%= event.name %></h3>
+                <p><%= event.category %></p>
+              </div>
+              <div class="date-info-test">
+
+                <p><%= event.start_date.day  %> <%= event.month %>  <%= event.start_date.year %></p>
+              </div>
+            </div>
+          </div>
+
+         <% end %>
+
+      <% end %>
+
+        <div class="today">
+          <h2>Evènements à venir</h2>
+        </div>
+
+        <% (@events - @events.return_today_event).each do |event|  %>
+
+          <div class="card-test">
+            <div class="image-event-test" data-toggle="modal" data-target="#event<%=event.id %>" style="background-image: url('<%= cl_image_path event.photo.key, height: 300, width: 400, crop: :fill %>')">
+
+            </div>
+
+            <div class="card-info-test">
+              <div class="main-info-test">
+                <h3><%= event.name %></h3>
+                <p><%= event.category %></p>
+              </div>
+              <div class="date-info-test">
+
+                <p><%= event.start_date.day  %> <%= event.month %>  <%= event.start_date.year %></p>
+              </div>
+            </div>
+          </div>
+
+        <% end %>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+<!-- MODAL -->
+  <% @events.each do |event| %>
+
+    <div class="modal fade" id="event<%= event.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">
+              <%= event.name %>
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <%end %>
+
+
+
+
 
 <!-- <h1>Searches#new</h1> -->
 
