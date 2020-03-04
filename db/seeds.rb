@@ -46,11 +46,11 @@ puts "Users destroyed!"
 
 
 
-# # #---------------------------DESTRUCTION-DONE-------------------
+# ---------------------------DESTRUCTION-DONE-------------------
 
 puts "User construction start !"
 
-# # # #############################USER-CREATION########################
+# #############################USER-CREATION########################
 
 
 
@@ -60,7 +60,7 @@ u = User.create!(user)
 cat = {label: "null"}
 c = Category.create!(cat)
 
-# #-----------------------------USER-DONE---------------------------
+# -----------------------------USER-DONE---------------------------
 
 puts "User created ok"
 
@@ -269,14 +269,25 @@ puts "Time table creation start"
 
 my_shops = Shop.all
 my_shops.each do |shop|
-  time_table = {                #day_of_week : 0 : Dimanche, 1 : Lundi ..... Samedi : 6 #
-      opened_at: rand(8..10) ,
-      closed_at: rand(17..20) ,
-      day_of_week: rand(0..6),  #day_of_week : 1 => lundi
-      shop_id: shop.id
-  }
-
-  TimeTable.create!(time_table)
+  number_of_day = rand(3..5)
+  start_day = rand(1..5)
+  open_rand = rand(8..12)
+  close_rand = rand(13..19)
+  star_with = start_day
+  number_of_day.times do
+    time_table = {                #day_of_week : 0 : Dimanche, 1 : Lundi ..... Samedi : 6 #
+        opened_at: open_rand ,
+        closed_at: close_rand ,
+        day_of_week: star_with,  #day_of_week : 1 => lundi
+        shop_id: shop.id
+    }
+    if star_with < 6
+      star_with += 1
+    else
+      star_with = 0
+    end
+    TimeTable.create!(time_table)
+  end
 end
 
 puts "Time table creation end"
