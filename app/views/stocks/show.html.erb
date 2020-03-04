@@ -23,7 +23,7 @@
 </div>
 
 
-<div class="bg-white" style="height: 50vh;">
+<div class="bg-white" style="height: 53vh;">
 
 
 <!--   <div class="bg-white info-instruction m-0 w-25 rounded ">
@@ -58,7 +58,7 @@
     <!-- Infos product -->
     <div class="d-flex mt-2">
       <div class="col-6 p-0 m-0">
-        <div class="product-description pt-1 px-2 mb-2">
+        <div class="product-description pt-1 px-2 mb-1">
           <div class="d-flex justify-content-between align-items-center mb-2">
             <h5><%= @product.name %></h5>
             <button class="btn p-0 m-0 bg-transparent border-O shadow-none" data-toggle="modal" data-target="#ModalNewFavorite"> <i class="fa fa-heart shadow-none"
@@ -71,7 +71,7 @@
           </div>
           <p><strong>Marque :</strong> <%= @product.brand %></p>
           <p><strong>Qté :</strong> <%= @stock.quantity %></p>
-          <p class="overflow-auto" style="height: 60px;"><%= @product.description %></p>
+          <p class="overflow-auto" style="max-height: 45px;"><%= @product.description %></p>
         </div>
 
         <!-- Rating -->
@@ -109,7 +109,7 @@
           </div>
           <% end %>
           <% else %>
-            <p>Soyez le premier à donner votre avis</p>
+            <p>Soyez le premier à donner votre avis.</p>
           <% end %>
         </div>
 

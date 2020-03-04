@@ -46,7 +46,7 @@
   <div class="container">
 
     <% @favorites.each do |favorite| %>
-    <div class="row d-flex bg-white rounded shadow border m-2 border-0">
+    <div class="row d-flex bg-white rounded shadow border m-2 border-0 ">
       <div class="col-sm-2 w-25 p-0">
        <i class="img-resize rounded"><%= cl_image_tag favorite.product.photo.key %></i>
       </div>
@@ -63,9 +63,9 @@
         <%= button_to favorite_path(favorite),method: :delete, class: " btn p-0 m-0 bg-transparent border-O" do %>
           <i class="far fa-times-circle" id="btn-suppr" style="color: #bbbbbb;"></i>
         <% end %>
-        <%= link_to stocks_path do %>
+        <%#= link_to stocks_path do %>
         <i class="fa fa-search" id="btn-search"></i>
-        <% end %>
+        <%# end %>
       </div>
     </div>
     <% end %>
