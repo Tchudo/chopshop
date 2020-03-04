@@ -13,7 +13,11 @@
   </ol>
 </div>
 
+
+<!-- btn address -->
+
 <button id="btn-add-2" class=" btn btn-circle-add-2 border-0 rounded rounded-pill bg-white py-1 px-2 shadow-none"><i class="fas fa-map-marker-alt" style="color: #F4AA5B; font-size: 30px"></i></button>
+
 <div id="geocoder-2" class="geocoder-2"></div>
 
 
@@ -22,7 +26,7 @@
 </div>
 
 
-<div class="bg-white" style="height: 50vh;">
+<div class="bg-white" style="height: 53vh;">
 
 
 <!--   <div class="bg-white info-instruction m-0 w-25 rounded ">
@@ -57,7 +61,7 @@
     <!-- Infos product -->
     <div class="d-flex mt-2">
       <div class="col-6 p-0 m-0">
-        <div class="product-description pt-1 px-2 mb-2">
+        <div class="product-description pt-1 px-2">
           <div class="d-flex justify-content-between align-items-center mb-2">
             <h5><%= @product.name %></h5>
             <button class="btn p-0 m-0 bg-transparent border-O shadow-none" data-toggle="modal" data-target="#ModalNewFavorite"> <i class="fa fa-heart shadow-none"
@@ -70,7 +74,7 @@
           </div>
           <p><strong>Marque :</strong> <%= @product.brand %></p>
           <p><strong>Qté :</strong> <%= @stock.quantity %></p>
-          <p><%= @product.description %></p>
+          <p class="overflow-auto" style="max-height: 45px;"><%= @product.description %></p>
         </div>
 
         <!-- Rating -->
@@ -108,7 +112,7 @@
           </div>
           <% end %>
           <% else %>
-            <p>Soyez le premier à donner votre avis</p>
+            <p>Soyez le premier à donner votre avis.</p>
           <% end %>
         </div>
 

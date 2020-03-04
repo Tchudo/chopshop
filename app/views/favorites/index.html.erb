@@ -46,7 +46,9 @@
   <div class="container">
 
     <% @favorites.each do |favorite| %>
+
     <div class="row d-flex bg-white rounded shadow border m-2 border-0" style="min-height: 120px;">
+
       <div class="col-sm-2 w-25 p-0">
        <i class="img-resize rounded"><%= cl_image_tag favorite.product.photo.key %></i>
       </div>

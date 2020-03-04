@@ -5,11 +5,15 @@
     "@mapbox/mapbox-gl-directions": "^4.0.3",
     "@mapbox/mapbox-gl-geocoder": "^4.5.1",
     "@rails/webpacker": "4.2.2",
+    "@turf/buffer": "^5.1.5",
+    "@turf/helpers": "^6.1.4",
+    "@turf/turf": "^5.1.6",
     "bootstrap": "^4.4.1",
     "jquery": "^3.4.1",
     "mapbox-gl": "^1.8.0",
     "places.js": "^1.18.1",
     "popper.js": "^1.16.1",
+    "rails-ujs": "^5.2.4-1"
     "quagga": "^0.12.1",
     "rails-ujs": "^5.2.4-1",
     "turbolinks": "^5.2.0"

@@ -1,0 +1,17 @@
+<div class="container p-0">
+  <div class="text-center">
+    <div class="img-size">
+      <i><%= cl_image_tag product[0].photo.key%></i>
+    </div>
+    <div>
+      <h6 class="mb-0 mt-1"><%= product[0].name %></h6>
+      <p class="mb-0">- <%= shop.name %> -</p>
+      <p><%= shop.address %></p>
+      <h4><%="#{stock[0].price}€" %></h4>
+    </div>
+    <div class="d-flex justify-content-between align-item-center px-4">
+
+    </div>
+  </div>
+</div>
+

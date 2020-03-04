@@ -16,7 +16,8 @@ class StocksController < ApplicationController
 
     #@products = Product.all #'sans Elastic'
 
-      @product = Product.find(params[:search_id])
+   @product = Product.find(params[:search_id])
+
 
      @stocks = []
     # @products.each do |product|
@@ -25,7 +26,6 @@ class StocksController < ApplicationController
       product_stocks.each do |stock|
         @stocks << stock
       end
-
 
     @basket = Basket.new
     @basket_user = Basket.where(user_id: current_user[:id]).map(&:stock_id)
