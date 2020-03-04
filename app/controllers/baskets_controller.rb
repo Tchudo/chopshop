@@ -11,7 +11,7 @@ class BasketsController < ApplicationController
     @stock = Stock.find(params[:stock_id])
     @basket = Basket.new()
     @basket.user_id = current_user[:id]
-    @basket.stock_id = @stock.product.id
+    @basket.stock_id = @stock.id
 
     if @basket.save
     else
