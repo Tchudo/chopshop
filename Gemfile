@@ -21,6 +21,7 @@ gem 'geocoder'
 gem 'searchkick', '~> 4.3.0'
 gem 'gemoji-parser'
 gem 'jquery-rails'
+gem 'turbolinks'
 
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 

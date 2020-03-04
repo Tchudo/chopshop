@@ -12,15 +12,15 @@
       <div class="col-sm-12 col-lg-6">
         <%= form_tag searches_path, method: :post, autocomplete: :off, id:"search", remote: true do %>
               <div class="input-group-append bg-white rounded rounded-pill d-flex justify-content-between p-2 px-4">
-                <%= link_to new_search_path do %>
+                <%= link_to products_path do %>
                 <i class="fas fa-barcode shadow-none pt-1" style="font-size: 30px; color: #F4AA5B;"></i>
                 <% end %>
                 <%= text_field_tag :query,
                   params[:query],
                   class:"form-control typeahead border-0 shadow-none bg-transparent align-middle",
-                  placeholder: "Recherchez un produit...",
-                  onFocus: "document.getElementById('choice').style.visibility = 'visible'",
-                  onFocusout: "document.getElementById('choice').style.visibility = 'hidden'"
+                  placeholder: "Recherchez un produit..."
+                  # onFocus: "document.getElementById('choice').style.visibility = 'visible'",
+                  # onFocusout: "document.getElementById('choice').style.visibility = 'hidden'"
                 %>
 
                 <%= button_tag :submit, id:"search_button", class:'border-0 shadow-none bg-transparent btn' do %>
@@ -31,7 +31,7 @@
       </div>
 
       <!--  Affichage des produits trouvés -->
-      <div class="col-sm-12 col-lg-6" id="choice" style="visibility: hidden">
+      <!-- <div class="col-sm-12 col-lg-6" id="choice" style="visibility: hidden">
         <ul>
           <li>
             <div class="card-product rounded rounded-pill p-2 px-4">
@@ -39,7 +39,7 @@
               <i class="fas fa-history" style="font-size: 30px; color: #F4AA5B;"></i>
 
               <div class="card-product-infos">
-                <h2><%= link_to "Historique de mes recherches", root_path %></h2>
+                <h2><%#= link_to "Historique de mes recherches", root_path %></h2>
               </div>
             </div>
           </li>
@@ -47,12 +47,12 @@
             <div class="card-product rounded rounded-pill px-4">
               <i class="far fa-heart" style="font-size: 30px; color: #F4AA5B;"></i>
               <div class="card-product-infos">
-                <h2><%= link_to "Recherchez dans mes favoris", root_path %></h2>
+                <h2><%#= link_to "Recherchez dans mes favoris", root_path %></h2>
               </div>
             </div>
           </li>
         </ul>
-      </div>
+      </div> -->
 
       <div class="col-sm-12 col-lg-12" id="list-results">
           <%#= render "_searches_results", products: @products %>

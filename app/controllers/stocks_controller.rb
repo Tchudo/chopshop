@@ -13,10 +13,11 @@ class StocksController < ApplicationController
     # @products = Product.search(params[:query], emoji: true)
     #-----------------#ElasticSearch
 
-    
+
     #@products = Product.all #'sans Elastic'
-   @product = Product.find(params[:search_id])
-    
+
+      @product = Product.find(params[:search_id])
+
      @stocks = []
     # @products.each do |product|
       product_stocks =  Stock.where(product_id: @product.id)
