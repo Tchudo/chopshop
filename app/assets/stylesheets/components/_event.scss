@@ -105,27 +105,20 @@
 // TEST
 
 .card-test {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 80%;
 
-  margin-bottom: 15%;
-
-
+    height: 13vh;
+    display: -webkit-box;
+    display: flex;
+    overflow: hidden;
+    margin-bottom: 12%;
 
 }
 
-
-
 .image-event-test {
-    width: 100%;
-    height: 0;
-    padding-bottom: 90%;
-    background-image: url('<%= cl_image_path @event.photo.key, height: 300, width: 400, crop: :fill %>');
-    border-radius: 10px 10px 10px 10px;
-    opacity: 1;
+    width: 44%;
 
+    border-radius: 10px 0px 0px 10px;
+    opacity: 1;
 
 }
 .image-event-test:hover {
@@ -159,9 +152,8 @@
 
 .card-info-test {
 
-    top: 76%;
-    left: 6%;
-    display: -webkit-box;
+    top: 78%;
+
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -170,14 +162,15 @@
     align-items: center;
     background-color: white;
     width: 90%;
-    height: 45%;
-    border-radius: 10px 10px 10px 10px;
-    box-shadow: 0px 0px 40px -9px rgba(0,0,0,0.75);
-    z-index: 5;
+    height: 94%;
 
-
+    box-shadow: 0px 0px 40px -9px rgba(0, 0, 0, 0.75);
 
 }
+
+.card-info-test:hover {
+    opacity: 0.5;
+  }
 
 .date-info-test {
   p {
@@ -186,19 +179,14 @@
 }
 
 .card-event-container {
-  margin: 20px;
-    display: -webkit-box;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
     overflow: scroll;
     height: 84vh;
+    -webkit-transition: .2s all;
     transition: .2s all;
-
     position: absolute;
-    width: 100%;
-    top: 13%;
-    left: -5%;
+    width: 90%;
+    top: 14%;
+    left: 5%;
 
 
 }
@@ -328,4 +316,32 @@
 
 .lily-go {
   opacity: 1;
+}
+
+.date-event {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  margin-top: 10%;
+
+  p {
+    margin: 0;
+    font-weight: bold;
+
+  }
+}
+
+.text-orange {
+  color: #F4AA5B;
+  font-weight: bold;
+}
+.img-event-modal {
+  width: 100%;
+}
+.font-modal {
+  background: linear-gradient(187deg, rgba(176,231,157,1) 0%, rgba(246,255,238,1) 100%);
+}
+.modal-content-rounded {
+  border-radius: 10px;
 }

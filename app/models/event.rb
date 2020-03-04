@@ -51,6 +51,9 @@ class Event < ApplicationRecord
     (self.start_date.. self.end_date)
   end
 
+  def month_color
+    relative_month_color(self.start_date.month)
+  end
 
 private
 
@@ -101,5 +104,38 @@ private
       "Décembre"
     end
   end
+
+  def relative_month_color(month)
+    case month
+    when 1
+      "#9FD8CB"
+    when 2
+      "#EFD2CB"
+    when 3
+      "#AFC2D5"
+    when 4
+      "#F7A072"
+    when 5
+      "#B48B7D"
+    when 6
+      "#885053"
+    when 7
+      ""
+    when 8
+      "#FABC3C "
+    when 9
+      "#FE4A49"
+    when 10
+      "#2C4251"
+    when 11
+      ""
+    when 12
+      "#D0E3C4"
+    end
+
+
+
+  end
+
 
 end

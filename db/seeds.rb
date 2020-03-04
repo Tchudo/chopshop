@@ -420,8 +420,8 @@ puts "Start creation Event !"
 
 ##############################EVENT-CREATION############
 
-event1start_date = Date.new(2020,3,5)
-event1end_date = Date.new(2020,3,5)
+event1start_date = Date.new(2020,3,4)
+event1end_date = Date.new(2020,3,4)
 
 event1 = {
     name: "Vide grenier des forains" ,
@@ -435,11 +435,11 @@ event1 = {
 }
 
 
-event2start_date = Date.new(2020,3,3)
-event2end_date = Date.new(2020,3,3)
+event2start_date = Date.new(2020,4,3)
+event2end_date = Date.new(2020,4,3)
 
 event2 = {
-    name: "Soirée moule-bite" ,
+    name: "Soirée moule-brite" ,
     category: "repas de quartier" ,
     description: "Viens prendre un moule frite en maillot de bain !" ,
     address: "Jardin public, 33000 Bordeaux" ,
@@ -449,9 +449,22 @@ event2 = {
     time_closing: 22 ,
 }
 
+event4start_date = Date.new(2020,10,5)
+event4end_date = Date.new(2020,11,5)
 
-event3start_date = Date.new(2020,3,7)
-event3end_date =  Date.new(2020,3,4)
+event4 = {
+    name: "T-shirt mémé" ,
+    category: "Sortie pour vieux" ,
+    description: "Concours de miss 70 +" ,
+    address: "Place des Quinquonces, 33000 Bordeaux" ,
+    start_date: event4start_date,
+    end_date: event4end_date,
+    time_opening: 7 ,
+    time_closing: 19 ,
+}
+
+event3start_date = Date.new(2020,5,4)
+event3end_date =  Date.new(2020,5,7)
 
 event3 = {
     name: "Vernissage sauvage sur voiture" ,
@@ -467,6 +480,7 @@ event3 = {
 ev1 = Event.create!(event1)
 ev2 = Event.create!(event2)
 ev3 = Event.create!(event3)
+ev4 = Event.create!(event4)
 
 #-----------------------------EVENT-END-----------------
 
@@ -518,6 +532,11 @@ puts "moule_bite_img loaded OK"
 vernissage_sauvage_img = URI.open('https://jondi.fr/wp-content/uploads/2018/09/carton-invit-sauvages-imaginaires-1024x726.jpg')
 ev3.photo.attach(io: vernissage_sauvage_img, filename: 'vernissage_sauvage_img.jpg' ,content_type: 'image/jpg')
 puts "vernissage_sauvage_img loaded OK"
+
+vieux_storie_img = URI.open('https://thewiffhotstove.files.wordpress.com/2013/12/old-lady-friend.jpg')
+ev4.photo.attach(io: vieux_storie_img, filename: 'vieux_storie_img.jpg' ,content_type: 'image/jpg')
+puts "vieux_storie_img loaded OK"
+
 
 puts "SEED DONE :D"
 
