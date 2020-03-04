@@ -27,6 +27,7 @@ const initMapbox = () => {
         element.className = 'marker';
         element.style.backgroundImage = `url('${marker.image_url}')`;
         element.style.backgroundSize = 'contain';
+        element.style.backgroundPosition = 'center center';
         element.style.width = '50px';
         element.style.height = '50px';
       new mapboxgl.Marker(element)
@@ -619,7 +620,7 @@ const initMapbox3 = () => {
   const fitMapToMarkers = (map, markers) => {
     const bounds = new mapboxgl.LngLatBounds();
     markers.forEach(marker => bounds.extend([ marker.lng, marker.lat ]));
-    map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 });
+    map.fitBounds(bounds, { padding: 100, maxZoom: 15, duration: 0 });
   };
       let truckLocation = [-0.5654924, 44.8592094];
       var warehouseLocation = [-0.5654924, 44.8592094];
@@ -668,8 +669,17 @@ const initMapbox3 = () => {
 
         // Create a new marker
         markers.forEach((marker) => {
-          new mapboxgl.Marker(marker)
-            .setLngLat(marker)
+          const popup = new mapboxgl.Popup().setHTML(marker.infoWindow);
+          const element = document.createElement('div');
+            element.className = 'marker';
+            element.style.backgroundImage = `url('${marker.image_url}')`;
+            element.style.backgroundSize = 'contain';
+            element.style.backgroundPosition = 'center top';
+            element.style.width = '50px';
+            element.style.height = '50px';
+          new mapboxgl.Marker(element)
+            .setLngLat([ marker.lng, marker.lat ])
+            .setPopup(popup)
             .addTo(map);
         });
 
@@ -682,8 +692,8 @@ const initMapbox3 = () => {
             type: 'geojson'
           },
           paint: {
-            'circle-radius': 10,
-            'circle-color': '#F4AA5B',
+            'circle-radius': 5,
+            'circle-color': 'white',
             'circle-stroke-color': '#F4AA5B',
             'circle-stroke-width': 3
           }
@@ -716,7 +726,7 @@ const initMapbox3 = () => {
           layout: {
             'icon-allow-overlap': true,
             'icon-ignore-placement': true,
-            'icon-image': 'marker-15'
+            'icon-image': ''
           }
         });
 
@@ -798,7 +808,7 @@ const initMapbox3 = () => {
           //
           if (data.waypoints.length === 12) {
             window.alert(
-              'Maximum number of points reached. Read more at docs.mapbox.com/api/navigation/#optimization.'
+              'Maximum number of points reached. '
             );
           }
         });

@@ -17,10 +17,12 @@ class ItinariesController < ApplicationController
 
     @shops = Shop.where(id: @shops_id)
 
+
     @markers = @shops.map do |shop|
       {
       lat: shop.latitude,
       lng: shop.longitude,
+      infoWindow: render_to_string(partial: "info_window", locals: { shop: shop, stock: Stock.where(shop_id: shop.id), product: Product.where(id: Stock.where(shop_id: shop.id)[0].product_id)}),
       image_url: helpers.asset_url('lily.png')
     }
     end
