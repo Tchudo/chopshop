@@ -33,7 +33,8 @@
   <div class="row justify-content-center">
     <div class="col-sm-12 col-lg-6">
 
-      <%= image_tag "lily_70.png", class: "mx-auto d-block", id: "lily" %>
+           <div class="lily" id="lily"></div>
+
 
       <h1 class="text-center my-2 text-white">ChopShop!</h1>
 
@@ -50,7 +51,7 @@
 
             <div class="input-group-append p-2 bg-white rounded rounded-pill d-flex justify-content-between">
 
-              <%= link_to new_search_path do %>
+              <%= link_to products_path do %>
                 <i class="fas fa-barcode shadow-none pt-1 px-4" style="font-size: 30px; color: #F4AA5B;"></i>
               <% end %>
 
@@ -73,6 +74,10 @@
   </div>
 </div>
 
+
+
 <!-- <h1>Searches#new</h1> -->
 
 </div>
+
+

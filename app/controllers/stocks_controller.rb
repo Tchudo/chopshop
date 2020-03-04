@@ -15,7 +15,9 @@ class StocksController < ApplicationController
 
 
     #@products = Product.all #'sans Elastic'
+
    @product = Product.find(params[:search_id])
+
 
      @stocks = []
     # @products.each do |product|

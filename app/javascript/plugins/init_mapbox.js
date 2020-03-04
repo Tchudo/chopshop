@@ -6,6 +6,7 @@ import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-direct
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 
 const initMapbox = () => {
+  console.log("start mapbox");
   const mapElement = document.getElementById('map');
   const fitMapToMarkers = (map, markers) => {
     console.log(markers);
@@ -25,6 +26,7 @@ const initMapbox = () => {
     markers.forEach((marker) => {
       const popup = new mapboxgl.Popup().setHTML(marker.infoWindow);
       const element = document.createElement('div');
+        element.setAttribute("id", "myDiv");
         element.className = 'marker';
         element.style.backgroundImage = `url('${marker.image_url}')`;
         element.style.backgroundSize = 'contain';
