@@ -37,7 +37,7 @@ class StocksController < ApplicationController
         lat: stock.shop.latitude,
         lng: stock.shop.longitude,
         infoWindow: render_to_string(partial: "info_window", locals: { shop: stock.shop , product: stock.product, stock: stock, basket: @basket}),
-        image_url: helpers.asset_url('lily.png')
+        image_url: helpers.asset_url('lily_omb.png')
       }
       end
 
