@@ -41,3 +41,8 @@
 #btn-search {
   color: #F4AA5B;
 }
+#new_basket > button {
+  &:hover {
+    background-color: white;
+  }
+}

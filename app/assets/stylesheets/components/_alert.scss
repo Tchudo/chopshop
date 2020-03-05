@@ -4,3 +4,12 @@
   right: 16px;
   z-index: 1000;
 }
+a:hover {
+  text-decoration: none;
+}
+button {
+  text-decoration: none;
+  &:focus {
+    outline: none;
+  }
+}

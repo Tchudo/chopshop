@@ -36,6 +36,7 @@
 
 
 <!-- Container Search -->
+
   <div class="container my-4" id="research">
     <h1 id="main-title" class="text-center my-4 text-white">ChopShop!</h1>
     <div class="row justify-content-center">
@@ -44,7 +45,7 @@
         <div class="flex-grow-1 mx-4">
             <div class="bg-white rounded rounded-pill d-flex p-2">
                 <%= link_to products_path do %>
-                  <i class="fas fa-barcode shadow-none pt-1" style="font-size: 30px; color: #F4AA5B;"></i>
+                  <i class="fas fa-barcode shadow-none pt-1" style="font-size: 30px; color: #ffcd3c;"></i>
                 <%  end %>
                 <div  class="flex-grow-1">
                   <%= form_tag searches_path, method: :post, autocomplete: :off, id:"search", remote: true do %>
@@ -57,7 +58,7 @@
                         autofocus: "true"
                       %>
                       <%= button_tag :submit, id:"search_button", class:'border-0 shadow-none bg-transparent btn' do %>
-                        <i class="fa fa-search shadow-none" style="color: #F4AA5B;"></i>
+                          <i class="fa fa-search shadow-none" style="color: #ffcd3c;"></i>
                       <% end %>
                     </div>
                   <% end %>
@@ -81,7 +82,9 @@
       </div>
     </div>
   </div>
+
 </div> <!-- #fin de la home -->
+
 
 
 

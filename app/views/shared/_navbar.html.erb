@@ -6,13 +6,14 @@
       <div class="ml-2 mr-3">
         <%= link_to "/" do %>
             <%= image_tag "lily_35.png" %>
+
         <% end %>
       </div>
      <!-- Search form -->
         <div class="w-75">
             <div class="bg-white rounded rounded-pill d-flex mx-2 p-2">
                 <%= link_to products_path do %>
-                  <i class="fas fa-barcode shadow-none pt-1" style="font-size: 30px; color: #F4AA5B;"></i>
+                  <i class="fas fa-barcode shadow-none pt-1" style="font-size: 30px; color: #ffcd3c;"></i>
                 <%  end %>
                 <div  class="flex-grow-1">
                   <%= form_tag searches_path, method: :post, autocomplete: :off, id:"search", remote: true do %>
@@ -25,7 +26,7 @@
                         # onfocus: "toggle(mask);"
                       %>
                       <%= button_tag :submit, id:"search_button", class:'border-0 shadow-none bg-transparent btn' do %>
-                        <i class="fa fa-search shadow-none" style="color: #F4AA5B;"></i>
+                        <i class="fa fa-search shadow-none" style="color: #ffcd3c;"></i>
                       <% end %>
                     </div>
                   <% end %>
