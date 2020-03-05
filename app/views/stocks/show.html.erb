@@ -59,7 +59,16 @@
           <h4><%= @shop.name %></h4>
           <div class="d-flex justify-content-around align-items-center p-0 m-0">
             <div class="col-6 p-0">
-              <p class="p-0 m-0"><%= @open %></p>
+              <% if @open == "Ouvert" %>
+                 <p class="p-0 m-0 green-title ">
+                  <%= @open %>
+                </p>
+              <% else %>
+                 <p class="p-0 m-0 red-title">
+                  <%= @open %>
+                </p>
+              <% end %>
+
               <p class="p-0 m-0"><%= @fermeture %></p>
             </div>
             <div class="col-6 p-0">

@@ -1,8 +1,8 @@
 const eventDisplay = () => {
   const cardContainer = document.querySelector('.card-event-container');
+  const noti = document.querySelector('.notiti');
 
-
-  const btnAction = document.querySelector('.fa-walking');
+  const btnAction = document.querySelector('.fa-calendar-alt');
 
 
   const logo = document.querySelector('#lily');
@@ -20,12 +20,26 @@ if (btnAction) {
     miniLogo.classList.toggle('lily-go');
     mainTitle.classList.toggle('opacity-destroy');
     searchbar.classList.toggle('opacity-destroy');
+    noti.classList.toggle('opacity-destroy');
 
   });
 
 };
 
 
+if (noti) {
+  noti.addEventListener('click', (event) => {
+    cardContainer.classList.toggle('display-card');
+    logo.classList.toggle('opacity-destroy');
+    miniLogo.classList.toggle('lily-go');
+    mainTitle.classList.toggle('opacity-destroy');
+    searchbar.classList.toggle('opacity-destroy');
+    noti.classList.toggle('opacity-destroy');
+
+  });
+
+
+};
 
 
 
@@ -36,6 +50,7 @@ if (miniLogo) {
     miniLogo.classList.toggle('lily-go');
     mainTitle.classList.toggle('opacity-destroy');
     searchbar.classList.toggle('opacity-destroy');
+    noti.classList.toggle('opacity-destroy');
 
 
   });
