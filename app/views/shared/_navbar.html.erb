@@ -1,92 +1,74 @@
-<nav class="navbar navbar-expand-sm bg-transparent justify-content-between" id="nav" style="position: absolute; z-index: 10; width: 100%">
 
-  <div class="row">
-  <!-- Logo à gauche -->
-  <%= link_to "/" do %>
-      <%= image_tag "lily_35.png" %>
-  <% end %>
+<nav class="navbar navbar-expand-sm bg-transparent justify-content-center" id="nav" style="position: absolute; z-index: 10; width: 100%">
 
+  <div class="row justify-content-center align-items-center">
+      <!-- Logo à gauche -->
+      <div class="ml-2 mr-3">
+        <%= link_to "/" do %>
+            <%= image_tag "lily_35.png" %>
 
-
-
-     <!-- Search form -->
-      <div class="col-sm-12 col-lg-6">
-        <%= form_tag searches_path, method: :post, autocomplete: :off, id:"search", remote: true do %>
-              <div class="input-group-append bg-white rounded rounded-pill d-flex justify-content-between p-2 px-4">
-                <%= link_to products_path do %>
-                <i class="fas fa-barcode shadow-none pt-1" style="font-size: 30px; color: #ffcd3c;"></i>
-                <% end %>
-                <%= text_field_tag :query,
-                  params[:query],
-                  class:"form-control typeahead border-0 shadow-none bg-transparent align-middle",
-                  placeholder: "Recherchez un produit..."
-                  # onFocus: "document.getElementById('choice').style.visibility = 'visible'",
-                  # onFocusout: "document.getElementById('choice').style.visibility = 'hidden'"
-                %>
-
-                <%= button_tag :submit, id:"search_button", class:'border-0 shadow-none bg-transparent btn' do %>
-                    <i class="fa fa-search shadow-none" style="color: #ffcd3c;"></i>
-                <% end %>
-              </div>
         <% end %>
       </div>
-
-      <!--  Affichage des produits trouvés -->
-      <!-- <div class="col-sm-12 col-lg-6" id="choice" style="visibility: hidden">
-        <ul>
-          <li>
-            <div class="card-product rounded rounded-pill p-2 px-4">
-
-              <i class="fas fa-history" style="font-size: 30px; color: #F4AA5B;"></i>
-
-              <div class="card-product-infos">
-                <h2><%#= link_to "Historique de mes recherches", root_path %></h2>
-              </div>
+     <!-- Search form -->
+        <div class="w-75">
+            <div class="bg-white rounded rounded-pill d-flex mx-2 p-2">
+                <%= link_to products_path do %>
+                  <i class="fas fa-barcode shadow-none pt-1" style="font-size: 30px; color: #ffcd3c;"></i>
+                <%  end %>
+                <div  class="flex-grow-1">
+                  <%= form_tag searches_path, method: :post, autocomplete: :off, id:"search", remote: true do %>
+                    <div class="d-flex justify-content-between">
+                      <%= text_field_tag :query,
+                        params[:query],
+                        id: "myForm",
+                        class:"form-control typeahead border-0 shadow-none bg-transparent align-middle",
+                        placeholder: "Recherchez un produit..."
+                        # onfocus: "toggle(mask);"
+                      %>
+                      <%= button_tag :submit, id:"search_button", class:'border-0 shadow-none bg-transparent btn' do %>
+                        <i class="fa fa-search shadow-none" style="color: #ffcd3c;"></i>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
             </div>
-          </li>
-           <li>
-            <div class="card-product rounded rounded-pill px-4">
-              <i class="far fa-heart" style="font-size: 30px; color: #F4AA5B;"></i>
-              <div class="card-product-infos">
-                <h2><%#= link_to "Recherchez dans mes favoris", root_path %></h2>
-              </div>
+        </div>
+
+      <!-- Burger -->
+      <div class="dropdown dropleft mx-2">
+        <button class="btn border-transparent shadow-none px-1" type="button" data-toggle="dropdown" ><i class="fas fa-bars fa-1x" style="color: #A8D384; font-size: 20px"></i>
+            </button>
+          <% if user_signed_in? %>
+
+            <div class="dropdown-menu rounded border-0" aria-labelledby="dropdownMenu2">
+              <%= link_to baskets_path do %>
+              <button class="dropdown-item" type="button">Panier</button>
+              <% end %>
+              <%= link_to favorites_path do %>
+              <button class="dropdown-item" type="button">Favoris</button>
+              <% end %>
+              <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+    <!--           <%#= link_to destroy_user_session_path, method: :delete do %>
+              <button class="dropdown-item" type="button">Log out</button>
+              <%# end %> -->
             </div>
-          </li>
-        </ul>
-      </div> -->
-  </div>
-      <div class="col-sm-12 col-lg-12" id="list-results">
-          <%#= render "_searches_results", products: @products %>
+          <% else %>
+            <div class="dropdown-menu rounded border-0" aria-labelledby="dropdownMenu2">
+              <%= link_to new_user_session_path do %>
+              <button class="dropdown-item" type="button">Login</button>
+              <% end %>
+            </div>
+          <% end %>
       </div>
-
-
-
-
-  <!-- Burger -->
-  <div class="dropdown dropleft">
-    <button class="btn border-transparent shadow-none px-1" type="button" data-toggle="dropdown" ><i class="fas fa-bars fa-1x" style="color: #A8D384;"></i>
-        </button>
-      <% if user_signed_in? %>
-
-        <div class="dropdown-menu rounded border-0" aria-labelledby="dropdownMenu2">
-          <%= link_to baskets_path do %>
-          <button class="dropdown-item" type="button">Panier</button>
-          <% end %>
-          <%= link_to favorites_path do %>
-          <button class="dropdown-item" type="button">Favoris</button>
-          <% end %>
-          <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
-<!--           <%#= link_to destroy_user_session_path, method: :delete do %>
-          <button class="dropdown-item" type="button">Log out</button>
-          <%# end %> -->
-        </div>
-      <% else %>
-        <div class="dropdown-menu rounded border-0" aria-labelledby="dropdownMenu2">
-          <%= link_to new_user_session_path do %>
-          <button class="dropdown-item" type="button">Login</button>
-          <% end %>
-        </div>
-      <% end %>
   </div>
+ <!-- list des resultats -->
+  <div class="row align-items-center w-100 overflow-auto" id="list-results" style="max-height:90vh;">
+            <%#= render "_searches_results", products: @products %>
+  </div>
+
+
 
 </nav>
+
+
+

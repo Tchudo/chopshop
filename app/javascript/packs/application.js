@@ -9,6 +9,7 @@ import { changeTime } from '../plugins/animation';
 import { autoSubmit } from '../plugins/auto_submit';
 import { load_quagga } from '../plugins/barcode_reader'
 import {eventDisplay} from '../components/eventcard';
+import {mask} from '../plugins/mask';
 import { initMapbox, initMapbox2, initMapbox3 } from '../plugins/init_mapbox';
 
 //config
@@ -22,6 +23,9 @@ changeTime();
 
 // event page
 eventDisplay();
+
+// modale recherche navbar
+mask();
 
 // recherche auto on keyup
 autoSubmit();
@@ -39,4 +43,5 @@ load_quagga();
 
 
 console.log("all JS read");
+
 
