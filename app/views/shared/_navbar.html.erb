@@ -1,5 +1,6 @@
 <nav class="navbar navbar-expand-sm bg-transparent justify-content-between" id="nav" style="position: absolute; z-index: 10; width: 100%">
 
+  <div class="row">
   <!-- Logo à gauche -->
   <%= link_to "/" do %>
       <%= image_tag "lily_35.png" %>
@@ -7,7 +8,7 @@
 
 
 
-  <div class="w-75">
+
      <!-- Search form -->
       <div class="col-sm-12 col-lg-6">
         <%= form_tag searches_path, method: :post, autocomplete: :off, id:"search", remote: true do %>
@@ -53,11 +54,12 @@
           </li>
         </ul>
       </div> -->
-
+  </div>
       <div class="col-sm-12 col-lg-12" id="list-results">
           <%#= render "_searches_results", products: @products %>
       </div>
-  </div>
+
+
 
 
   <!-- Burger -->
