@@ -1,7 +1,7 @@
 .card-product {
   overflow: hidden;
-  height: 50px;
-  background: rgba(246,255,238,1);
+  height: 100px;
+  background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
@@ -21,13 +21,13 @@
 }
 
 .card-product img {
-  height: 50px;
-  width: 100px;
+  height: 150px;
+  width: 150px;
   object-fit: cover;
 }
 
 .card-product h2 {
-  font-size: 8px;
+  font-size: 16px;
   font-weight: bold;
   margin: 0;
 
