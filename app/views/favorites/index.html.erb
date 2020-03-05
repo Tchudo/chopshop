@@ -65,9 +65,9 @@
         <%= button_to favorite_path(favorite),method: :delete, class: " btn p-0 m-0 bg-transparent border-O" do %>
           <i class="far fa-times-circle" id="btn-suppr" style="color: #bbbbbb;"></i>
         <% end %>
-        <%#= link_to stocks_path do %>
+        <%= link_to search_stocks_path(favorite.product.id) do %>
         <i class="fa fa-search" id="btn-search"></i>
-        <%# end %>
+        <% end %>
       </div>
     </div>
     <% end %>
