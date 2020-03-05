@@ -105,7 +105,7 @@
 // TEST
 
 .card-test {
-    height: 58vh;
+        height: 58vh;
     display: -webkit-box;
     display: flex;
     -webkit-box-orient: vertical;
@@ -115,18 +115,27 @@
     margin-bottom: 12%;
     background-color: white;
     position: relative;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0px 0px 8px -2px #a9a4a4;
 }
 
 .card-cat {
-  background: linear-gradient(146deg, #f4999a 0%, #f5eae9 100%);
-    padding: 10px 37px;
+    background: linear-gradient(146deg, #f4aa5b 0%, #b6e9a4 100%);
+    padding: 10px 20px;
     width: 71%;
     font-size: 13px;
     position: absolute;
-    top: 40%;
-    left: 17%;
-    border-radius: 6px;
+    top: 45%;
+    left: 15%;
+    border-radius: 5px;
     color: white;
+    box-shadow: 0px 3px 12px -1px #bab0b0;
+    text-align: center;
+
+    h3 {
+      font-size: 15px;
+      font-weight: bold;
+    }
 }
 
 .opacity-destroy {
@@ -137,7 +146,7 @@
 
 .image-event-test {
 
-    height: 104%;
+    height: 107%;
     border-radius: 0 0 41% 50%;
     width: 100%;
 }
@@ -154,17 +163,20 @@
 }
 
 .main-info-test {
-    height: 61%;
-    padding: 4% 8%;
+   height: 78%;
+    /* padding: 4% 8%; */
     box-shadow: 0 5px 2px -5px #333;
+    width: 77%;
+    padding-bottom: 0%;
+    text-align: center;
 
    h3 {
-    font-size: 10px;
+    font-size: 15px;
     font-weight: bold;
-    margin-bottom: 0;
+    margin-bottom: 22px;
 }
   p {
-    font-size: 10px;
+    font-size: 15px;
     color: rgba(0,0,0,0.5);
 }
 
@@ -182,9 +194,11 @@
     align-items: center;
     background-color: white;
     width: 100%;
-    height: 93%;
+    height: 92%;
     /* margin-top: 41%; */
-    padding-top: 33%;
+    padding-top: 9%;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
 }
 
 .card-info-test:hover {
@@ -268,7 +282,7 @@
   position: relative;
 
   h2 {
-    font-size: 15px;
+    font-size: 20px;
     font-weight: bold;
     color: #e48d1a;
     margin-bottom: 20px;
@@ -349,11 +363,11 @@
 }
 
 .border-foufou {
-  position: absolute;
+      position: absolute;
     box-shadow: -5px 1px 0px 4px #7fc468;
-    top: 13px;
+    top: 19px;
     left: 10px;
-    width: 22%;
+    width: 36%;
     z-index: 1;
     opacity: 0.5;
 }
@@ -361,9 +375,9 @@
 .border-foufou2 {
   position: absolute;
     box-shadow: -5px 1px 0px 4px #7fc468;
-    top: 13px;
+    top: 19px;
     left: 10px;
-    width: 39%;
+    width: 62%;
     z-index: 1;
     opacity: 0.5;
 }
