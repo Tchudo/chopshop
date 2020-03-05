@@ -27,7 +27,7 @@ function load_quagga(){
         console.log(last_result);
 
 
-        if (last_result.length > 50) {
+        if (last_result.length > 5) {
           console.log(order_by_occurrence(last_result));
           var results = order_by_occurrence(last_result);
           var code = results[results.length-1];
