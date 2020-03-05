@@ -36,7 +36,13 @@ class BasketsController < ApplicationController
   end
 
   def create
-    @stock = Stock.find(params[:stock_id])
+
+    if Stock.find(params[:stock_id]) == nil
+      @stock = Stock.find(params[:id])
+    else
+      @stock = Stock.find(params[:stock_id])
+    end
+
     @basket = Basket.new()
     @basket.user_id = current_user[:id]
     @basket.stock_id = @stock.id

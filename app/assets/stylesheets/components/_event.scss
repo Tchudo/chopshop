@@ -105,21 +105,41 @@
 // TEST
 
 .card-test {
-
-    height: 13vh;
+    height: 58vh;
     display: -webkit-box;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
     overflow: hidden;
     margin-bottom: 12%;
+    background-color: white;
+    position: relative;
+}
+
+.card-cat {
+  background: linear-gradient(146deg, #f4999a 0%, #f5eae9 100%);
+    padding: 10px 37px;
+    width: 71%;
+    font-size: 13px;
+    position: absolute;
+    top: 40%;
+    left: 17%;
+    border-radius: 6px;
+    color: white;
+}
+
+.opacity-destroy {
+
+  opacity: 0;
 
 }
 
 .image-event-test {
-    width: 44%;
 
-    border-radius: 10px 0px 0px 10px;
-    opacity: 1;
-
+    height: 104%;
+    border-radius: 0 0 41% 50%;
+    width: 100%;
 }
 .image-event-test:hover {
       opacity: 0.5;
@@ -152,8 +172,8 @@
 
 .card-info-test {
 
-    top: 78%;
-
+        top: 78%;
+    display: -webkit-box;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -161,11 +181,10 @@
     -webkit-box-align: center;
     align-items: center;
     background-color: white;
-    width: 90%;
-    height: 94%;
-
-    box-shadow: 0px 0px 40px -9px rgba(0, 0, 0, 0.75);
-
+    width: 100%;
+    height: 93%;
+    /* margin-top: 41%; */
+    padding-top: 33%;
 }
 
 .card-info-test:hover {
@@ -180,17 +199,26 @@
 
 .card-event-container {
     overflow: scroll;
-    height: 84vh;
+    height: 82vh;
     -webkit-transition: .2s all;
     transition: .2s all;
     position: absolute;
-    width: 90%;
-    top: 14%;
-    left: 5%;
+    width: 78%;
+    top: 11%;
+    left: 11%;
+
 
 
 }
 
+.red-title {
+
+  color: red;
+}
+
+.green-title {
+  color: green;
+}
 
 .home-page {
   position: relative;
@@ -200,46 +228,52 @@
   bottom: 0;
   width: 100%;
   height: 15vh;
-  background-color: white;
+
 }
 
 .event-btn {
-  position: relative;
+  position: absolute;
+  left: 50%;
+  top: 91%;
+  color: #a8d383;
 
   i {
     position: absolute;
     top: 22px;
     left: -18px;
-    font-size: 23px;
-    color: white;
+    font-size: 35px;
     z-index: 2;
-
   }
 
   p {
     position: absolute;
-    top: 23px;
-    left: -2px;
+    top: 16px;
+    left: -1px;
     font-size: 23px;
     color: white;
-    background-color: red;
-    opacity: 0.6;
-    padding: 3px 3px;
+    background-color: #e45f5f;
+    transition: opacity 0.3s;
+    padding: 4px 10px;
     border-radius: 50%;
-    font-size: 11px;
+    font-size: 15px;
     font-weight: bold;
+    z-index: 5;
+
 
   }
 }
 
 .today {
   width: 100%;
+  position: relative;
 
   h2 {
     font-size: 15px;
     font-weight: bold;
-    color: #e79d3b;
+    color: #e48d1a;
     margin-bottom: 20px;
+    z-index: 2;
+    position: relative;
 
   }
 }
@@ -254,11 +288,7 @@
   transition: opacity 0.1s;
 }
 
-.opacity-destroy {
 
-  opacity: 0;
-
-}
 
 
 .navbar {
@@ -318,9 +348,28 @@
   opacity: 1;
 }
 
+.border-foufou {
+  position: absolute;
+    box-shadow: -5px 1px 0px 4px #7fc468;
+    top: 13px;
+    left: 10px;
+    width: 22%;
+    z-index: 1;
+    opacity: 0.5;
+}
+
+.border-foufou2 {
+  position: absolute;
+    box-shadow: -5px 1px 0px 4px #7fc468;
+    top: 13px;
+    left: 10px;
+    width: 39%;
+    z-index: 1;
+    opacity: 0.5;
+}
+
 .date-event {
   display: flex;
-  flex-direction: column;
   align-items: center;
   color: white;
   margin-top: 10%;

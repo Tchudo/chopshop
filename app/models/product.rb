@@ -15,9 +15,11 @@ class Product < ApplicationRecord
   # validates :product_sku, uniqueness: true
 
 
-  def search_data  #ElasticSearch
-    attributes.merge(shops: self.shops.map(&:name), addresses: self.shops.map(&:address), tags: self.tags.map(&:label) )
-  end
+
+def search_data  #ElasticSearch
+  attributes.merge(shops: self.shops.map(&:name), addresses: self.shops.map(&:address), tags: self.tags.map(&:label) )
+ end
+
 
 
   def self.searchable_by(words)

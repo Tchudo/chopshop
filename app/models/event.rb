@@ -42,6 +42,11 @@ class Event < ApplicationRecord
     relative_day(day)
   end
 
+  def month2
+    my_month = self.end_date.month
+    relative_month(my_month)
+  end
+
   def month
     my_month = self.start_date.month
     relative_month(my_month)

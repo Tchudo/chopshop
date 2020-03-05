@@ -13,7 +13,8 @@ class ProductsController < ApplicationController
   # POST /products/get_barcode
   def get_barcode
 
-    id = Product.where(product_sku: params[:upc]).ids[0]
+    # id = Product.where(product_sku: params[:upc]).ids[0]
+    id = Product.where(product_sku: "3046920042567").ids[0]
     p id
 
     if id.nil?

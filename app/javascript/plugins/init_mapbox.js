@@ -9,7 +9,6 @@ const initMapbox = () => {
   console.log("start mapbox");
   const mapElement = document.getElementById('map');
   const fitMapToMarkers = (map, markers) => {
-    console.log(markers);
     const bounds = new mapboxgl.LngLatBounds();
     markers.forEach(marker => bounds.extend([ marker.lng, marker.lat ]));
     map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 });
@@ -39,17 +38,17 @@ const initMapbox = () => {
         .addTo(map);
     });
 
-    fitMapToMarkers(map, markers);
+    //fitMapToMarkers(map, markers);
 
 
-    map.addControl(
-      new mapboxgl.GeolocateControl({
-      positionOptions: {
-          enableHighAccuracy: true
-        },
-      trackUserLocation: true
-      }), 'bottom-right'
-    );
+    // map.addControl(
+    //   new mapboxgl.GeolocateControl({
+    //   positionOptions: {
+    //       enableHighAccuracy: true
+    //     },
+    //   trackUserLocation: true
+    //   }), 'bottom-right'
+    // );
 
     const geocoder = new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
@@ -91,7 +90,18 @@ const initMapbox = () => {
 
     document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
 
+    //marker geoloc
+    const geo = new mapboxgl.Marker()
+        .setLngLat([-0.5657 , 44.859221])
+        .addTo(map);
+
+    let bound = new mapboxgl.LngLatBounds();
+    bound.extend([-0.5657, 44.859221]);
+    markers.forEach(marker => bound.extend([ marker.lng, marker.lat ]));
+    map.fitBounds(bound, { padding: 90, maxZoom: 15, duration: 500 });
+
   };
+
 };
 
 

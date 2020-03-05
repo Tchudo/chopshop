@@ -77,31 +77,31 @@ puts "User created ok"
 # ------------------------- OPEN FACTS FOOD------------------------
 # ----------------------Product creation start ---------------------
 
-puts "Product creation start"
+# puts "Product creation start"
 
-product_names = ["Chocolat", "Biscuit", "Confiture", "Conserve", "Poisson", "Marron", "Châtaigne", "Beurre", "Pain"]
+# product_names = ["Chocolat", "Biscuit", "Confiture", "Conserve", "Poisson", "Marron", "Châtaigne", "Beurre", "Pain"]
 
-product_names.each do |product_name|
-  products = Openfoodfacts::Product.search(product_name, locale: 'fr', page_size: 1)
+# product_names.each do |product_name|
+#   products = Openfoodfacts::Product.search(product_name, locale: 'fr', page_size: 1)
 
-  products.each do |product|
-    my_product = Openfoodfacts::Product.get(product.code, locale: 'fr')
-    my_new_product = Product.create!({
-      name: my_product.product_name,
-      description: my_product.ingredients_text_fr,
-      product_sku: my_product.code,
-      brand: my_product.brands,
-      category_id: c.id
-    })
-    puts "#{my_new_product.name} has been created"
-    file = URI.open(my_product.image_front_url)
-    puts "Image loaded"
+#   products.each do |product|
+#     my_product = Openfoodfacts::Product.get(product.code, locale: 'fr')
+#     my_new_product = Product.create!({
+#       name: my_product.product_name,
+#       description: my_product.ingredients_text_fr,
+#       product_sku: my_product.code,
+#       brand: my_product.brands,
+#       category_id: c.id
+#     })
+#     puts "#{my_new_product.name} has been created"
+#     file = URI.open(my_product.image_front_url)
+#     puts "Image loaded"
 
-    my_new_product.photo.attach(io: file, filename: "#{product.code}.jpg", content_type: 'image/jpg')
-    puts "Product save !"
+#     my_new_product.photo.attach(io: file, filename: "#{product.code}.jpg", content_type: 'image/jpg')
+#     puts "Product save !"
 
-  end
-end
+#   end
+# end
 
 
 #---------------------------PRODUCT-END-------------------------------
@@ -113,96 +113,96 @@ end
 
 #---------------------- SHOP ADDRESS CHARTRONS -----------------------
 
-puts "Chartrons Shop construction start !"
+# puts "Chartrons Shop construction start !"
 
-addresses = ["3 Cours Balguerie Stuttenberg, 33300 Bordeaux", "8 Cours Balguerie Stuttenberg, 33300 Bordeaux",
-"20 Cours Balguerie Stuttenberg, 33300 Bordeaux", "31 Cours Balguerie Stuttenberg, 33300 Bordeaux",
-"36 Cours Balguerie Stuttenberg, 33300 Bordeaux", "46 Cours Balguerie Stuttenberg, 33300 Bordeaux",
-"53 Cours Balguerie Stuttenberg, 33300 Bordeaux", "67 Cours Balguerie Stuttenberg, 33300 Bordeaux",
-"87 Cours Balguerie Stuttenberg, 33300 Bordeaux", "101 Cours Balguerie Stuttenberg, 33300 Bordeaux",
-"110 Cours Balguerie Stuttenberg, 33300 Bordeaux", "131 Cours Balguerie Stuttenberg, 33300 Bordeaux",
-"154 Cours Balguerie Stuttenberg, 33300 Bordeaux", "167 Cours Balguerie Stuttenberg, 33300 Bordeaux",
-"230 Cours Balguerie Stuttenberg, 33300 Bordeaux", "270 Cours Balguerie Stuttenberg, 33300 Bordeaux",
-"3 Cours du Médoc, 33300 Bordeaux", "8 Cours du Médoc, 33300 Bordeaux",
-"20 Cours du Médoc, 33300 Bordeaux", "31 Cours du Médoc, 33300 Bordeaux",
-"36 Cours du Médoc, 33300 Bordeaux", "46 Cours du Médoc, 33300 Bordeaux",
-"53 Cours du Médoc, 33300 Bordeaux", "67 Cours du Médoc, 33300 Bordeaux",
-"87 Cours du Médoc, 33300 Bordeaux", "101 Cours du Médoc, 33300 Bordeaux",
-"110 Cours du Médoc, 33300 Bordeaux", "131 Cours du Médoc, 33300 Bordeaux",
-"154 Cours du Médoc, 33300 Bordeaux", "167 Cours du Médoc, 33300 Bordeaux",
-"34 Cours Portal, 33000 Bordeaux", "34 Cours de Verdun, 33000 Bordeaux",
-"50 Cours de Verdun, 33000 Bordeaux", "34 Cours de la Marne, 33300 Bordeaux",
-"12 Cours de Verdun, 33000 Bordeaux", "34 Rue Lagrange, 33000 Bordeaux",
-"11 Rue Lagrange, 33000 Bordeaux", "67 Rue Lagrange, 33000 Bordeaux",
-"22 Rue Lagrange, 33000 Bordeaux", "100 Rue Lagrange, 33000 Bordeaux",
-"3 Rue Lagrange, 33000 Bordeaux", "66 Rue Lagrange, 33000 Bordeaux",
-"37 Rue Lombard, 33300 Bordeaux", "12 Rue Lombard, 33300 Bordeaux",
-"22 Rue Dupaty, 33300 Bordeaux", "109 Rue Dupaty, 33300 Bordeaux",
-"78 Rue Dupaty, 33300 Bordeaux", "122 Rue Dupaty, 33300 Bordeaux",
-"13 Cours Georges Clemenceau, 33000 Bordeaux", "28 Cours Georges Clemenceau, 33000 Bordeaux",
-"7 Rue Etienne Huyard, 33300 Bordeaux", "12 Rue Lucien Duffau, 33300 Bordeaux",
-"20 Avenue Emile Counord, 33300 Bordeaux", "34 Avenue Emile Counord, 33300 Bordeaux",
-"53 Avenue Emile Counord, 33300 Bordeaux", "71 Avenue Emile Counord, 33300 Bordeaux",
-"88 Avenue Emile Counord, 33300 Bordeaux", "104 Avenue Emile Counord, 33300 Bordeaux",
-"128 Avenue Emile Counord, 33300 Bordeaux", "145 Avenue Emile Counord, 33300 Bordeaux",
-"163 Avenue Emile Counord, 33300 Bordeaux", "176 Avenue Emile Counord, 33300 Bordeaux",
-"203 Avenue Emile Counord, 33300 Bordeaux", "229 Avenue Emile Counord, 33300 Bordeaux"]
+# addresses = ["3 Cours Balguerie Stuttenberg, 33300 Bordeaux", "8 Cours Balguerie Stuttenberg, 33300 Bordeaux",
+# "20 Cours Balguerie Stuttenberg, 33300 Bordeaux", "31 Cours Balguerie Stuttenberg, 33300 Bordeaux",
+# "36 Cours Balguerie Stuttenberg, 33300 Bordeaux", "46 Cours Balguerie Stuttenberg, 33300 Bordeaux",
+# "53 Cours Balguerie Stuttenberg, 33300 Bordeaux", "67 Cours Balguerie Stuttenberg, 33300 Bordeaux",
+# "87 Cours Balguerie Stuttenberg, 33300 Bordeaux", "101 Cours Balguerie Stuttenberg, 33300 Bordeaux",
+# "110 Cours Balguerie Stuttenberg, 33300 Bordeaux", "131 Cours Balguerie Stuttenberg, 33300 Bordeaux",
+# "154 Cours Balguerie Stuttenberg, 33300 Bordeaux", "167 Cours Balguerie Stuttenberg, 33300 Bordeaux",
+# "230 Cours Balguerie Stuttenberg, 33300 Bordeaux", "270 Cours Balguerie Stuttenberg, 33300 Bordeaux",
+# "3 Cours du Médoc, 33300 Bordeaux", "8 Cours du Médoc, 33300 Bordeaux",
+# "20 Cours du Médoc, 33300 Bordeaux", "31 Cours du Médoc, 33300 Bordeaux",
+# "36 Cours du Médoc, 33300 Bordeaux", "46 Cours du Médoc, 33300 Bordeaux",
+# "53 Cours du Médoc, 33300 Bordeaux", "67 Cours du Médoc, 33300 Bordeaux",
+# "87 Cours du Médoc, 33300 Bordeaux", "101 Cours du Médoc, 33300 Bordeaux",
+# "110 Cours du Médoc, 33300 Bordeaux", "131 Cours du Médoc, 33300 Bordeaux",
+# "154 Cours du Médoc, 33300 Bordeaux", "167 Cours du Médoc, 33300 Bordeaux",
+# "34 Cours Portal, 33000 Bordeaux", "34 Cours de Verdun, 33000 Bordeaux",
+# "50 Cours de Verdun, 33000 Bordeaux", "34 Cours de la Marne, 33300 Bordeaux",
+# "12 Cours de Verdun, 33000 Bordeaux", "34 Rue Lagrange, 33000 Bordeaux",
+# "11 Rue Lagrange, 33000 Bordeaux", "67 Rue Lagrange, 33000 Bordeaux",
+# "22 Rue Lagrange, 33000 Bordeaux", "100 Rue Lagrange, 33000 Bordeaux",
+# "3 Rue Lagrange, 33000 Bordeaux", "66 Rue Lagrange, 33000 Bordeaux",
+# "37 Rue Lombard, 33300 Bordeaux", "12 Rue Lombard, 33300 Bordeaux",
+# "22 Rue Dupaty, 33300 Bordeaux", "109 Rue Dupaty, 33300 Bordeaux",
+# "78 Rue Dupaty, 33300 Bordeaux", "122 Rue Dupaty, 33300 Bordeaux",
+# "13 Cours Georges Clemenceau, 33000 Bordeaux", "28 Cours Georges Clemenceau, 33000 Bordeaux",
+# "7 Rue Etienne Huyard, 33300 Bordeaux", "12 Rue Lucien Duffau, 33300 Bordeaux",
+# "20 Avenue Emile Counord, 33300 Bordeaux", "34 Avenue Emile Counord, 33300 Bordeaux",
+# "53 Avenue Emile Counord, 33300 Bordeaux", "71 Avenue Emile Counord, 33300 Bordeaux",
+# "88 Avenue Emile Counord, 33300 Bordeaux", "104 Avenue Emile Counord, 33300 Bordeaux",
+# "128 Avenue Emile Counord, 33300 Bordeaux", "145 Avenue Emile Counord, 33300 Bordeaux",
+# "163 Avenue Emile Counord, 33300 Bordeaux", "176 Avenue Emile Counord, 33300 Bordeaux",
+# "203 Avenue Emile Counord, 33300 Bordeaux", "229 Avenue Emile Counord, 33300 Bordeaux"]
 
-addresses.each do |address|
-  Faker::Config.locale = 'fr'
-  new_shop = {
-     name: Faker::Company.name,
-     user_id: u.id ,
-     address: address,
-     category: Faker::Commerce.department(max: 1)
-  }
-Shop.create!(new_shop)
-end
+# addresses.each do |address|
+#   Faker::Config.locale = 'fr'
+#   new_shop = {
+#      name: Faker::Company.name,
+#      user_id: u.id ,
+#      address: address,
+#      category: Faker::Commerce.department(max: 1)
+#   }
+# Shop.create!(new_shop)
+# end
 
-puts "shops in Chartrons created"
+# puts "shops in Chartrons created"
 
 
 # #------------------------------------------------------------------
 
 # #----------------------SHOP ADDRESS TALENCE-----------------------
 
-puts "Talence Shop construction start !"
+# puts "Talence Shop construction start !"
 
-talence_addresses = ["310 Cours de la Libération, 33400 Talence", "540 Cours de la Libération, 33400 Talence",
-"350 Cours de la Libération, 33400 Talence", "387 Cours de la Libération, 33400 Talence",
-"429 Cours de la Libération, 33400 Talence", "456 Cours de la Libération, 33400 Talence",
-"499 Cours de la Libération, 33400 Talence", "510 Cours de la Libération, 33400 Talence",
-"540 Cours de la Libération, 33400 Talence",
-"156 Rue Lamartine, 33400 Talence", "110 Rue Lamartine, 33400 Talence",
-"43 Rue Lamartine, 33400 Talence", "11 Avenue Georges Lasserre, 33400 Talence",
-"100 Avenue Roul, 33400 Talence", "22 Avenue Roul, 33400 Talence",
-"2 Rue de Tremeuge, 33400 Talence", "16 Rue de Tremeuge, 33400 Talence",
-"48 Rue de Tremeuge, 33400 Talence", "23 Rue Frédéric Sévène, 33400 Talence",
-"76 Rue Frédéric Sévène, 33400 Talence", "108 Rue Frédéric Sévène, 33400 Talence",
-"160 Rue Frédéric Sévène, 33400 Talence", "129 Rue Frédéric Sévène, 33400 Talence",
-"112 Rue Camille Pelletan, 33400 Talence", "87 Rue Camille Pelletan, 33400 Talence",
-"45 Rue Camille Pelletan, 33400 Talence", "23 Rue Camille Pelletan, 33400 Talence",
-"2 Rue Camille Pelletan, 33400 Talence", "67 Rue Camille Pelletan, 33400 Talence",
-"12 Rue Roustaing, 33400 Talence", "45 Rue Roustaing, 33400 Talence",
-"87 Rue Roustaing, 33400 Talence", "120 Rue Roustaing, 33400 Talence",
- "3 Cours Gambetta, 33400 Talence", "45 Cours Gambetta, 33400 Talence",
-"87 Cours Gambetta, 33400 Talence", "108 Cours Gambetta, 33400 Talence",
-"126 Cours Gambetta, 33400 Talence", "151 Cours Gambetta, 33400 Talence",
-"187 Cours Gambetta, 33400 Talence", "204 Cours Gambetta, 33400 Talence",
-"232 Cours Gambetta, 33400 Talence", "249 Cours Gambetta, 33400 Talence" ]
+# talence_addresses = ["310 Cours de la Libération, 33400 Talence", "540 Cours de la Libération, 33400 Talence",
+# "350 Cours de la Libération, 33400 Talence", "387 Cours de la Libération, 33400 Talence",
+# "429 Cours de la Libération, 33400 Talence", "456 Cours de la Libération, 33400 Talence",
+# "499 Cours de la Libération, 33400 Talence", "510 Cours de la Libération, 33400 Talence",
+# "540 Cours de la Libération, 33400 Talence",
+# "156 Rue Lamartine, 33400 Talence", "110 Rue Lamartine, 33400 Talence",
+# "43 Rue Lamartine, 33400 Talence", "11 Avenue Georges Lasserre, 33400 Talence",
+# "100 Avenue Roul, 33400 Talence", "22 Avenue Roul, 33400 Talence",
+# "2 Rue de Tremeuge, 33400 Talence", "16 Rue de Tremeuge, 33400 Talence",
+# "48 Rue de Tremeuge, 33400 Talence", "23 Rue Frédéric Sévène, 33400 Talence",
+# "76 Rue Frédéric Sévène, 33400 Talence", "108 Rue Frédéric Sévène, 33400 Talence",
+# "160 Rue Frédéric Sévène, 33400 Talence", "129 Rue Frédéric Sévène, 33400 Talence",
+# "112 Rue Camille Pelletan, 33400 Talence", "87 Rue Camille Pelletan, 33400 Talence",
+# "45 Rue Camille Pelletan, 33400 Talence", "23 Rue Camille Pelletan, 33400 Talence",
+# "2 Rue Camille Pelletan, 33400 Talence", "67 Rue Camille Pelletan, 33400 Talence",
+# "12 Rue Roustaing, 33400 Talence", "45 Rue Roustaing, 33400 Talence",
+# "87 Rue Roustaing, 33400 Talence", "120 Rue Roustaing, 33400 Talence",
+#  "3 Cours Gambetta, 33400 Talence", "45 Cours Gambetta, 33400 Talence",
+# "87 Cours Gambetta, 33400 Talence", "108 Cours Gambetta, 33400 Talence",
+# "126 Cours Gambetta, 33400 Talence", "151 Cours Gambetta, 33400 Talence",
+# "187 Cours Gambetta, 33400 Talence", "204 Cours Gambetta, 33400 Talence",
+# "232 Cours Gambetta, 33400 Talence", "249 Cours Gambetta, 33400 Talence" ]
 
-talence_addresses.each do |address|
-  Faker::Config.locale = 'fr'
-  new_shop = {
-     name: Faker::Company.name,
-     user_id: u.id ,
-     address: address,
-     category: Faker::Commerce.department(max: 1)
-  }
-Shop.create!(new_shop)
-end
+# talence_addresses.each do |address|
+#   Faker::Config.locale = 'fr'
+#   new_shop = {
+#      name: Faker::Company.name,
+#      user_id: u.id ,
+#      address: address,
+#      category: Faker::Commerce.department(max: 1)
+#   }
+# Shop.create!(new_shop)
+# end
 
-puts "shops in Talence created"
+# puts "shops in Talence created"
 
 #---------------------------- SHOPS-CREATION-DONE -------------------------
 
@@ -1016,6 +1016,7 @@ cartouchet2 = {
      product_sku: 76543
 }
 
+
 cartouchet3 = {
      name: "Cartouche d'encre Brother 49",
      brand: "Brother",
@@ -1233,8 +1234,8 @@ pc13.photo.attach(io: file14, filename: 'cartouchet_1.jpg', content_type: 'image
 
 puts "Image1 loaded OK"
 
-puts "Loading image...."
 
+puts "Loading image...."
 file15 = URI.open('https://www.tinkco.com/photos/TINBR050B_2.jpg')
 pc14.photo.attach(io: file15, filename: 'cartouchet_2.jpg', content_type: 'image/jpg')
 

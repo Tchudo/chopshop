@@ -37,13 +37,16 @@ class StocksController < ApplicationController
         lat: stock.shop.latitude,
         lng: stock.shop.longitude,
         infoWindow: render_to_string(partial: "info_window", locals: { shop: stock.shop , product: stock.product, stock: stock, basket: @basket}),
-        image_url: helpers.asset_url('lily.png')
+        image_url: helpers.asset_url('lily_omb.png')
       }
       end
 
   end
 
   def show
+
+    @basket = Basket.new
+    @basket_user = Basket.where(user_id: current_user[:id]).map(&:stock_id)
 
     @review = Review.new
     @reviews = Review.where(stock_id: params[:id])
