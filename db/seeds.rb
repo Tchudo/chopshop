@@ -1389,4 +1389,423 @@ puts "Product tags creation ok!"
 puts "Shop 3 operationnel"
 
 #------------------------------------------------------------------------------------------------------------------------
+#----------------------------------FROMAGE-------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------------------------------
 
+fromager_1 = {
+   name: "L'héritage de Robert",
+   user_id: u.id,
+   address: "9 Rue Ravez, 33000 Bordeaux",
+   category: "Fromager"
+}
+
+fr1 = Shop.create!(fromager_1)
+puts "Shop1 create"
+
+fromager_2 = {
+   name: "Olivier le petit fromager",
+   user_id: u.id,
+   address: "Place Saint-Martial, 33300 Bordeaux",
+   category: "Producteur"
+}
+
+fr2 = Shop.create!(fromager_2)
+puts "Shop2 create"
+
+time_table_fromage_1 = [{       #day_of_weed : 0 : Dimanche, 1 : Lundi ..... Samedi : 6 #
+    opened_at: 10 ,
+    closed_at: 19 ,
+    day_of_week: 1,  #day_of_week : 1 => lundi
+    shop_id: fr1.id
+},{
+    opened_at: 9 ,
+    closed_at: 18,
+    day_of_week: 2,  #day_of_week : 2 => mardi
+    shop_id: fr1.id
+},{
+    opened_at: 10 ,
+    closed_at: 19 ,
+    day_of_week: 3 ,  #day_of_week : 3 => mercredi
+    shop_id: fr1.id
+},{
+    opened_at: 9 ,
+    closed_at: 18 ,
+    day_of_week: 4 ,  #day_of_week : 4 => jeudi
+    shop_id: fr1.id
+},{
+    opened_at: 8 ,
+    closed_at: 19 ,
+    day_of_week: 5 ,  #day_of_week : 5 => vendredi
+    shop_id: fr1.id
+},{
+    opened_at: 8 ,
+    closed_at: 12 ,
+    day_of_week: 6 ,  #day_of_week : 6 => samedi
+    shop_id: fr1.id
+}]
+
+TimeTable.create!(time_table_fromage_1)
+puts "Time table ok!"
+
+time_table_fromage_2 = [{
+    opened_at: 9 ,
+    closed_at: 15 ,
+    day_of_week: 3 ,  #day_of_week : 3 => mercredi
+    shop_id: fr2.id
+},{
+    opened_at: 8 ,
+    closed_at: 14 ,
+    day_of_week: 0 ,  #day_of_week : 6 => samedi
+    shop_id: fr2.id
+}]
+
+TimeTable.create!(time_table_fromage_2)
+puts "Time table ok!"
+
+puts "Fromage in creation"
+fromage1 = {
+     name: "Emmentale rapé",
+     brand: "Président",
+     description: "Fromage de qualité très moyenne",
+     category_id: 1,
+     product_sku: 636737
+}
+
+fromage2 = {
+     name: "Gouda au cumin",
+     brand: "Président",
+     description: "Fromage Gouda de qualité moyenne",
+     category_id: 1,
+     product_sku: 673756
+}
+
+fromage3 = {
+     name: "Camembert",
+     brand: "Président",
+     description: "Fromage frais fumé au bois de hêtre",
+     category_id: 1,
+     product_sku: 1343143
+}
+
+fromage4 = {
+     name: "Fromage de chèvre cendré",
+     brand: "Olivier le petit fromager",
+     description: "Remarquable fromage de chèvre frais",
+     category_id: 1,
+     product_sku: 8577589
+}
+
+fromage5 = {
+     name: "Rocamadour",
+     brand: "L'héritage de Robert",
+     description: "Super fromage frais au lait cru",
+     category_id: 1,
+     product_sku: 76445676
+}
+
+fromage6 = {
+     name: "Cabécou",
+     brand: "L'héritage de Robert",
+     description: "Fromage frais de chèvre coulant",
+     category_id: 1,
+     product_sku: 1960968
+}
+fromage7 = {
+     name: "Chaussée aux moines",
+     brand: "Chaussée aux moines",
+     description: "Fromage à pâte pressée non cuite et au lait pasteurisé",
+     category_id: 1,
+     product_sku: 19689690
+}
+
+fromage8 = {
+     name: "Bleu d'Auvergne",
+     brand: "Olivier le petit fromager",
+     description: "Fromage frais AOP de qualité supérieur",
+     category_id: 1,
+     product_sku: 1906866
+}
+
+fromage9 = {
+     name: "Saint Nectaire",
+     brand: "Olivier le ptit fromager",
+     description: "Fromage frais AOP au lait cru. Pâte pressée non cuite",
+     category_id: 1,
+     product_sku: 6790988
+}
+
+fromage10 = {
+     name: "Comté",
+     brand: "L'héritage de Robert",
+     description: "Fromage frais AOP affiné 36 mois",
+     category_id: 1,
+     product_sku: 8979696
+}
+
+fromage11 = {
+     name: "Mimolette",
+     brand: "L'héritage de Robert",
+     description: "Fromage frais à pate dur",
+     category_id: 1,
+     product_sku: 8769796
+}
+
+fromage12 = {
+     name: "Éspoisse",
+     brand: "Olivier le petit fromager",
+     description: "Fromage frais AOP un peu trop coulant",
+     category_id: 1,
+     product_sku: 1960867
+}
+
+f1 = Product.create!(fromage1)
+f2 = Product.create!(fromage2)
+f3 = Product.create!(fromage3)
+f4 = Product.create!(fromage4)
+f5 = Product.create!(fromage5)
+f6 = Product.create!(fromage6)
+f7 = Product.create!(fromage7)
+f8 = Product.create!(fromage8)
+f9 = Product.create!(fromage9)
+f10 = Product.create!(fromage10)
+f11 = Product.create!(fromage11)
+f12 = Product.create!(fromage12)
+
+stockt_fromage1 = {
+     product_id: f1.id ,
+     shop_id: s1.id ,
+     quantity: 10 ,
+     price: 2,
+}
+stockt_fromage2 = {
+     product_id: f2.id ,
+     shop_id: s1.id ,
+     quantity: 10 ,
+     price: 3,
+}
+
+stockt_fromage3 = {
+     product_id: f3.id ,
+     shop_id: s1.id ,
+     quantity: 10 ,
+     price: 4,
+}
+stockt_fromage4 = {
+     product_id: f4.id ,
+     shop_id: fr2.id ,
+     quantity: 10 ,
+     price: 3,
+}
+stockt_fromage5 = {
+     product_id: f5.id ,
+     shop_id: fr1.id ,
+     quantity: 10 ,
+     price: 3,
+}
+stockt_fromage6 = {
+     product_id: f6.id ,
+     shop_id: fr1.id ,
+     quantity: 10 ,
+     price: 2,
+}
+stockt_fromage7 = {
+     product_id: f7.id ,
+     shop_id: s1.id ,
+     quantity: 10 ,
+     price: 3,
+}
+stockt_fromage8 = {
+     product_id: f8.id ,
+     shop_id: fr2.id ,
+     quantity: 10 ,
+     price: 4,
+}
+stockt_fromage9 = {
+     product_id: f9.id ,
+     shop_id: fr2.id ,
+     quantity: 10 ,
+     price: 4,
+}
+stockt_fromage10 = {
+     product_id: f10.id ,
+     shop_id: fr1.id ,
+     quantity: 10 ,
+     price: 5,
+}
+stockt_fromage11 = {
+     product_id: f11.id ,
+     shop_id: fr1.id ,
+     quantity: 10 ,
+     price: 2,
+}
+stockt_fromage12 = {
+     product_id: f12.id ,
+     shop_id: fr2.id ,
+     quantity: 10 ,
+     price: 3,
+}
+
+puts "Loading image...."
+
+file20 = URI.open('https://www.paysanbreton.com/sites/default/files/styles/product_large/public/formats/fromages-rape.png?itok=n5swi7Qj')
+f1.photo.attach(io: file20, filename: 'fromage1.jpg', content_type: 'image/jpg')
+
+puts "Image6 loaded OK"
+
+puts "Loading image...."
+
+file21 = URI.open('https://www.fromage-pouillot.fr/142-large_default/gouda-au-cumin.jpg')
+f2.photo.attach(io: file21, filename: 'fromage2.jpg', content_type: 'image/jpg')
+
+puts "Image6 loaded OK"
+
+puts "Loading image...."
+
+file22 = URI.open('https://assets.afcdn.com/story/20190219/1333694_w980h638c1cx2304cy1536.jpg')
+f3.photo.attach(io: file22, filename: 'fromage3.jpg', content_type: 'image/jpg')
+
+puts "Image6 loaded OK"
+
+puts "Loading image...."
+
+file23 = URI.open('https://static.lecomptoirlocal.fr/img/produits/898654cc4675ecc6b31e3bce05bd263f/large.jpg')
+f4.photo.attach(io: file23, filename: 'fromage4.jpg', content_type: 'image/jpg')
+
+puts "Image6 loaded OK"
+
+puts "Loading image...."
+
+file24 = URI.open('https://d3rrv21q7fx9b0.cloudfront.net/m/69e51f397ae7c9f7/LA02_768x400-LA02_37_rocamadour_9.jpg')
+f5.photo.attach(io: file24, filename: 'fromage5.jpg', content_type: 'image/jpg')
+
+puts "Image6 loaded OK"
+
+puts "Loading image...."
+
+file25 = URI.open('https://www.grandfrais.com/userfiles/image/produit/gfp-20140528122859.jpg')
+f6.photo.attach(io: file25, filename: 'fromage6.jpg', content_type: 'image/jpg')
+
+puts "Image6 loaded OK"
+
+puts "Loading image...."
+
+file26 = URI.open('https://www.monoprix.fr/assets/images/grocery/3032566/580x580.jpg?impolicy=High_Grocery')
+f7.photo.attach(io: file26, filename: 'fromage7.jpg', content_type: 'image/jpg')
+
+puts "Image6 loaded OK"
+
+puts "Loading image...."
+
+file27 = URI.open('https://www.toutunfromage.com/179-large_default/bleu-d-auvergne-fermier.jpg')
+f8.photo.attach(io: file27, filename: 'fromage8.jpg', content_type: 'image/jpg')
+
+puts "Image6 loaded OK"
+
+puts "Loading image...."
+
+file28 = URI.open('https://www.fromages-aop-auvergne.com/wp-content/themes/afa/images/fromages/aop-saint-nectaire.png')
+f9.photo.attach(io: file28, filename: 'fromage9.jpg', content_type: 'image/jpg')
+
+puts "Image6 loaded OK"
+
+puts "Loading image...."
+
+file29 = URI.open('https://www.coop-de-yenne.fr/230-large_default/comte-extra-aop-.jpg')
+f10.photo.attach(io: file29, filename: 'fromage10.jpg', content_type: 'image/jpg')
+
+puts "Image6 loaded OK"
+
+puts "Loading image...."
+
+file30 = URI.open('https://www.lacremerieroyale.fr/pub/produits/mimolette-24-mois.jpg')
+f11.photo.attach(io: file30, filename: 'fromage11.jpg', content_type: 'image/jpg')
+
+puts "Image6 loaded OK"
+
+puts "Loading image...."
+
+file31 = URI.open('https://www.murrayscheese.com/site/images/items/00000000094.0.jpg?resizeid=9&resizeh=300&resizew=300')
+f12.photo.attach(io: file31, filename: 'fromage12.jpg', content_type: 'image/jpg')
+
+puts "Image6 loaded OK"
+
+stf1 = Stock.create!(stockt_fromage1)
+stf2 = Stock.create!(stockt_fromage2)
+stf3 = Stock.create!(stockt_fromage3)
+stf4 = Stock.create!(stockt_fromage4)
+stf5 = Stock.create!(stockt_fromage5)
+stf6 = Stock.create!(stockt_fromage6)
+stf7 = Stock.create!(stockt_fromage7)
+stf8 = Stock.create!(stockt_fromage8)
+stf9 = Stock.create!(stockt_fromage9)
+stf10 = Stock.create!(stockt_fromage10)
+stf11 = Stock.create!(stockt_fromage11)
+stf12 = Stock.create!(stockt_fromage12)
+
+tag8 = Tag.create!(label: "frais")
+tag9 = Tag.create!(label: "AOP")
+
+product_tags_fromage_t2 = [{
+   tag_id: tag8.id ,
+   product_id: f3.id ,
+}, {
+   tag_id: tag9.id ,
+   product_id: f4.id ,
+}]
+product_tags_fromage_t3 = [{
+   tag_id: tag8.id ,
+   product_id: f4.id ,
+}, {
+   tag_id: tag9.id ,
+   product_id: f8.id ,
+}]
+product_tags_fromage_t4 = [{
+   tag_id: tag8.id ,
+   product_id: f5.id ,
+}, {
+   tag_id: tag9.id ,
+   product_id: f9.id ,
+}]
+product_tags_fromage_t5 = [{
+   tag_id: tag8.id ,
+   product_id: f6.id ,
+}, {
+   tag_id: tag9.id ,
+   product_id: f10.id ,
+}]
+product_tags_fromage_t6 = [{
+   tag_id: tag8.id ,
+   product_id: f8.id ,
+}, {
+   tag_id: tag9.id ,
+   product_id: f12.id ,
+}]
+product_tags_fromage_t7 = [{
+   tag_id: tag8.id ,
+   product_id: f9.id ,
+}]
+
+product_tags_fromage_t8 = [{
+   tag_id: tag8.id ,
+   product_id: f10.id ,
+}]
+
+product_tags_fromage_t9 = [{
+   tag_id: tag8.id ,
+   product_id: f11.id ,
+}]
+
+product_tags_fromage_t10 = [{
+   tag_id: tag8.id ,
+   product_id: f12.id ,
+}]
+
+ProductTag.create!(product_tags_fromage_t2)
+ProductTag.create!(product_tags_fromage_t3)
+ProductTag.create!(product_tags_fromage_t4)
+ProductTag.create!(product_tags_fromage_t5)
+ProductTag.create!(product_tags_fromage_t6)
+ProductTag.create!(product_tags_fromage_t7)
+ProductTag.create!(product_tags_fromage_t8)
+ProductTag.create!(product_tags_fromage_t9)
+ProductTag.create!(product_tags_fromage_t10)
