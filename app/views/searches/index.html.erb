@@ -37,12 +37,6 @@
         </div>
       <% end %>
   </div>
-  <div class="event-btn">
-    <i class="fas fa-walking"></i>
-          <% if @events.event_today? %>
-            <p></p>
-          <% end %>
-  </div>
 </nav>
 <div id="chop-container" class="container">
   <div class="row justify-content-center">
@@ -89,21 +83,17 @@
       <% if @events.event_today? %>
         <div class="today">
           <h2>Aujourd'hui</h2>
+          <div class="border-foufou"></div>
         </div>
         <% @events.return_today_event.each do |event| %>
            <div class="card-test" >
-            <div class="image-event-test" data-toggle="modal" data-target="#event<%=event.id %>" style="background-color: #F2545B">
+            <div class="image-event-test" data-toggle="modal" data-target="#event<%=event.id %>" style="background-image: url('<%= cl_image_path event.photo.key, height: 300, width: 400, crop: :fill %>')">>
               <div class="date-event">
-                <% if event.end_date.day == event.start_date.day %>
-                  <p><%= event.start_date.day  %></p>
-                  <p><%= event.month %></p>
-                  <p> <%= event.start_date.year %></p>
-                <% else %>
-                  <p><%= event.start_date.day  %> - <%= event.end_date.day %></p>
-                  <p><%= event.month %></p>
-                  <p> <%= event.start_date.year %></p>
-                <% end %>
+
               </div>
+            </div>
+            <div class="card-cat">
+              <h3><%= event.category %></h3>
             </div>
             <div class="card-info-test" data-toggle="modal" data-target="#event<%=event.id %>">
               <div class="main-info-test">
@@ -111,7 +101,14 @@
                 <p><%= event.category %></p>
               </div>
               <div class="date-info-test">
-                <p><%= event.start_date.day  %> <%= event.month %>  <%= event.start_date.year %></p>
+                <% if event.end_date.day == event.start_date.day && event.month == event.month %>
+                  <p><%= event.start_date.day  %> <%= event.month %>  <%= event.start_date.year %></p>
+                <% elsif event.month == event.month %>
+                  <p><%= event.start_date.day %>/<%= event.end_date.day %> <%= events.month %> <%= event.start_date.year %></p>
+                <% else %>
+                  <p><%= event.start_date.day %> - <%= event.month %> / <%= event.end_date.day %> - <%= event.month2 %> <%= event.start_date.year %></p>
+                <% end %>
+
               </div>
             </div>
           </div>
@@ -119,34 +116,42 @@
       <% end %>
         <div class="today">
           <h2>Evènements à venir</h2>
+          <div class="border-foufou2"></div>
         </div>
         <% (@events - @events.return_today_event).each do |event|  %>
-          <div class="card-test">
-            <div class="image-event-test" data-toggle="modal" data-target="#event<%=event.id %>" style="background-color: <%= event.month_color  %>">
-              <div class="date-event">
-                <% if event.end_date.day == event.start_date.day %>
-                  <p><%= event.start_date.day  %></p>
-                  <p><%= event.month %></p>
-                  <p> <%= event.start_date.year %></p>
-                <% else %>
-                  <p><%= event.start_date.day  %> - <%= event.end_date.day %></p>
-                  <p><%= event.month %></p>
-                  <p> <%= event.start_date.year %></p>
-                <% end %>
+          <% if event.start_date > Date.today %>
+
+            <div class="card-test">
+              <div class="image-event-test" data-toggle="modal" data-target="#event<%=event.id %>" style="background-image: url('<%= cl_image_path event.photo.key, height: 300, width: 400, crop: :fill %>')">
+                <div class="date-event">
+
+                </div>
+              </div>
+              <div class="card-cat">
+                <h3><%= event.category %></h3>
+              </div>
+              <div class="card-info-test" data-toggle="modal" data-target="#event<%=event.id %>">
+                <div class="main-info-test">
+                  <h3><%= event.name %></h3>
+                  <p><%= event.category %></p>
+                </div>
+                <div class="date-info-test">
+                  <% if event.end_date.day == event.start_date.day && event.start_date.month == event.end_date.month %>
+                    <p><%= event.start_date.day  %> <%= event.month %>  <%= event.start_date.year %></p>
+                  <% elsif event.start_date.month == event.end_date.month %>
+                    <p><%= event.start_date.day %>/<%= event.end_date.day %> <%= event.month %> <%= event.start_date.year %></p>
+                  <% else %>
+                    <p><%= event.start_date.day %> - <%= event.month %> / <%= event.end_date.day %> - <%= event.month2 %> <%= event.start_date.year %></p>
+                  <% end %>
+
+                </div>
               </div>
             </div>
-            <div class="card-info-test" data-toggle="modal" data-target="#event<%=event.id %>">
-              <div class="main-info-test">
-                <h3><%= event.name %></h3>
-                <p><%= event.category %></p>
-              </div>
-              <div class="date-info-test">
-                <p><%= event.start_date.day  %> <%= event.month %>  <%= event.start_date.year %></p>
-              </div>
-            </div>
-          </div>
+          <% end %>
         <% end %>
 </div>
+
+
 <!-- MODAL -->
     <% @events.each do |event| %>
     <div class="modal fade" id="event<%= event.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -194,5 +199,12 @@
       </div>
     </div>
   <%end %>
+
+  <div class="event-btn">
+    <i class="fas fa-calendar-alt"></i>
+          <% if @events.event_today? %>
+            <p class="notiti"><%= @events.all_event_today %></p>
+          <% end %>
+  </div>
 <!-- <h1>Searches#new</h1> -->
 </div>
