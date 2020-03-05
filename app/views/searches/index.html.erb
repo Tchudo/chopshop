@@ -1,6 +1,20 @@
 <div class="home-page">
-
   <nav class="navbar navbar-expand-sm bg-transparent justify-content-end" id="nav">
+  <div class="lily-logo">
+    <!-- <h1 id="mini-title" class="text-center my-2 text-white">ShopChop!</h1> -->
+    <div class="mini-logo_lily"></div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
 
   <!-- Burger -->
   <div class="dropdown dropleft">
@@ -8,9 +22,6 @@
         </button>
       <% if user_signed_in? %>
         <div class="dropdown-menu rounded border-0" aria-labelledby="dropdownMenu2">
-          <%= link_to baskets_path do %>
-          <button class="dropdown-item" type="button">Panier</button>
-          <% end %>
           <%= link_to favorites_path do %>
           <button class="dropdown-item" type="button">Favoris</button>
           <% end %>
@@ -26,22 +37,24 @@
         </div>
       <% end %>
   </div>
-
+  <div class="event-btn">
+    <i class="fas fa-walking"></i>
+          <% if @events.event_today? %>
+            <p></p>
+          <% end %>
+  </div>
 </nav>
-
-<div class="container">
+<div id="chop-container" class="container">
   <div class="row justify-content-center">
     <div class="col-sm-12 col-lg-6">
-
-           <div class="lily" id="lily"></div>
-
-
-      <h1 class="text-center my-2 text-white">ChopShop!</h1>
-
+      <div class="lily" id="lily">
+      </div>
+      <%#= image_tag "lily_70.png", class: "mx-auto d-block", id: "lily" %>
+      <h1 id="main-title" class="text-center my-2 text-white">ShopChop!</h1>
     </div>
   </div>
 </div>
-
+<!-- Container Search -->
 <!-- Container Search -->
 <div class="container my-4">
   <div class="row justify-content-center">
@@ -49,7 +62,7 @@
 
  <!-- Search form -->
 
-            <div class="input-group-append p-2 bg-white rounded rounded-pill d-flex justify-content-between">
+            <div class="input-group-append p-2 bg-white rounded rounded-pill d-flex justify-content-between search-bar">
 
               <%= link_to products_path do %>
                 <i class="fas fa-barcode shadow-none pt-1 px-4" style="font-size: 30px; color: #F4AA5B;"></i>
@@ -72,12 +85,114 @@
 
     </div>
   </div>
+<div class="card-event-container display-card ">
+      <% if @events.event_today? %>
+        <div class="today">
+          <h2>Aujourd'hui</h2>
+        </div>
+        <% @events.return_today_event.each do |event| %>
+           <div class="card-test" >
+            <div class="image-event-test" data-toggle="modal" data-target="#event<%=event.id %>" style="background-color: #F2545B">
+              <div class="date-event">
+                <% if event.end_date.day == event.start_date.day %>
+                  <p><%= event.start_date.day  %></p>
+                  <p><%= event.month %></p>
+                  <p> <%= event.start_date.year %></p>
+                <% else %>
+                  <p><%= event.start_date.day  %> - <%= event.end_date.day %></p>
+                  <p><%= event.month %></p>
+                  <p> <%= event.start_date.year %></p>
+                <% end %>
+              </div>
+            </div>
+            <div class="card-info-test" data-toggle="modal" data-target="#event<%=event.id %>">
+              <div class="main-info-test">
+                <h3><%= event.name %></h3>
+                <p><%= event.category %></p>
+              </div>
+              <div class="date-info-test">
+                <p><%= event.start_date.day  %> <%= event.month %>  <%= event.start_date.year %></p>
+              </div>
+            </div>
+          </div>
+         <% end %>
+      <% end %>
+        <div class="today">
+          <h2>Evènements à venir</h2>
+        </div>
+        <% (@events - @events.return_today_event).each do |event|  %>
+          <div class="card-test">
+            <div class="image-event-test" data-toggle="modal" data-target="#event<%=event.id %>" style="background-color: <%= event.month_color  %>">
+              <div class="date-event">
+                <% if event.end_date.day == event.start_date.day %>
+                  <p><%= event.start_date.day  %></p>
+                  <p><%= event.month %></p>
+                  <p> <%= event.start_date.year %></p>
+                <% else %>
+                  <p><%= event.start_date.day  %> - <%= event.end_date.day %></p>
+                  <p><%= event.month %></p>
+                  <p> <%= event.start_date.year %></p>
+                <% end %>
+              </div>
+            </div>
+            <div class="card-info-test" data-toggle="modal" data-target="#event<%=event.id %>">
+              <div class="main-info-test">
+                <h3><%= event.name %></h3>
+                <p><%= event.category %></p>
+              </div>
+              <div class="date-info-test">
+                <p><%= event.start_date.day  %> <%= event.month %>  <%= event.start_date.year %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
 </div>
-
-
-
+<!-- MODAL -->
+    <% @events.each do |event| %>
+    <div class="modal fade" id="event<%= event.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content font-modal modal-content-rounded">
+          <div class="modal-header">
+            <div class="modal-title" id="exampleModalLongTitle">
+              <%= cl_image_tag event.photo.key ,class:"img-event-modal pl-4"%>
+              <h4 class="d-flex justify-content-center pt-4">
+                <strong><%= event.name %></strong>
+              </h4>
+            </div>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="d-flex justify-content-between pb-2 text-orange">
+              <div>
+                <% if event.start_date == event.end_date%>
+                <%= "Le #{event.start_date.day} #{event.month} #{event.start_date.year}" %>
+                <% else %>
+                <div class="d-block">
+                <p><%= "Du : #{event.start_date.day} #{event.month} #{event.start_date.year}" %></p>
+                <p><%= "Au: #{event.end_date.day} #{event.month} #{event.end_date.year}" %></p>
+                </div>
+                <% end %>
+              </div>
+              <div>
+                <%= event.category.capitalize %>
+              </div>
+            </div>
+            <div class="text-orange pb-4 border-bottom">
+              <i class="fas fa-map-marked-alt"></i>
+              <em><%= event.address %></em>
+            </div>
+            <div class="pt-3">
+              <%= event.description %>
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <button type="button" class="btn btn-warning text-white">J'y vais!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <%end %>
 <!-- <h1>Searches#new</h1> -->
-
 </div>
-
-

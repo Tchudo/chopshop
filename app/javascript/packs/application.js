@@ -7,7 +7,8 @@ import Quagga from 'quagga';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { changeTime } from '../plugins/animation';
 import { autoSubmit } from '../plugins/auto_submit';
-import { load_quagga } from '../plugins/barcode_reader';
+import { load_quagga } from '../plugins/barcode_reader'
+import {eventDisplay} from '../components/eventcard';
 import { initMapbox, initMapbox2, initMapbox3 } from '../plugins/init_mapbox';
 
 //config
@@ -18,6 +19,9 @@ Rails.start();
 
 // animation clin oeil
 changeTime();
+
+// event page
+eventDisplay();
 
 // recherche auto on keyup
 autoSubmit();
@@ -32,8 +36,7 @@ initMapbox3();
 // $(document).on('turbolinks:load', load_quagga);
 load_quagga();
 
-import {eventDisplay} from '../components/eventcard';
-eventDisplay();
+
 
 console.log("all JS read");
 
