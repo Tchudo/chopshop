@@ -4,11 +4,11 @@
       <i><%= cl_image_tag product.photo.key%></i>
     </div>
     <div>
-      <h6 class="mb-0 mt-1"><%= product.name %></h6>
-      <p><%= shop.name %></p>
+      <h6 class="my-2"><%= product.name %></h6>
+      <p class="m-0"><%= shop.name %></p>
       <p><%= shop.address %></p>
 
-    <div class="d-flex justify-content-between align-item-center px-4">
+    <div class="text-center px-4">
       <h4><%="#{stock.price}€" %></h4>
     </div>
     <div class="d-flex justify-content-around align-items-center p-2">

@@ -1,6 +1,9 @@
 class FavoritesController < ApplicationController
   def index
     @favorites = Favorite.all
+    @favorites.each do |favorite|
+      @stock = Stock.where(product_id: favorite.product_id)
+    end
   end
 
   def new

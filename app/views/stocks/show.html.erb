@@ -2,7 +2,7 @@
 <%= render 'shared/navbar' %>
 
 <!-- btn back -->
-<%= link_to stock_path do%>
+<%= link_to search_stocks_path(@stock.product.id) do%>
   <div class="btn rounded rounded-pill btn-circle bg-warning p-2"><i class="fas fa-chevron-right" style="color: white"></i></div>
 <% end %>
 
@@ -16,8 +16,7 @@
 
 <!-- btn address -->
 
-<button id="btn-add-2" class=" btn btn-circle-add-2 border-0 rounded rounded-pill bg-white py-1 px-2 shadow-none"><i class="fas fa-map-marker-alt" style="color: #F4AA5B; font-size: 30px"></i></button>
-
+<button id="btn-add-2" class=" btn btn-circle-add-2 border-0 rounded rounded-pill bg-white py-1 px-2 shadow-none"><i class="fas fa-map-marker-alt" style="color: #ffcd3c; font-size: 30px"></i></button>
 <div id="geocoder-2" class="geocoder-2"></div>
 
 
@@ -26,7 +25,7 @@
 </div>
 
 
-<div class="bg-white" style="height: 53vh;">
+<div class="bg-white" style="height: 50vh;">
 
 
 <!--   <div class="bg-white info-instruction m-0 w-25 rounded ">
@@ -40,9 +39,22 @@
 
     <!-- Infos shop -->
     <div class="shop_part text-center shadow-sm p-3 bg-white rounded">
-      <div class="photo_shop">
+    <div class="btn-basket">
+      <% if @basket_user.include? @stock.id  %>
+        <%= simple_form_for [@stock, @basket] do |f| %>
+          <%= button_tag :submit, class: 'btn border shadow-none' do %>
+          <i class="fas fa-shopping-basket shadow-none" style="color: #cfcfcf; cursor: auto; font-size: 20px;"></i>
+          <% end %>
+        <% end %>
+      <% else %>
+        <%= simple_form_for [@stock, @basket] do |f| %>
+          <%= button_tag :submit, class: 'btn btn-outline-success shadow-none' do %>
+          <i class="fas fa-shopping-basket shadow-none " style="color: #A8D384; font-size: 20px;"></i>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
 
-      </div>
       <div class="">
           <h4><%= @shop.name %></h4>
           <div class="d-flex justify-content-around align-items-center p-0 m-0">
@@ -62,7 +74,7 @@
     <div class="d-flex mt-2">
       <div class="col-6 p-0 m-0">
         <div class="product-description pt-1 px-2">
-          <div class="d-flex justify-content-between align-items-center mb-2">
+          <div class="d-flex justify-content-between align-items-center mb-2" style="max-height: 75px;">
             <h5><%= @product.name %></h5>
             <button class="btn p-0 m-0 bg-transparent border-O shadow-none" data-toggle="modal" data-target="#ModalNewFavorite"> <i class="fa fa-heart shadow-none"
               <% if @favorite_user.include? @stock.product.id  %>
@@ -73,11 +85,26 @@
             ></i></button>
           </div>
           <p><strong>Marque :</strong> <%= @product.brand %></p>
-          <p><strong>Qté :</strong> <%= @stock.quantity %></p>
-          <p class="overflow-auto" style="max-height: 45px;"><%= @product.description %></p>
+          <p class="mb-1"><strong>Qté :</strong> <%= @stock.quantity %></p>
+          <p class="overflow-auto" style="max-height: 100px;"><%= @product.description %></p>
         </div>
 
-        <!-- Rating -->
+
+
+
+      </div>
+
+      <div class="col-6 text-center">
+
+        <div class="img-size-large my-2">
+          <%= cl_image_tag @product.photo.key%>
+        </div>
+
+        <div class="pric">
+          <h3 class="mb-0"><%= @stock.price %> €</h3>
+        </div>
+
+              <!-- Rating -->
         <div class="d-flex px-2 justify-content-between">
           <!--<%# if @rating_score != 0 %>
             <p><%= @rating_score %></p>
@@ -108,37 +135,19 @@
                 <i class="fas fa-star" style="font-size: 13px;"></i>
               <%end  %>
             </div>
-            <p class="mb-1 border-bottom"><%= review.comment %></p>
+            <p class="mb-1 border-bottom text-left"><%= review.comment %></p>
           </div>
           <% end %>
           <% else %>
-            <p>Soyez le premier à donner votre avis.</p>
+            <p class="text-left">Soyez le premier à donner votre avis.</p>
           <% end %>
         </div>
 
-
       </div>
 
-      <div class="col-6 text-center">
-        <div class="img-size-large my-2">
-          <i><%= cl_image_tag @product.photo.key%></i>
-        </div>
-
-        <div class="pric">
-          <h2><%= @stock.price %> €</h2>
-        </div>
-
-      </div>
     </div>
 
-    <div class="row">
-      <div class="col-6">
 
-      </div>
-      <div class="col-6">
-
-      </div>
-    </div>
 
 <!-- <div id="instructions-steps"></div> -->
 

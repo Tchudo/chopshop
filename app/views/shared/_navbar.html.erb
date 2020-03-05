@@ -14,7 +14,7 @@
         <%= form_tag searches_path, method: :post, autocomplete: :off, id:"search", remote: true do %>
               <div class="input-group-append bg-white rounded rounded-pill d-flex justify-content-between p-2 px-4">
                 <%= link_to products_path do %>
-                <i class="fas fa-barcode shadow-none pt-1" style="font-size: 30px; color: #F4AA5B;"></i>
+                <i class="fas fa-barcode shadow-none pt-1" style="font-size: 30px; color: #ffcd3c;"></i>
                 <% end %>
                 <%= text_field_tag :query,
                   params[:query],
@@ -25,7 +25,7 @@
                 %>
 
                 <%= button_tag :submit, id:"search_button", class:'border-0 shadow-none bg-transparent btn' do %>
-                    <i class="fa fa-search shadow-none" style="color: #F4AA5B;"></i>
+                    <i class="fa fa-search shadow-none" style="color: #ffcd3c;"></i>
                 <% end %>
               </div>
         <% end %>
