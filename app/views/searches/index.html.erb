@@ -88,7 +88,8 @@
             <div class="card-info-test" data-toggle="modal" data-target="#event<%=event.id %>">
               <div class="main-info-test">
                 <h3><%= event.name %></h3>
-                <p><%= event.category %></p>
+                <p><%= event.description %></p>
+                <p><%= event.address %></p>
               </div>
               <div class="date-info-test">
                 <% if event.end_date.day == event.start_date.day && event.month == event.month %>
@@ -123,7 +124,8 @@
               <div class="card-info-test" data-toggle="modal" data-target="#event<%=event.id %>">
                 <div class="main-info-test">
                   <h3><%= event.name %></h3>
-                  <p><%= event.category %></p>
+                  <p><%= event.description %></p>
+                  <p><%= event.address %></p>
                 </div>
                 <div class="date-info-test">
                   <% if event.end_date.day == event.start_date.day && event.start_date.month == event.end_date.month %>
