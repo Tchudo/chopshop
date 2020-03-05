@@ -29,9 +29,10 @@ def search_data  #ElasticSearch
       products = Product.all
       words.split(" ").each do |word|
         products = products.where(id: products.search(word).map(&:id))
+
       end
     end
-    return products
+     return products
   end
 
 end
