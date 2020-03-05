@@ -15,9 +15,7 @@ Event.destroy_all
 
 puts "Event destroyed !"
 
-# TimeTable.destroy_all
 
-##########################DESTRUCTION-START######################
 TimeTable.destroy_all
 
 
@@ -47,7 +45,7 @@ Product.destroy_all
 puts "Products destroyed!"
 
 
-puts "Tags destroyed!"
+puts "Users creation"
 
 User.destroy_all
 
@@ -59,29 +57,24 @@ puts "Users destroyed!"
 # # #---------------------------DESTRUCTION-DONE-------------------
 
 
-puts "User construction start !"
 
 
 # # # #############################USER-CREATION########################
 
+puts "User construction start !"
 
-
-
-
-
-user = {email: "dezanneaucharlotte@gmail.com", password:"charlotte"}
+user = {email: "chopshop@chopshop.me", password:"charlotte"}
 u = User.create!(user)
 
 cat = {label: "null"}
 c = Category.create!(cat)
 
+puts "User created ok"
 
 # -----------------------------USER-DONE---------------------------
 
 
-puts "User created ok"
-
-# ------------------------- OPEN FOOD FACTS ------------------------
+# ------------------------- OPEN FACTS FOOD------------------------
 # ----------------------Product creation start ---------------------
 
 puts "Product creation start"
@@ -115,7 +108,10 @@ end
 
 
 
-#---------------------- Shop address Chartrons -----------------------
+
+########################"SHOPS-CREATION-START"########################
+
+#---------------------- SHOP ADDRESS CHARTRONS -----------------------
 
 puts "Chartrons Shop construction start !"
 
@@ -168,7 +164,7 @@ puts "shops in Chartrons created"
 
 # #------------------------------------------------------------------
 
-# #---------------------- Shop address Talence -----------------------
+# #----------------------SHOP ADDRESS TALENCE-----------------------
 
 puts "Talence Shop construction start !"
 
@@ -208,52 +204,27 @@ end
 
 puts "shops in Talence created"
 
-# ---------------------------- Stocks creation ----------------------------
+#---------------------------- SHOPS-CREATION-DONE -------------------------
+
+############################## STOCKS-CREATION-START ############################
 
 puts "stock in creation"
 
-Shop.all.ids.each do |id|
+Product.all.ids.each do |id|
   Faker::Config.locale = 'fr'
   new_stock = {
-    product_id: Product.all.ids.sample,
-    shop_id: id,
+    product_id: id,
+    shop_id: Shop.all.ids.sample,
     quantity: rand(1..20),
-    price: Faker::Commerce.price(range: 3..15),
+    price: Faker::Commerce.price(range: 3..7),
   }
 
   Stock.create!(new_stock)
 end
 
+#-------------------- STOCKS-CREATION-DONE -----------------
 
-#shop7 = {
-#  name: "Leroy Merlin",
-#  user_id: u.id ,
-#  address: "3 Rue Dumont d'Urville, 33300 Bordeaux",
-#  category: "Bricolage grande surface"
-#}
-
-#shop8 = {
-#  name: "Bricorelais",
-#  user_id: u.id ,
-#  address: "115 Cours Victor Hugo, 33000 Bordeaux",
-#  category: "Bricolage"
-#}
-
-#s1 = Shop.create!(shop1)
-#s2 = Shop.create!(shop2)
-#s3 = Shop.create!(shop3)
-#s4 = Shop.create!(shop4)
-#s5 = Shop.create!(shop5)
-#s6 = Shop.create!(shop6)
-#s7 = Shop.create!(shop7)
-#s8 = Shop.create!(shop8)
-
-#  puts "stocks created"
-
-
-#-----------------------------------------------------------
-
-#----------------------- Tags creation ---------------------
+###################### TAGS-CREATION-START ####################
 puts "Creation tags"
 
 
@@ -265,24 +236,16 @@ my_actual_products.each do |product|
     tag = Tag.create!(label: info)
 
     ProductTag.create!(tag_id: tag.id, product_id: product.id)
-    puts "Product tag created ok"
+    puts "New tag creation ok"
   end
-
-
 end
 
+#---------------------- TAGS-CREATION-DONE -----------------
 
 
 
-#product1 = {
-#    name: "Pizza Nico",
-#   brand: "Nico",
-#    description: "La meilleure des Pizzas"
+# ######################TIME-TABLE-CREATION#################
 
-
-
-
-# ------------------------TIME-TABLE-CREATION---------------
 puts "Time table creation start"
 
 my_shops = Shop.all
@@ -308,166 +271,148 @@ my_shops.each do |shop|
   end
 end
 
+puts "Time table creation done !"
 
-# my_shops = Shop.all
-# my_shops.each do |shop|
-#   time_table = {                #day_of_week : 0 : Dimanche, 1 : Lundi ..... Samedi : 6 #
-#       opened_at: rand(8..10) ,
-#       closed_at: rand(17..20) ,
-#       day_of_week: rand(0..6),  #day_of_week : 1 => lundi
-#       shop_id: shop.id
-#   }
+#---------------------------TIME-TABLE-END---------------------
 
-#   TimeTable.create!(time_table)
-# end
+##########################EVENTS-CREATION######################
 
-# puts "Time table creation end"
+puts "Start creation Event !"
 
-#-------------------------------------------------------------
+event1start_date = Date.new(2020,3,21)
+event1end_date = Date.new(2020,3,21)
+
+event1 = {
+    name: "Bourse philatélique" ,
+    category: "Marché" ,
+    description: "Le groupe philatélique bordelais organise ce samedi sa bourse aux timbres, cartes postales, fèves, cartes de téléphone, capsules de champagne, vieux papiers…" ,
+    address: "Place de l'Europe, 33300 Bordeaux" ,
+    start_date: event1start_date,
+    end_date: event1end_date,
+    time_opening: 14 ,
+    time_closing: 16 ,
+}
+
+
+event2start_date = Date.new(2020,4,17)
+event2end_date = Date.new(2020,10,31)
+
+event2 = {
+    name: "Les Bassins de Lumières" ,
+    category: "Exposition" ,
+    description: "Les Bassins de Lumières présenteront des expositions numériques immersives monumentales dédiées aux grands artistes de l’Histoire de l’art et à la création contemporaine." ,
+    address: "Base Sous Marine - Boulevard Alfred Daney, 33100 Bordeaux" ,
+    start_date: event2start_date,
+    end_date: event2end_date,
+    time_opening: 9 ,
+    time_closing: 17 ,
+}
+
+event3start_date = Date.new(2020,6,18)
+event3end_date =  Date.new(2020,6,21)
+
+event3 = {
+    name: "Bordeaux fête le vin" ,
+    category: "Fête" ,
+    description: "En 2020, Bordeaux Fête le Vin mêlera de nouveau la présence de quelques très grands voiliers patrimoniaux à la dégustation des vins de Bordeaux et de Nouvelle Aquitaine. Rendez-vous du jeudi 18 au dimanche 21 juin 2020, sur les quais de Bordeaux inscrits au Patrimoine mondial de l’UNESCO." ,
+    address: "Place de la Bourse, 33000 Bordeaux" ,
+    start_date: event3start_date,
+    end_date: event3end_date,
+    time_opening: 11 ,
+    time_closing: 23 ,
+}
+
+event4start_date = Date.new(2020,3,6)
+event4end_date = Date.new(2020,3,6)
+
+event4 = {
+    name: "Candlelight Bordeaux" ,
+    category: "Musique" ,
+    description: "Après leur succès à Madrid, Londres, Bruxelles et plus récemment à Paris, les concerts de musique éclairés à la bougie, Candlelight, débarquent à Bordeaux cette année." ,
+    address: "107 Cours Balguerie Stuttenberg, 33300 Bordeaux" ,
+    start_date: event4start_date,
+    end_date: event4end_date,
+    time_opening: 18,
+    time_closing: 21,
+}
+
+event5start_date = Date.new(2020,3,6)
+event5end_date = Date.new(2020,3,6)
+
+event5 = {
+    name: "Démo Day",
+    category: "Education" ,
+    description: "Le Démo Day le plus atttendu de l'année se déroule dans les locaux du Wagon Bordeaux. De nombreux projets y seront présentés tels que RandomLife, PronostikR, WikiRace, Spiice, OChild mais aussi ChopShop" ,
+    address: "Place Saint Martial, 33300 Bordeaux" ,
+    start_date: event4start_date,
+    end_date: event4end_date,
+    time_opening: 18,
+    time_closing: 23,
+}
+
+ev1 = Event.create!(event1)
+ev2 = Event.create!(event2)
+ev3 = Event.create!(event3)
+ev4 = Event.create!(event4)
+ev5 = Event.create!(event5)
+
+puts "Event cretion done"
+
+puts "Linking images to events start"
+
+
+bourse_philaléique_img = URI.open('https://i.ebayimg.com/images/g/EGAAAOSwDN1UP2Nv/s-l1600.jpg')
+ev1.photo.attach(io: bourse_philaléique_img, filename: 'bourse_philaléique_img.jpg'   , content_type:'image/jpg')
+puts "bourse_philaléique_img loaded OK"
+
+bassins_lumieres_img = URI.open('https://www.bassins-lumieres.com/sites/bdl/files/styles/1600x500/public/bdl_klimt_0.jpg')
+ev2.photo.attach(io: bassins_lumieres_img, filename: 'bassins_lumieres_img.jpg' , content_type: 'image/jpg')
+puts "bassins_lumieres_img loaded OK"
+
+fete_vin_img = URI.open('https://www.pierreoteiza.com/images/products/443x332/147047.png')
+ev3.photo.attach(io: fete_vin_img, filename: 'fete_vin_img.png' ,content_type: 'image/png')
+puts "fete_vin_img loaded OK"
+
+candlelight_img = URI.open('https://www.bordeauxtendances.fr/wp-content/uploads/2019/12/candle-1024x410.jpg')
+ev4.photo.attach(io: candlelight_img, filename: 'candlelight_img.jpg' ,content_type: 'image/jpg')
+puts "marche_img loaded OK"
+
+demoday_img = URI.open('https://www.frenchtechbordeaux.com/wp-content/uploads/2020/02/Demo-Day-FT.png')
+ev5.photo.attach(io: demoday_img, filename: 'demoday_img.png' ,content_type: 'image/png')
+puts "marche_img loaded OK"
+
+puts "All images are linked"
+
+#------------------------EVENTS-CREATION-DONE-------------------
+
+
 puts "SEED DONE :D"
 
+################################################################################################################################################
+################################################################################################################################################
+################################################################################################################################################
+################################################################################################################################################
 
-#product6 = {
-#    name: "Pizza Hut",
-#    brand: "Bob",
-#    description: "La pire des Pizzas"
+puts "CREATION SEED FOR DEMODAY START"
 
-
-
-#   product7 = {
-#     name: "VIS METAUX TETE FRAISEE BOMBEE TFB POZI 6X50 ALUMINIUM",
-#     brand: "VIS EXPRESS",
-#     description: "Diametre=6, Matiere=Aluminium, Norme=DIN 966"
-
-#   }
-
-#   product8 = {
-#     name: "VIS POUR BOIS ET AGGLOMERE TETE RONDE ",
-#     brand: "VIS EXPRESS",
-#     description: "TR POZI 2 4X80 FILETEE SUR 48 ACIER ZING BLANC"
-
-#   }
-
-#   product9 = {
-#     name: "VBA/VIS POUR BOIS ET AGGLOMERE TETE RONDE",
-#     brand: "LEGRAND",
-#     description: "TR POZI 3 6X35 ACIER ZINGUE NOIR"
-
-#   }
-
-
-# # ############################SHOP-CREATION#######################
-
-
-# p7 = Product.create!(product7)
-# p8 = Product.create!(product8)
-# p9 = Product.create!(product9)
-
-
-# shop1 = {
-#     name: "Pizza Nico",
-#     user_id: u.id ,
-#     address: "134 Cours Balguerie Stuttenberg, 33300 Bordeaux",
-#     category: "Pizzeria"
-#   }
-  shop1 = {
-     name: "Chez paul",
-     user_id: u.id,
-     address: "51 cours du medoc, 33300 Bordeaux",
-     category: "Boulangerie"
- }
-# shop3 = {
-#     name: "Le baraka",
-#     user_id: u.id ,
-#     address: "4 Cours Balguerie Stuttenberg, 33300 Bordeaux",
-#     category: "Kebab"
-#   }
-# shop4 = {
-#     name: "Makadam Fitness",
-#     user_id: u.id ,
-#     address: "90 Cours Balguerie Stuttenberg, 33300 Bordeaux",
-#     category: "Pour les biscotos"
-#   }
-# shop5 = {
-#     name: "La rotisserie",
-#     user_id: u.id ,
-#     address: "place saint martial, 33300 Bordeaux",
-#     category: "Des gros cochons"
-#   }
-
-# shop6 = {
-#   name: "Le Kiosque à Pizzas",
-#   user_id: u.id ,
-#   address: "453bis Cours de la Libération, 33400 Talence",
-#   category: "Pizzeria"
-# }
-
+#------------------------Creation-Products-For-DemoDay--------------------------
+################################################################################
+##########################                      ################################
+##########################    CHOCOLAT LINDT    #############################
+##########################                      ################################
+################################################################################
+puts "Creation shop start"
+shop1 = {
+   name: "Chez Willy Wonka",
+   user_id: u.id,
+   address: "43 Rue Surson, 33300 Bordeaux",
+   category: "Confiseur"
+}
 s1 = Shop.create!(shop1)
-# s2 = Shop.create!(shop2)
-# s3 = Shop.create!(shop3)
-# s4 = Shop.create!(shop4)
-# s5 = Shop.create!(shop5)
-
-# s6 = Shop.create!(shop6)
+puts "Shop create"
 
 
-
-
-# #------------------------SHOP-DONE------------------
-
-
-
-#stock9= {
-#    product_id: p7.id ,
-#    shop_id: s7.id ,
-#    quantity: 10,
-#    price: 1.2,
-#}
-
-#stock10= {
-#    product_id: p7.id ,
-#    shop_id: s8.id ,
-#    quantity: 3,
-#    price: 1.8,
-#}
-
-#stock11= {
-#    product_id: p8.id ,
-#    shop_id: s7.id ,
-#    quantity: 20,
-#    price: 0.7,
-#}
-
-#stock12= {
-#    product_id: p8.id ,
- #   shop_id: s8.id ,
-#    quantity: 5,
-#    price: 1.5,
-#}
-
-#stock13= {
-#    product_id: p9.id ,
-#    shop_id: s7.id ,
-#    quantity: 30,
- #   price: 0.6,
-#}
-
-#stock14= {
- #   product_id: p9.id ,
- #   shop_id: s8.id ,
- #   quantity: 3,
-#    price: 1.4,
-#}
-
-
-# puts "Shops created ok"
-# puts "Product construction start !"
-
-
-# ####################PRODUCT-CREATION##################
-
-
-
+puts "Lindt chocolate in creation"
 product1 = {
      name: "Tablette de chocolat Lindt creation",
      brand: "Lindt",
@@ -476,524 +421,971 @@ product1 = {
      product_sku: 3046920042567
 
 }
-# product2 = {
-#     name: "Sandwich Thon-mayo",
-#     brand: "Sodebo",
-#     description: "Un bon Sandwich dans du plastique"
-
-#   }
-# product3 = {
-#     name: "Kebab",
-#     brand: "De chez baraka",
-#     description: "STO F MK"
-
-#   }
-# product4 = {
-#     name: "Barre aux protéines",
-#     brand: "Grany",
-#     description: "C'est du bon pour les muscles"
-
-#   }
-# product5 = {
-#     name: "Chicken Poulet du marché",
-#     brand: "Chez robert",
-#     description: "Bien grillé avec des patates"
-#   }
-
-
-#st6 = Stock.create!(stock6)
-#st7 = Stock.create!(stock7)
-#st8 = Stock.create!(stock8)
-#st9 = Stock.create!(stock9)
-#st10 = Stock.create!(stock10)
-#st11 = Stock.create!(stock11)
-#st12 = Stock.create!(stock12)
-#st13 = Stock.create!(stock13)
-#st14 = Stock.create!(stock14)
-#puts "Stocks created ok !"
-#puts "Tags creation start !"
-
-
-# product6 = {
-#     name: "Pizza",
-#     brand: "Bob",
-#     description: "La pire des Pizzas"
-
-#   }
-
-
 p1 = Product.create!(product1)
-# p2 = Product.create!(product2)
-# p3 = Product.create!(product3)
-# p4 = Product.create!(product4)
-# p5 = Product.create!(product5)
-
-# p6 = Product.create!(product6)
+puts "Lindt Chocolate create"
 
 
-
-
-# #-----------------------PRODUCT-DONE------------------
-
-# puts "Product created ok"
-# puts "stocks creation start !"
-
-# ########################STOCK-CREATION####################
-
-
-
-#tag1 = Tag.create!(label: "fast food")
-#tag2 = Tag.create!(label: "sportive")
-#tag3 = Tag.create!(label: "healthy")
-#tag4 = Tag.create!(label: "amateur")
-#tag5 = Tag.create!(label: "expert")
-
+puts "Stock for Lindt in creation"
 stock1 = {
      product_id: p1.id ,
      shop_id: s1.id ,
      quantity: 10 ,
-     price: 12,
-}
-# stock2 = {
-#     product_id: p2.id ,
-#     shop_id: s2.id ,
-#     quantity: 15 ,
-#     price: 8,
-# }
-# stock3 = {
-#     product_id: p3.id ,
-#     shop_id: s3.id ,
-#     quantity: 30 ,
-#     price: 5,
-# }
-# stock4 = {
-#     product_id: p4.id ,
-#     shop_id: s4.id ,
-#     quantity: 100 ,
-#     price: 12,
-# }
-# stock5 = {
-#     product_id: p5.id ,
-#     shop_id: s5.id ,
-#     quantity: 5 ,
-#     price: 8,
-# }
-
-
-# stock6= {
-#     product_id: p1.id ,
-#     shop_id: s2.id ,
-#     quantity: 2 ,
-#     price: 18,
-# }
-# stock7= {
-#     product_id: p1.id ,
-#     shop_id: s4.id ,
-#     quantity: 1 ,
-#     price: 36,
-# }
-# stock8= {
-#     product_id: p6.id ,
-#     shop_id: s6.id ,
-#     quantity: 3,
-#     price: 72,
-# }
-
-
-
-
-#puts "Tags created ok"
-#puts " Produt tags creation start !"
-
-##########################PRODUCT-TAD-CREATION##############
-##
-
-
-#product_tags = [{
-#    tag_id: tag1.id ,
-#    product_id: p1.id ,
-#}, {
-#    tag_id: tag1.id ,
-#    product_id: p2.id ,
-#}, {
-#    tag_id: tag1.id ,
-#    product_id: p3.id ,
-#}, {
-#    tag_id: tag2.id ,
-#    product_id: p4.id ,
-#}, {
-#    tag_id: tag3.id ,
-#    product_id: p5.id ,
-#}, {
-#    tag_id: tag5.id ,
-#    product_id: p7.id ,
-#}, {
-#    tag_id: tag5.id ,
-#    product_id: p8.id ,
-#}, {
- #   tag_id: tag4.id ,
-#    product_id: p9.id ,
-#}]
-
-#ProductTag.create!(product_tags)
-
-
-
-#--------------------------PRODUCT-TAD-END----------------
-
-#puts "Product tag created ok"
-
-
-#puts "Reviews creation start !"
-
-
-st1 = Stock.create!(stock1)
-# st2 = Stock.create!(stock2)
-# st3 = Stock.create!(stock3)
-# st4 = Stock.create!(stock4)
-# st5 = Stock.create!(stock5)
-
-# st6 = Stock.create!(stock6)
-# st7 = Stock.create!(stock7)
-# st8 = Stock.create!(stock8)
-# puts "Stocks created ok !"
-# puts "Tags creation start !"
-
-# tag1 = Tag.create!(label: "fast")
-# tag2 = Tag.create!(label: "sport")
-# tag3 = Tag.create!(label: "healthy")
-
-
-
-
-# #--------------------------STOCK-DONE-----------------------
-
-# puts "Stocks created ok !"
-# puts "Tags creation start !"
-
-# ############################TAG-CREATION######################
-
-
-
-# tags = [label: "pizza", label: "Sandwich", label: "kebab", label: "barre", label: "poulet"]
-# tag1 = Tag.create!(tags[0])
-# tag2 = Tag.create!(tags[1])
-# tag3 = Tag.create!(tags[2])
-# tag4 = Tag.create!(tags[3])
-# tag5 = Tag.create!(tags[4])
-
-
-
-# #--------------------------TAG-DONE---------------------
-
-
-# puts "Tags created ok"
-# puts " Produt tags creation start !"
-
-# ##########################PRODUCT-TAD-CREATION##############
-
-
-
-# product_tags = [{
-#     tag_id: tag1.id ,
-#     product_id: p1.id ,
-# }, {
-#     tag_id: tag1.id ,
-#     product_id: p2.id ,
-# }, {
-#     tag_id: tag1.id ,
-#     product_id: p3.id ,
-# }, {
-#     tag_id: tag2.id ,
-#     product_id: p4.id ,
-# }, {
-#     tag_id: tag3.id ,
-#     product_id: p5.id ,
-# }]
-
-# ProductTag.create!(product_tags)
-
-
-
-# #--------------------------PRODUCT-TAD-END----------------
-
-# puts "Product tag created ok"
-
-
-# puts "Reviews creation start !"
-
-# ############################REVIEWS-CREATION##############
-
-
-
-# reviews = [{
-#     comment: "C'est vraiment très bon !",
-#     rating: 0 ,
-#     user_id: u.id,
-#     stock_id: st1.id
-# },{
-#     comment: "Même ma mamie est aussi bonne ! gg",
-#     rating: 5,
-#     user_id: u.id,
-#     stock_id: st1.id
-# },{
-#     comment: "C'était périmé..",
-#     rating: 1,
-#     user_id: u.id,
-#     stock_id: st2.id
-# },{
-#     comment: "Le vendeur est gentil..",
-#     rating: 3,
-#     user_id: u.id,
-#     stock_id: st3.id
-# }]
-
-# Review.create!(reviews)
-
-
-
-# #---------------------------REVIEWS-END---------------
-
-# puts "Reviews creation done !"
-
-# puts "Time tables creation start !"
-
-# TimeTable.create!(time_table2)
-# TimeTable.create!(time_table)
-
-
-
-#---------------------------TIME-TABLE-END--------------
-puts "TimeTable created ok !"
-puts "Start creation Event !"
-
-##############################EVENT-CREATION############
-
-event1start_date = Date.new(2020,3,4)
-event1end_date = Date.new(2020,3,4)
-
-event1 = {
-    name: "Vide grenier des forains" ,
-    category: "vide grenier" ,
-    description: "Vente de reliques foraine" ,
-    address: "Place saint-martial, 33000 Bordeaux" ,
-    start_date: event1start_date,
-    end_date: event1end_date,
-    time_opening: 9 ,
-    time_closing: 19 ,
+     price: 6,
 }
 
-
-event2start_date = Date.new(2020,4,3)
-event2end_date = Date.new(2020,4,3)
-
-event2 = {
-    name: "Soirée moule-brite" ,
-    category: "repas de quartier" ,
-    description: "Viens prendre un moule frite en maillot de bain !" ,
-    address: "Jardin public, 33000 Bordeaux" ,
-    start_date: event2start_date,
-    end_date: event2end_date,
-    time_opening: 19 ,
-    time_closing: 22 ,
-}
-
-event4start_date = Date.new(2020,10,5)
-event4end_date = Date.new(2020,11,5)
-
-event4 = {
-    name: "T-shirt mémé" ,
-    category: "Sortie pour vieux" ,
-    description: "Concours de miss 70 +" ,
-    address: "Place des Quinquonces, 33000 Bordeaux" ,
-    start_date: event4start_date,
-    end_date: event4end_date,
-    time_opening: 7 ,
-    time_closing: 19 ,
-}
-
-event3start_date = Date.new(2020,5,4)
-event3end_date =  Date.new(2020,5,7)
-
-event3 = {
-    name: "Vernissage sauvage sur voiture" ,
-    category: "rencontre artistique" ,
-    description: "Du tunning à l'ancienne pour petits et grands." ,
-    address: "87 quai des queyries, 33000 bordeaux" ,
-    start_date: event3start_date,
-    end_date: event3end_date,
-    time_opening: 13 ,
-    time_closing: 19 ,
-}
-
-ev1 = Event.create!(event1)
-ev2 = Event.create!(event2)
-ev3 = Event.create!(event3)
-ev4 = Event.create!(event4)
-
-#-----------------------------EVENT-END-----------------
-
-
-puts "Load image"
-
-
-file1 = URI.open('https://fotomelia.com/wp-content/uploads/2018/01/fotomelia-images-gratuites-38-1560x1041.jpg')
-
-# #############################TIME-TABLE-CREATION#########
-
-
-
-
-# time_table = [{       #day_of_weed : 0 : Dimanche, 1 : Lundi ..... Samedi : 6 #
-#     opened_at: 8 ,
-#     closed_at: 19 ,
-#     day_of_week: 1,  #day_of_week : 1 => lundi
-#     shop_id: s1.id
-# },{
-#     opened_at: 8 ,
-#     closed_at: 19,
-#     day_of_week: 2,  #day_of_week : 2 => mardi
-#     shop_id: s1.id
-# },{
-#     opened_at: 8 ,
-#     closed_at: 19 ,
-#     day_of_week: 3 ,  #day_of_week : 3 => mercredi
-#     shop_id: s1.id
-# },{
-#     opened_at: 8 ,
-#     closed_at: 19 ,
-#     day_of_week: 4 ,  #day_of_week : 4 => jeudi
-#     shop_id: s1.id
-# },{
-#     opened_at: 8 ,
-#     closed_at: 19 ,
-#     day_of_week: 5 ,  #day_of_week : 5 => vendredi
-#     shop_id: s1.id
-# },{
-#     opened_at: 8 ,
-#     closed_at: 19 ,
-#     day_of_week: 6 ,  #day_of_week : 6 => samedi
-#     shop_id: s1.id
-# }]
-
-# file7 = URI.open('https://media.castorama.fr/is/image/Castorama/NPC_HT_1806_choisir_vis_2?wid=720&$jpgp$')
-
-# p7.photo.attach(io: file7, filename: 'poulet.png', content_type: 'image/png')
-# puts "Image7 loaded OK"
-
-# file8 = URI.open('https://cdn.quincaillerie.pro/images/c94fdd8bf3df64a84b8d/0/0/P106254.png')
-
-# p8.photo.attach(io: file8, filename: 'poulet.png', content_type: 'image/png')
-# puts "Image8 loaded OK"
-
-# file9 = URI.open('https://www.bricodepot.fr/images/page_prod_big/105000/105179.jpg')
-
-# p9.photo.attach(io: file9, filename: 'poulet.png', content_type: 'image/png')
-# puts "Image9 loaded OK"
-
-
-# time_table2 = [{
-#     opened_at: 7,
-#     closed_at: 18 ,
-#     day_of_week: 2 ,
-#     shop_id: s2.id ,
-# },{
-#     opened_at: 8 ,
-#     closed_at: 16 ,
-#     day_of_week: 3 ,
-#     shop_id: s2.id ,
-# },{
-#     opened_at: 8 ,
-#     closed_at: 16 ,
-#     day_of_week: 4 ,
-#     shop_id: s2.id ,
-# },{
-#     opened_at: 5 ,
-#     closed_at: 16 ,
-#     day_of_week: 5 ,
-#     shop_id: s2.id ,
-# }]
-
-# TimeTable.create(time_table2)
-# TimeTable.create!(time_table)
-
-
-
-# #---------------------------TIME-TABLE-END--------------
-
-
-# puts "Load image"
-
+puts "Loading image...."
 
 file1 = URI.open('https://www.lindt.fr/shop/media/catalog/product/cache/2/thumbnail/405x400/9df78eab33525d08d6e5fb8d27136e95/c/r/creation-lait-creme-brulee_1.png')
+p1.photo.attach(io: file1, filename: 'chocolat_lindt.png', content_type: 'image/png')
 
-p1.photo.attach(io: file1, filename: 'pizza.png', content_type: 'image/png')
 puts "Image1 loaded OK"
 
-# file2 = URI.open('https://cdn.pixabay.com/photo/2015/08/16/12/02/sandwich-890822_960_720.jpg')
+st1 = Stock.create!(stock1)
 
-# p2.photo.attach(io: file2, filename: 'sandwich.png', content_type: 'image/png')
-# puts "Image2 loaded OK"
+puts "Stock created"
 
-# file3 = URI.open('https://fotomelia.com/wp-content/uploads/2017/03/base-d-images-gratuites-20-1560x1040.jpg')
+puts "Time Table in creation"
 
-# p3.photo.attach(io: file3, filename: 'kebab.png', content_type: 'image/png')
-# puts "Image3 loaded OK"
+time_table = [{       #day_of_weed : 0 : Dimanche, 1 : Lundi ..... Samedi : 6 #
+    opened_at: 10 ,
+    closed_at: 19 ,
+    day_of_week: 1,  #day_of_week : 1 => lundi
+    shop_id: s1.id
+},{
+    opened_at: 9 ,
+    closed_at: 18,
+    day_of_week: 2,  #day_of_week : 2 => mardi
+    shop_id: s1.id
+},{
+    opened_at: 10 ,
+    closed_at: 19 ,
+    day_of_week: 3 ,  #day_of_week : 3 => mercredi
+    shop_id: s1.id
+},{
+    opened_at: 9 ,
+    closed_at: 18 ,
+    day_of_week: 4 ,  #day_of_week : 4 => jeudi
+    shop_id: s1.id
+},{
+    opened_at: 8 ,
+    closed_at: 19 ,
+    day_of_week: 5 ,  #day_of_week : 5 => vendredi
+    shop_id: s1.id
+},{
+    opened_at: 8 ,
+    closed_at: 19 ,
+    day_of_week: 6 ,  #day_of_week : 6 => samedi
+    shop_id: s1.id
+}]
 
-# file4 = URI.open('https://s1.thcdn.com/productimg/960/960/10979946-1904620647515953.jpg')
+TimeTable.create!(time_table)
+puts "Time table ok!"
 
-# p4.photo.attach(io: file4, filename: 'barreprot.png', content_type: 'image/png')
-# puts "Image4 loaded OK"
+puts "Tag creation start"
 
-# file5 = URI.open('https://fotomelia.com/wp-content/uploads/edd/2015/12/banque-d-images-et-photos-gratuites-libres-de-droits-t%C3%A9l%C3%A9chargement-gratuits20-1560x1170.jpg')
+tag1 = Tag.create!(label: "chocolat")
+tag2 = Tag.create!(label: "confiserie")
 
 
-###images event####
-puts "alors ?"
-vide_grenier_img = URI.open('https://www.falicon.fr/wp-content/uploads/2018/09/videgrenier-1024x640.png')
-puts "ca marche ?"
-ev1.photo.attach(io: vide_grenier_img, filename: 'vide_grenier_img.png'   , content_type:'image/png')
-puts "vide_grenier_img loaded OK"
+puts "Tags created !"
 
-moule_bite_img = URI.open('https://lh6.googleusercontent.com/proxy/9ImYG6R_aONplnsXVM_aY772heIUREnC5zrsWVX4UOMgZOE15rHGhWgnHPMui1DoIRlnizNxA-aulhBPHUm8TZLZFl9cBVJBO1sGJIj9e0-HGJTrdqnjIheNcMnlwjm_graDFE19IYyy5ZD9x267-Q')
-ev2.photo.attach(io: moule_bite_img, filename: 'moule_bite_img.jpg' , content_type: 'image/jpg')
-puts "moule_bite_img loaded OK"
+puts "Product tags creation start"
 
-vernissage_sauvage_img = URI.open('https://jondi.fr/wp-content/uploads/2018/09/carton-invit-sauvages-imaginaires-1024x726.jpg')
-ev3.photo.attach(io: vernissage_sauvage_img, filename: 'vernissage_sauvage_img.jpg' ,content_type: 'image/jpg')
-puts "vernissage_sauvage_img loaded OK"
+product_tags1 = [{
+   tag_id: tag1.id ,
+   product_id: p1.id ,
+}, {
+   tag_id: tag2.id ,
+   product_id: p1.id ,
+}]
 
-vieux_storie_img = URI.open('https://thewiffhotstove.files.wordpress.com/2013/12/old-lady-friend.jpg')
-ev4.photo.attach(io: vieux_storie_img, filename: 'vieux_storie_img.jpg' ,content_type: 'image/jpg')
-puts "vieux_storie_img loaded OK"
+ProductTag.create!(product_tags1)
 
-# p5.photo.attach(io: file5, filename: 'poulet.png', content_type: 'image/png')
-# puts "Image5 loaded OK"
-puts "Seed done ! :D"
+puts "Product tags creation ok!"
 
-# file6 = URI.open('https://fotomelia.com/wp-content/uploads/edd/2015/12/banque-d-images-et-photos-gratuites-libres-de-droits-t%C3%A9l%C3%A9chargement-gratuits20-1560x1170.jpg')
+puts "Lindt product operationnel"
 
-# p6.photo.attach(io: file6, filename: 'poulet.png', content_type: 'image/png')
-# puts "Image6 loaded OK"
+#------------------------------------------------------------------------------------------------------------------------
 
-# file = URI.open('https://static.openfoodfacts.org/images/products/762/221/044/9283/front_fr.286.400.jpg')
-# article = Product.new(name: 'NES', description: "A great console")
-# article.photo.attach(io: file, filename: 'nes.png', content_type: 'image/png')
-# article.save
-# puts "its good"
 
-#------------------------Scraping shops (raté) ----------------------------
+################################################################################
+##########################                      ################################
+##########################  CARTOUCHE D'ENCRE   ################################
+##########################                      ################################
+################################################################################
 
-# url = "https://www.larondedesquartiers.com/annuaire-des-commerces/"
+puts "Creation shop start"
+shop_cartouche_1 = {
+   name: "Papeterie des Chartrons",
+   user_id: u.id,
+   address: "74 Rue Delord, 33300 Bordeaux",
+   category: "Papeterie"
+}
+sc1 = Shop.create!(shop_cartouche_1)
+puts "Shop create"
 
-# html_file = open(url).read
-# html_doc = Nokogiri::HTML(html_file)
-# html_doc.search('.location .clearfix .mapDescription').each do |element|
-#   p element.text.strip
-#   puts "scrapping done"
-# end
 
-#-------------------------------------------------------------------
-# Faker::Config.locale = 'fr'
-# paul = Faker::Restaurant.type
-#  puts paul
+puts "Cartouche in creation"
+cartouche1 = {
+     name: "Cartouche d'encre HP 45",
+     brand: "HP",
+     description: "Cartouche de couleur noir d'une contenance de 42ml. Compatible HP Deskjet 1220",
+     category_id: 1,
+     product_sku: 4551645
+}
+
+cartouche2 = {
+     name: "Cartouche d'encre HP 20",
+     brand: "HP",
+     description: "Cartouche de couleur noir d'une contenance de 40ml. Compatible HP APOLLO P2100",
+     category_id: 1,
+     product_sku: 206614
+}
+
+cartouche3 = {
+     name: "Cartouche d'encre HP 49",
+     brand: "HP",
+     description: "Cartouche de couleur d'une contenance de 42ml. Compatible HP APOLLO P2100",
+     category_id: 1,
+     product_sku: 4951649
+}
+
+cartouche4 = {
+     name: "Cartouche d'encre HP 56",
+     brand: "HP",
+     description: "Cartouche de couleur noir d'une contenance de 19ml. Compatible HP OFFICEJET 4105",
+     category_id: 1,
+     product_sku: 566656
+}
+
+cartouche5 = {
+     name: "Cartouche d'encre HP 57",
+     brand: "HP",
+     description: "Cartouche de couleur d'une contenance de 18ml. Compatible HP OFFICEJET 4105",
+     category_id: 1,
+     product_sku: 576657
+}
+
+cartouche6 = {
+     name: "Cartouche d'encre HP 28",
+     brand: "HP",
+     description: "Cartouche de couleur d'une contenance de 15ml. Compatible HP OFFICEJET 4105",
+     category_id: 1,
+     product_sku: 288728
+}
+
+pc1 = Product.create!(cartouche1)
+pc2 = Product.create!(cartouche2)
+pc3 = Product.create!(cartouche3)
+pc4 = Product.create!(cartouche4)
+pc5 = Product.create!(cartouche5)
+pc6 = Product.create!(cartouche6)
+puts "Cartouche HP create"
+
+
+puts "Stock for cartouche in creation"
+stock1 = {
+     product_id: pc1.id ,
+     shop_id: sc1.id ,
+     quantity: 10 ,
+     price: 22,
+}
+stock2 = {
+     product_id: pc2.id ,
+     shop_id: sc1.id ,
+     quantity: 10 ,
+     price: 20,
+}
+stock3 = {
+     product_id: pc3.id ,
+     shop_id: sc1.id ,
+     quantity: 10 ,
+     price: 15,
+}
+stock4 = {
+     product_id: pc4.id ,
+     shop_id: sc1.id ,
+     quantity: 10 ,
+     price: 14,
+}
+stock5 = {
+     product_id: pc5.id ,
+     shop_id: sc1.id ,
+     quantity: 10 ,
+     price: 25,
+}
+stock6 = {
+     product_id: pc6.id ,
+     shop_id: sc1.id ,
+     quantity: 10 ,
+     price: 16,
+}
+
+puts "Loading image...."
+
+file2 = URI.open('https://static.fnac-static.com/multimedia/Images/FR/MC/12/d3/b5/11916050/1540-1/tsp20170228094212/HP-45-78-pack-de-2-1-noir-couleur-cyan-magenta-jaune-originale-cartouche-d-encre-C8788BC.jpg')
+pc1.photo.attach(io: file2, filename: 'cartouche1.jpg', content_type: 'image/jpg')
+
+puts "Image1 loaded OK"
+
+puts "Loading image...."
+
+file3 = URI.open('https://images-na.ssl-images-amazon.com/images/I/91Uu4m0sUYL._AC_SX425_.jpg')
+pc2.photo.attach(io: file3, filename: 'cartouche2.jpg', content_type: 'image/jpg')
+
+puts "Image2 loaded OK"
+
+puts "Loading image...."
+
+file4 = URI.open('https://static.fnac-static.com/multimedia/Images/FR/MC/f8/9b/4f/21994488/1540-1/tsp20170323081328/HP-49-couleur-cyan-magenta-jaune-originale-cartouche-d-encre.jpg')
+pc3.photo.attach(io: file4, filename: 'cartouche3.jpg', content_type: 'image/jpg')
+
+puts "Image3 loaded OK"
+
+puts "Loading image...."
+
+file5 = URI.open('https://static.fnac-static.com/multimedia/Images/FR/MC/f5/91/da/14324213/1540-1/tsp20170321084436/HP-56-noir-originale-cartouche-d-encre.jpg')
+pc4.photo.attach(io: file5, filename: 'cartouche4.jpg', content_type: 'image/jpg')
+
+puts "Image4 loaded OK"
+
+puts "Loading image...."
+
+file6 = URI.open('https://www.tinkco.com/photos/CAHC057_2.jpg')
+pc5.photo.attach(io: file6, filename: 'cartouche5.jpg', content_type: 'image/jpg')
+
+puts "Image5 loaded OK"
+
+puts "Loading image...."
+
+file7 = URI.open('https://www.cdiscount.com/pdt2/8/a/e/1/300x300/c8728ae/rw/hp-pack-de-1-cartouche-d-encre-28-original-trico.jpg')
+pc6.photo.attach(io: file7, filename: 'cartouche6.jpg', content_type: 'image/jpg')
+
+puts "Image6 loaded OK"
+
+
+puts "Creation stocks start"
+
+st1 = Stock.create!(stock1)
+st2 = Stock.create!(stock2)
+st3 = Stock.create!(stock3)
+st4 = Stock.create!(stock4)
+st5 = Stock.create!(stock5)
+st6 = Stock.create!(stock6)
+
+puts "Stock created"
+
+puts "Time Table in creation"
+
+time_table = [{       #day_of_weed : 0 : Dimanche, 1 : Lundi ..... Samedi : 6 #
+    opened_at: 10 ,
+    closed_at: 19 ,
+    day_of_week: 1,  #day_of_week : 1 => lundi
+    shop_id: sc1.id
+},{
+    opened_at: 9 ,
+    closed_at: 18,
+    day_of_week: 2,  #day_of_week : 2 => mardi
+    shop_id: sc1.id
+},{
+    opened_at: 10 ,
+    closed_at: 19 ,
+    day_of_week: 3 ,  #day_of_week : 3 => mercredi
+    shop_id: sc1.id
+},{
+    opened_at: 9 ,
+    closed_at: 18 ,
+    day_of_week: 4 ,  #day_of_week : 4 => jeudi
+    shop_id: sc1.id
+},{
+    opened_at: 8 ,
+    closed_at: 19 ,
+    day_of_week: 5 ,  #day_of_week : 5 => vendredi
+    shop_id: sc1.id
+},{
+    opened_at: 8 ,
+    closed_at: 19 ,
+    day_of_week: 6 ,  #day_of_week : 6 => samedi
+    shop_id: sc1.id
+}]
+
+TimeTable.create!(time_table)
+puts "Time table ok!"
+
+puts "Tag creation start"
+
+tag3 = Tag.create!(label: "encre")
+tag4 = Tag.create!(label: "imprimante")
+
+
+puts "Tags created !"
+
+puts "Product tags creation start"
+
+product_tags2 = [{
+   tag_id: tag3.id ,
+   product_id: pc1.id ,
+}, {
+   tag_id: tag4.id ,
+   product_id: pc1.id ,
+}]
+product_tags3 = [{
+   tag_id: tag3.id ,
+   product_id: pc2.id ,
+}, {
+   tag_id: tag4.id ,
+   product_id: pc2.id ,
+}]
+product_tags4 = [{
+   tag_id: tag3.id ,
+   product_id: pc3.id ,
+}, {
+   tag_id: tag4.id ,
+   product_id: pc3.id ,
+}]
+product_tags5 = [{
+   tag_id: tag3.id ,
+   product_id: pc4.id ,
+}, {
+   tag_id: tag4.id ,
+   product_id: pc4.id ,
+}]
+product_tags6 = [{
+   tag_id: tag3.id ,
+   product_id: pc5.id ,
+}, {
+   tag_id: tag4.id ,
+   product_id: pc5.id ,
+}]
+product_tags7 = [{
+   tag_id: tag3.id ,
+   product_id: pc6.id ,
+}, {
+   tag_id: tag4.id ,
+   product_id: pc6.id ,
+}]
+
+ProductTag.create!(product_tags2)
+ProductTag.create!(product_tags3)
+ProductTag.create!(product_tags4)
+ProductTag.create!(product_tags5)
+ProductTag.create!(product_tags6)
+ProductTag.create!(product_tags7)
+
+puts "Product tags creation ok!"
+
+puts "Shop 1 operationnel"
+
+#------------------------------------------------------------------------------------------------------------------------
+#                                    || SHOP 2 ||
+#------------------------------------------------------------------------------------------------------------------------
+
+puts "Creation shop start"
+shop_cartouche_2 = {
+   name: "La Petite Machine",
+   user_id: u.id,
+   address: "47 Rue le Chapelier, 33000 Bordeaux",
+   category: "Papeterie"
+}
+sc2 = Shop.create!(shop_cartouche_2)
+puts "Shop create"
+
+
+puts "Stock for cartouche in creation"
+
+stock1 = {
+     product_id: pc1.id ,
+     shop_id: sc2.id ,
+     quantity: 10 ,
+     price: 25,
+}
+stock2 = {
+     product_id: pc2.id ,
+     shop_id: sc2.id ,
+     quantity: 10 ,
+     price: 23,
+}
+stock3 = {
+     product_id: pc3.id ,
+     shop_id: sc2.id ,
+     quantity: 10 ,
+     price: 18,
+}
+stock4 = {
+     product_id: pc4.id ,
+     shop_id: sc2.id ,
+     quantity: 10 ,
+     price: 16,
+}
+stock5 = {
+     product_id: pc5.id ,
+     shop_id: sc2.id ,
+     quantity: 10 ,
+     price: 27,
+}
+stock6 = {
+     product_id: pc6.id ,
+     shop_id: sc2.id ,
+     quantity: 10 ,
+     price: 18,
+}
+
+puts "Creation stocks start"
+
+st2 = Stock.create!(stock2)
+st3 = Stock.create!(stock3)
+st4 = Stock.create!(stock4)
+st5 = Stock.create!(stock5)
+st6 = Stock.create!(stock6)
+
+puts "Stock created"
+
+puts "Time Table in creation"
+
+time_table = [{       #day_of_weed : 0 : Dimanche, 1 : Lundi ..... Samedi : 6 #
+    opened_at: 10 ,
+    closed_at: 19 ,
+    day_of_week: 1,  #day_of_week : 1 => lundi
+    shop_id: sc2.id
+},{
+    opened_at: 9 ,
+    closed_at: 18,
+    day_of_week: 2,  #day_of_week : 2 => mardi
+    shop_id: sc2.id
+},{
+    opened_at: 10 ,
+    closed_at: 19 ,
+    day_of_week: 3 ,  #day_of_week : 3 => mercredi
+    shop_id: sc2.id
+},{
+    opened_at: 9 ,
+    closed_at: 18 ,
+    day_of_week: 4 ,  #day_of_week : 4 => jeudi
+    shop_id: sc2.id
+},{
+    opened_at: 8 ,
+    closed_at: 19 ,
+    day_of_week: 5 ,  #day_of_week : 5 => vendredi
+    shop_id: sc2.id
+},{
+    opened_at: 8 ,
+    closed_at: 19 ,
+    day_of_week: 6 ,  #day_of_week : 6 => samedi
+    shop_id: sc2.id
+}]
+
+TimeTable.create!(time_table)
+puts "Time table ok!"
+
+puts "Shop 2 operationnel"
+
+#------------------------------------------------------------------------------------------------------------------------
+#                                   ||| SHOP 3 |||
+#------------------------------------------------------------------------------------------------------------------------
+
+
+
+puts "Creation shop start"
+shop_cartouche_3 = {
+   name: "Gropapier",
+   user_id: u.id,
+   address: "134 Rue du Jardin public, 33300 Bordeaux",
+   category: "Papeterie"
+}
+sc3 = Shop.create!(shop_cartouche_3)
+puts "Shop create"
+
+
+puts "Stock for cartouche in creation"
+
+stock7 = {
+     product_id: pc1.id ,
+     shop_id: sc3.id ,
+     quantity: 10 ,
+     price: 23,
+}
+stock8 = {
+     product_id: pc2.id ,
+     shop_id: sc3.id ,
+     quantity: 10 ,
+     price: 21,
+}
+stock9 = {
+     product_id: pc3.id ,
+     shop_id: sc3.id ,
+     quantity: 10 ,
+     price: 20,
+}
+stock10 = {
+     product_id: pc4.id ,
+     shop_id: sc3.id ,
+     quantity: 10 ,
+     price: 18,
+}
+stock11 = {
+     product_id: pc5.id ,
+     shop_id: sc3.id ,
+     quantity: 10 ,
+     price: 25,
+}
+stock12 = {
+     product_id: pc6.id ,
+     shop_id: sc3.id ,
+     quantity: 10 ,
+     price: 20,
+}
+
+puts "Creation stocks start"
+
+st7 = Stock.create!(stock7)
+st8 = Stock.create!(stock8)
+st9 = Stock.create!(stock9)
+st10 = Stock.create!(stock10)
+st11 = Stock.create!(stock11)
+st12 = Stock.create!(stock12)
+
+puts "Stock created"
+
+puts "Time Table in creation"
+
+time_table = [{       #day_of_weed : 0 : Dimanche, 1 : Lundi ..... Samedi : 6 #
+    opened_at: 10 ,
+    closed_at: 19 ,
+    day_of_week: 1,  #day_of_week : 1 => lundi
+    shop_id: sc3.id
+},{
+    opened_at: 9 ,
+    closed_at: 18,
+    day_of_week: 2,  #day_of_week : 2 => mardi
+    shop_id: sc3.id
+},{
+    opened_at: 10 ,
+    closed_at: 19 ,
+    day_of_week: 3 ,  #day_of_week : 3 => mercredi
+    shop_id: sc3.id
+},{
+    opened_at: 9 ,
+    closed_at: 18 ,
+    day_of_week: 4 ,  #day_of_week : 4 => jeudi
+    shop_id: sc3.id
+},{
+    opened_at: 8 ,
+    closed_at: 19 ,
+    day_of_week: 5 ,  #day_of_week : 5 => vendredi
+    shop_id: sc3.id
+},{
+    opened_at: 8 ,
+    closed_at: 19 ,
+    day_of_week: 6 ,  #day_of_week : 6 => samedi
+    shop_id: sc3.id
+}]
+
+TimeTable.create!(time_table)
+puts "Time table ok!"
+
+puts "Shop 3 operationnel"
+
+#------------------------------------------------------------------------------------------------------------------------
+#                                      | SHOP 4 (TALENCE) |
+#------------------------------------------------------------------------------------------------------------------------
+puts "Creation shop talence start"
+shop_cartouche_t = {
+   name: "Papeterie de Talence",
+   user_id: u.id,
+   address: "234 Cours Gambetta, 33400 Talence",
+   category: "Papeterie"
+}
+sct = Shop.create!(shop_cartouche_t)
+puts "Shop create"
+
+
+puts "Cartouche in creation"
+cartouchet1 = {
+     name: "Cartouche d'encre Brother 45",
+     brand: "Brother",
+     description: "Cartouche de couleur noir d'une contenance de 42ml. Compatible Brother",
+     category_id: 1,
+     product_sku: 9876543
+}
+
+cartouchet2 = {
+     name: "Cartouche d'encre Brother 20",
+     brand: "Brother",
+     description: "Cartouche de couleur noir d'une contenance de 40ml. Compatible Brother",
+     category_id: 1,
+     product_sku: 76543
+}
+
+cartouchet3 = {
+     name: "Cartouche d'encre Brother 49",
+     brand: "Brother",
+     description: "Cartouche de couleur d'une contenance de 42ml. Compatible Brother",
+     category_id: 1,
+     product_sku: 12345
+}
+
+cartouchet4 = {
+     name: "Cartouche d'encre Brother 56",
+     brand: "Brother",
+     description: "Cartouche de couleur noir d'une contenance de 19ml. Compatible Brother05",
+     category_id: 1,
+     product_sku: 987657
+}
+
+cartouchet5 = {
+     name: "Cartouche d'encre Brother 57",
+     brand: "Brother",
+     description: "Cartouche de couleur d'une contenance de 18ml. Compatible Brother05",
+     category_id: 1,
+     product_sku: 345643
+}
+
+cartouchet6 = {
+     name: "Cartouche d'encre HP 28",
+     brand: "HP",
+     description: "Cartouche de couleur d'une contenance de 15ml. Compatible HP OFFICEJET 4105",
+     category_id: 1,
+     product_sku: 235432
+}
+cartouchet7 = {
+     name: "Cartouche d'encre HP 45",
+     brand: "HP",
+     description: "Cartouche de couleur noir d'une contenance de 42ml. Compatible HP Deskjet 1220",
+     category_id: 1,
+     product_sku: 675857
+}
+
+cartouchet8 = {
+     name: "Cartouche d'encre HP 20",
+     brand: "HP",
+     description: "Cartouche de couleur noir d'une contenance de 40ml. Compatible HP APOLLO P2100",
+     category_id: 1,
+     product_sku: 57858
+}
+
+cartouchet9 = {
+     name: "Cartouche d'encre HP 49",
+     brand: "HP",
+     description: "Cartouche de couleur d'une contenance de 42ml. Compatible HP APOLLO P2100",
+     category_id: 1,
+     product_sku: 5785875
+}
+
+cartouchet10 = {
+     name: "Cartouche d'encre HP 56",
+     brand: "HP",
+     description: "Cartouche de couleur noir d'une contenance de 19ml. Compatible HP OFFICEJET 4105",
+     category_id: 1,
+     product_sku: 578758
+}
+
+cartouchet11 = {
+     name: "Cartouche d'encre HP 57",
+     brand: "HP",
+     description: "Cartouche de couleur d'une contenance de 18ml. Compatible HP OFFICEJET 4105",
+     category_id: 1,
+     product_sku: 75877578
+}
+
+cartouchet12 = {
+     name: "Cartouche d'encre HP 28",
+     brand: "HP",
+     description: "Cartouche de couleur d'une contenance de 15ml. Compatible HP OFFICEJET 4105",
+     category_id: 1,
+     product_sku: 578757848
+}
+
+
+
+pc7 = Product.create!(cartouchet1)
+pc8 = Product.create!(cartouchet2)
+pc9 = Product.create!(cartouchet3)
+pc10 = Product.create!(cartouchet4)
+pc11 = Product.create!(cartouchet5)
+pc12 = Product.create!(cartouchet6)
+pc13 = Product.create!(cartouchet7)
+pc14 = Product.create!(cartouchet8)
+pc15 = Product.create!(cartouchet9)
+pc16 = Product.create!(cartouchet10)
+pc17 = Product.create!(cartouchet11)
+pc18 = Product.create!(cartouchet12)
+puts "Cartouche HP create"
+
+
+puts "Stock for cartouche in creation"
+stockt1 = {
+     product_id: pc7.id ,
+     shop_id: sct.id ,
+     quantity: 10 ,
+     price: 22,
+}
+stockt2 = {
+     product_id: pc8.id ,
+     shop_id: sct.id ,
+     quantity: 10 ,
+     price: 20,
+}
+stockt3 = {
+     product_id: pc9.id ,
+     shop_id: sct.id ,
+     quantity: 10 ,
+     price: 15,
+}
+stockt4 = {
+     product_id: pc10.id ,
+     shop_id: sct.id ,
+     quantity: 10 ,
+     price: 14,
+}
+stockt5 = {
+     product_id: pc11.id ,
+     shop_id: sct.id ,
+     quantity: 10 ,
+     price: 25,
+}
+stockt6 = {
+     product_id: pc12.id ,
+     shop_id: sct.id ,
+     quantity: 10 ,
+     price: 16,
+}
+stockt7 = {
+     product_id: pc13.id ,
+     shop_id: sct.id ,
+     quantity: 10 ,
+     price: 22,
+}
+stockt8 = {
+     product_id: pc14.id ,
+     shop_id: sct.id ,
+     quantity: 10 ,
+     price: 20,
+}
+stockt9 = {
+     product_id: pc15.id ,
+     shop_id: sct.id ,
+     quantity: 10 ,
+     price: 15,
+}
+stockt10 = {
+     product_id: pc16.id ,
+     shop_id: sct.id ,
+     quantity: 10 ,
+     price: 14,
+}
+stockt11 = {
+     product_id: pc17.id ,
+     shop_id: sct.id ,
+     quantity: 10 ,
+     price: 25,
+}
+stockt12 = {
+     product_id: pc18.id ,
+     shop_id: sct.id ,
+     quantity: 10 ,
+     price: 16,
+}
+
+puts "Loading image...."
+
+file8 = URI.open('https://bv-prd-fbi-fr-media.s3.amazonaws.com/pub/media/catalog/product/c/9/c94854c3b0c3908381aa1ecfd25693f7984838a4_9df85423_2810_4116_a4a9_08d3e44117d6.jpg')
+pc7.photo.attach(io: file8, filename: 'cartouchet1.jpg', content_type: 'image/jpg')
+
+puts "Image1 loaded OK"
+
+puts "Loading image...."
+
+file9 = URI.open('https://www.tinkco.com/photos/TINBR050B_2.jpg')
+pc8.photo.attach(io: file9, filename: 'cartouchet2.jpg', content_type: 'image/jpg')
+
+puts "Image2 loaded OK"
+
+puts "Loading image...."
+
+file10 = URI.open('https://www.tinkco.com/photos/TINBR050B_2.jpg')
+pc9.photo.attach(io: file10, filename: 'cartouchet3.jpg', content_type: 'image/jpg')
+
+puts "Image3 loaded OK"
+
+puts "Loading image...."
+
+file11 = URI.open('https://prod.isg.bruneau.media/OMM/Images_Basse_Definition/ZoomHD/65/67/65671.jpg?width=2000&height=2000&mode=Default&quality=85&scale=upscalecanvas')
+pc10.photo.attach(io: file11, filename: 'cartouchet4.jpg', content_type: 'image/jpg')
+
+puts "Image4 loaded OK"
+
+puts "Loading image...."
+
+file12 = URI.open('https://www.encreservices.fr/images/produits/zoom/LC123BK_2.jpg')
+pc11.photo.attach(io: file12, filename: 'cartouchet5.jpg', content_type: 'image/jpg')
+
+puts "Image5 loaded OK"
+
+puts "Loading image...."
+
+file13 = URI.open('https://prod.isg.bruneau.media/OMM/Images_Basse_Definition/ZoomHD/65/67/65671.jpg?width=2000&height=2000&mode=Default&quality=85&scale=upscalecanvas')
+pc12.photo.attach(io: file13, filename: 'cartouchet6.jpg', content_type: 'image/jpg')
+
+puts "Image6 loaded OK"
+
+file14 = URI.open('https://bv-prd-fbi-fr-media.s3.amazonaws.com/pub/media/catalog/product/c/9/c94854c3b0c3908381aa1ecfd25693f7984838a4_9df85423_2810_4116_a4a9_08d3e44117d6.jpg')
+pc13.photo.attach(io: file14, filename: 'cartouchet_1.jpg', content_type: 'image/jpg')
+
+puts "Image1 loaded OK"
+
+puts "Loading image...."
+
+file15 = URI.open('https://www.tinkco.com/photos/TINBR050B_2.jpg')
+pc14.photo.attach(io: file15, filename: 'cartouchet_2.jpg', content_type: 'image/jpg')
+
+puts "Image2 loaded OK"
+
+puts "Loading image...."
+
+file16 = URI.open('https://www.tinkco.com/photos/TINBR050B_2.jpg')
+pc15.photo.attach(io: file16, filename: 'cartouchet_3.jpg', content_type: 'image/jpg')
+
+puts "Image3 loaded OK"
+
+puts "Loading image...."
+
+file17 = URI.open('https://prod.isg.bruneau.media/OMM/Images_Basse_Definition/ZoomHD/65/67/65671.jpg?width=2000&height=2000&mode=Default&quality=85&scale=upscalecanvas')
+pc16.photo.attach(io: file17, filename: 'cartouchet_4.jpg', content_type: 'image/jpg')
+
+puts "Image4 loaded OK"
+
+puts "Loading image...."
+
+file18 = URI.open('https://www.encreservices.fr/images/produits/zoom/LC123BK_2.jpg')
+pc17.photo.attach(io: file18, filename: 'cartouchet_5.jpg', content_type: 'image/jpg')
+
+puts "Image5 loaded OK"
+
+puts "Loading image...."
+
+file19 = URI.open('https://prod.isg.bruneau.media/OMM/Images_Basse_Definition/ZoomHD/65/67/65671.jpg?width=2000&height=2000&mode=Default&quality=85&scale=upscalecanvas')
+pc18.photo.attach(io: file19, filename: 'cartouchet_6.jpg', content_type: 'image/jpg')
+
+puts "Image6 loaded OK"
+
+
+puts "Creation stocks start"
+
+stt1 = Stock.create!(stockt1)
+stt2 = Stock.create!(stockt2)
+stt3 = Stock.create!(stockt3)
+stt4 = Stock.create!(stockt4)
+stt5 = Stock.create!(stockt5)
+stt6 = Stock.create!(stockt6)
+stt7 = Stock.create!(stockt7)
+stt8 = Stock.create!(stockt8)
+stt9 = Stock.create!(stockt9)
+stt10 = Stock.create!(stockt10)
+stt11 = Stock.create!(stockt11)
+stt12 = Stock.create!(stockt12)
+
+puts "Stock created"
+
+puts "Time Table in creation"
+
+time_table = [{       #day_of_weed : 0 : Dimanche, 1 : Lundi ..... Samedi : 6 #
+    opened_at: 10 ,
+    closed_at: 19 ,
+    day_of_week: 1,  #day_of_week : 1 => lundi
+    shop_id: sct.id
+},{
+    opened_at: 9 ,
+    closed_at: 18,
+    day_of_week: 2,  #day_of_week : 2 => mardi
+    shop_id: sct.id
+},{
+    opened_at: 10 ,
+    closed_at: 19 ,
+    day_of_week: 3 ,  #day_of_week : 3 => mercredi
+    shop_id: sct.id
+},{
+    opened_at: 9 ,
+    closed_at: 18 ,
+    day_of_week: 4 ,  #day_of_week : 4 => jeudi
+    shop_id: sct.id
+},{
+    opened_at: 8 ,
+    closed_at: 19 ,
+    day_of_week: 5 ,  #day_of_week : 5 => vendredi
+    shop_id: sct.id
+},{
+    opened_at: 8 ,
+    closed_at: 19 ,
+    day_of_week: 6 ,  #day_of_week : 6 => samedi
+    shop_id: sct.id
+}]
+
+TimeTable.create!(time_table)
+puts "Time table ok!"
+
+puts "Tag creation start"
+
+tag3 = Tag.create!(label: "encre")
+tag4 = Tag.create!(label: "imprimante")
+
+
+puts "Tags created !"
+
+puts "Product tags creation start"
+
+product_tags_t2 = [{
+   tag_id: tag3.id ,
+   product_id: pc7.id ,
+}, {
+   tag_id: tag4.id ,
+   product_id: pc8.id ,
+}]
+product_tags_t3 = [{
+   tag_id: tag3.id ,
+   product_id: pc9.id ,
+}, {
+   tag_id: tag4.id ,
+   product_id: pc10.id ,
+}]
+product_tags_t4 = [{
+   tag_id: tag3.id ,
+   product_id: pc11.id ,
+}, {
+   tag_id: tag4.id ,
+   product_id: pc12.id ,
+}]
+product_tags_t5 = [{
+   tag_id: tag3.id ,
+   product_id: pc13.id ,
+}, {
+   tag_id: tag4.id ,
+   product_id: pc14.id ,
+}]
+product_tags_t6 = [{
+   tag_id: tag3.id ,
+   product_id: pc15.id ,
+}, {
+   tag_id: tag4.id ,
+   product_id: pc16.id ,
+}]
+product_tags_t7 = [{
+   tag_id: tag3.id ,
+   product_id: pc17.id ,
+}, {
+   tag_id: tag4.id ,
+   product_id: pc18.id ,
+}]
+
+ProductTag.create!(product_tags_t2)
+ProductTag.create!(product_tags_t3)
+ProductTag.create!(product_tags_t4)
+ProductTag.create!(product_tags_t5)
+ProductTag.create!(product_tags_t6)
+ProductTag.create!(product_tags_t7)
+
+puts "Product tags creation ok!"
+
+puts "Shop 3 operationnel"
+
+#------------------------------------------------------------------------------------------------------------------------
+
