@@ -45,6 +45,9 @@ class StocksController < ApplicationController
 
   def show
 
+    @basket = Basket.new
+    @basket_user = Basket.where(user_id: current_user[:id]).map(&:stock_id)
+
     @review = Review.new
     @reviews = Review.where(stock_id: params[:id])
 

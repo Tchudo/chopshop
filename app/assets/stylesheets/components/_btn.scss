@@ -38,3 +38,10 @@
 .strike {
   text-decoration: line-through;
 }
+
+.btn-basket {
+  position: absolute;
+  z-index: 10;
+  top: 52vh;
+  right: 2%;
+}
