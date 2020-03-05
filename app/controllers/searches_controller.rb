@@ -8,7 +8,7 @@ class SearchesController < ApplicationController
   end
 
 
-   
+
 
 
   def new
