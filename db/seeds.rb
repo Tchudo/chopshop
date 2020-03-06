@@ -1689,7 +1689,7 @@ puts "Image6 loaded OK"
 
 puts "Loading image...."
 
-file26 = URI.open('https://www.monoprix.fr/assets/images/grocery/3032566/580x580.jpg?impolicy=High_Grocery')
+file26 = URI.open('https://static.openfoodfacts.org/images/products/311/427/040/0334/front_fr.7.full.jpg')
 f7.photo.attach(io: file26, filename: 'fromage7.jpg', content_type: 'image/jpg')
 
 puts "Image6 loaded OK"
