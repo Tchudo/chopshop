@@ -73,7 +73,7 @@ puts "User created ok"
 
 # -----------------------------USER-DONE---------------------------
 
-=begin
+
 # ------------------------- OPEN FACTS FOOD------------------------
 # ----------------------Product creation start ---------------------
 
@@ -274,7 +274,7 @@ end
 puts "Time table creation done !"
 
 #---------------------------TIME-TABLE-END---------------------
-=end
+
 ##########################EVENTS-CREATION######################
 
 puts "Start creation Event !"

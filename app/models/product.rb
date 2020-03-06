@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  # searchkick  #ElasticSearch
+  searchkick  #ElasticSearch
 
   belongs_to :category
   has_many :product_tags, dependent: :destroy
@@ -16,9 +16,9 @@ class Product < ApplicationRecord
 
 
 
-# def search_data  #ElasticSearch
-#   attributes.merge(shops: self.shops.map(&:name), addresses: self.shops.map(&:address), tags: self.tags.map(&:label) )
-#  end
+def search_data  #ElasticSearch
+  attributes.merge(shops: self.shops.map(&:name), addresses: self.shops.map(&:address), tags: self.tags.map(&:label) )
+ end
 
 
 
