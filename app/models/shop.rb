@@ -16,6 +16,21 @@ class Shop < ApplicationRecord
 
 
 
+def open?
+  return false if close_today?
+  today = self.time_tables.find_by(day_of_week: Time.now.wday)
+  (today.opened_at...today.closed_at).include?(Time.now.hour)
+end
+
+private
+
+def open_today?
+  self.time_tables.map(&:day_of_week).include?(Time.now.day)
+end
+
+def close_today?
+  !self.open_today?
+end
 
 
 end
