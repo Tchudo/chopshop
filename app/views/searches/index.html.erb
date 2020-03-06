@@ -77,7 +77,7 @@
         </div>
         <% @events.return_today_event.each do |event| %>
            <div class="card-test" >
-            <div class="image-event-test" data-toggle="modal" data-target="#event<%=event.id %>" style="background-image: url('<%= cl_image_path event.photo.key, height: 300, width: 400, crop: :fill %>')">>
+            <div class="image-event-test" data-toggle="modal" data-target="#event<%=event.id %>" style="background-image: url('<%= cl_image_path event.photo.key, height: 300, width: 400, crop: :fill %>')">
               <div class="date-event">
 
               </div>

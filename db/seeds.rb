@@ -73,7 +73,7 @@ puts "User created ok"
 
 # -----------------------------USER-DONE---------------------------
 
-
+=begin
 # ------------------------- OPEN FACTS FOOD------------------------
 # ----------------------Product creation start ---------------------
 
@@ -274,7 +274,7 @@ end
 puts "Time table creation done !"
 
 #---------------------------TIME-TABLE-END---------------------
-
+=end
 ##########################EVENTS-CREATION######################
 
 puts "Start creation Event !"
@@ -314,7 +314,7 @@ event3end_date =  Date.new(2020,6,21)
 event3 = {
     name: "Bordeaux fête le vin" ,
     category: "Fête" ,
-    description: "En 2020, Bordeaux Fête le Vin mêlera de nouveau la présence de quelques très grands voiliers patrimoniaux à la dégustation des vins de Bordeaux et de Nouvelle Aquitaine. Rendez-vous du jeudi 18 au dimanche 21 juin 2020, sur les quais de Bordeaux inscrits au Patrimoine mondial de l’UNESCO." ,
+    description: "En 2020, Bordeaux Fête le Vin mêlera de nouveau la présence de quelques très grands voiliers patrimoniaux à la dégustation des vins de Bordeaux et de Nouvelle Aquitaine. Rendez-vous du jeudi 18 au dimanche 21 juin 2020." ,
     address: "Place de la Bourse, 33000 Bordeaux" ,
     start_date: event3start_date,
     end_date: event3end_date,
@@ -329,7 +329,7 @@ event4 = {
     name: "Candlelight Bordeaux" ,
     category: "Musique" ,
     description: "Après leur succès à Madrid, Londres, Bruxelles et plus récemment à Paris, les concerts de musique éclairés à la bougie, Candlelight, débarquent à Bordeaux cette année." ,
-    address: "107 Cours Balguerie Stuttenberg, 33300 Bordeaux" ,
+    address: "Place Saint Martial, 33300 Bordeaux" ,
     start_date: event4start_date,
     end_date: event4end_date,
     time_opening: 18,
@@ -343,7 +343,7 @@ event5 = {
     name: "Démo Day",
     category: "Education" ,
     description: "Le Démo Day le plus atttendu de l'année se déroule dans les locaux du Wagon Bordeaux. De nombreux projets y seront présentés tels que RandomLife, PronostikR, WikiRace, Spiice, OChild mais aussi ChopShop" ,
-    address: "Place Saint Martial, 33300 Bordeaux" ,
+    address: "107 Cours Balguerie Stuttenberg, 33300 Bordeaux" ,
     start_date: event4start_date,
     end_date: event4end_date,
     time_opening: 18,
@@ -411,6 +411,25 @@ shop1 = {
 s1 = Shop.create!(shop1)
 puts "Shop create"
 
+puts "Creation shop start"
+shopc2 = {
+   name: "Outlet Lindt",
+   user_id: u.id,
+   address: "66 Quai de Bacalan, 33300 Bordeaux",
+   category: "Chocolatier"
+}
+sc2 = Shop.create!(shopc2)
+puts "Shop create"
+
+puts "Creation shop start"
+shopc3 = {
+   name: "Chocolate lover",
+   user_id: u.id,
+   address: "132 Rue Binaud, 33300 Bordeaux",
+   category: "Chocolatier"
+}
+sc3 = Shop.create!(shopc3)
+puts "Shop create"
 
 puts "Lindt chocolate in creation"
 product1 = {
@@ -430,7 +449,21 @@ stock1 = {
      product_id: p1.id ,
      shop_id: s1.id ,
      quantity: 10 ,
+     price: 5,
+}
+
+stockc2 = {
+     product_id: p1.id ,
+     shop_id: sc2.id ,
+     quantity: 10 ,
      price: 6,
+}
+
+stockc3 = {
+     product_id: p1.id ,
+     shop_id: sc3.id ,
+     quantity: 10 ,
+     price: 4,
 }
 
 puts "Loading image...."
@@ -441,6 +474,8 @@ p1.photo.attach(io: file1, filename: 'chocolat_lindt.png', content_type: 'image/
 puts "Image1 loaded OK"
 
 st1 = Stock.create!(stock1)
+stc2 = Stock.create!(stockc2)
+stc3 = Stock.create!(stockc3)
 
 puts "Stock created"
 
@@ -478,7 +513,73 @@ time_table = [{       #day_of_weed : 0 : Dimanche, 1 : Lundi ..... Samedi : 6 #
     shop_id: s1.id
 }]
 
+time_tablec2 = [{       #day_of_weed : 0 : Dimanche, 1 : Lundi ..... Samedi : 6 #
+    opened_at: 10 ,
+    closed_at: 19 ,
+    day_of_week: 1,  #day_of_week : 1 => lundi
+    shop_id: sc2.id
+},{
+    opened_at: 9 ,
+    closed_at: 18,
+    day_of_week: 2,  #day_of_week : 2 => mardi
+    shop_id: sc2.id
+},{
+    opened_at: 10 ,
+    closed_at: 19 ,
+    day_of_week: 3 ,  #day_of_week : 3 => mercredi
+    shop_id: sc2.id
+},{
+    opened_at: 9 ,
+    closed_at: 18 ,
+    day_of_week: 4 ,  #day_of_week : 4 => jeudi
+    shop_id: sc2.id
+},{
+    opened_at: 8 ,
+    closed_at: 19 ,
+    day_of_week: 5 ,  #day_of_week : 5 => vendredi
+    shop_id: sc2.id
+},{
+    opened_at: 8 ,
+    closed_at: 19 ,
+    day_of_week: 6 ,  #day_of_week : 6 => samedi
+    shop_id: sc2.id
+}]
+
+time_tablec3 = [{       #day_of_weed : 0 : Dimanche, 1 : Lundi ..... Samedi : 6 #
+    opened_at: 10 ,
+    closed_at: 19 ,
+    day_of_week: 1,  #day_of_week : 1 => lundi
+    shop_id: sc3.id
+},{
+    opened_at: 9 ,
+    closed_at: 18,
+    day_of_week: 2,  #day_of_week : 2 => mardi
+    shop_id: sc3.id
+},{
+    opened_at: 10 ,
+    closed_at: 19 ,
+    day_of_week: 3 ,  #day_of_week : 3 => mercredi
+    shop_id: sc3.id
+},{
+    opened_at: 9 ,
+    closed_at: 18 ,
+    day_of_week: 4 ,  #day_of_week : 4 => jeudi
+    shop_id: sc3.id
+},{
+    opened_at: 8 ,
+    closed_at: 19 ,
+    day_of_week: 5 ,  #day_of_week : 5 => vendredi
+    shop_id: sc3.id
+},{
+    opened_at: 8 ,
+    closed_at: 19 ,
+    day_of_week: 6 ,  #day_of_week : 6 => samedi
+    shop_id: sc3.id
+}]
+
 TimeTable.create!(time_table)
+TimeTable.create!(time_tablec2)
+TimeTable.create!(time_tablec3)
 puts "Time table ok!"
 
 puts "Tag creation start"
